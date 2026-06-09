@@ -13,6 +13,14 @@ interface Video {
 const FEED_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${SITE.youtubeChannelId}`;
 const MAX = 3;
 
+// Fallback: últimos vídeos conhecidos do canal (atualizado em 2026-06-09).
+// Garante que a Home sempre mostra vídeos, mesmo se o YouTube bloquear o fetch no build.
+const FALLBACK: Video[] = [
+  { id: 'xWi7EBfJkCU', title: 'Vídeo no canal de Aline Antunes' },
+  { id: 'EBliMKcM28k', title: 'Vídeo no canal de Aline Antunes' },
+  { id: 'KUyxxtYHPkg', title: 'Vídeo no canal de Aline Antunes' },
+];
+
 function decodeEntities(str: string): string {
   return str
     .replace(/&amp;/g, '&')
@@ -23,29 +31,42 @@ function decodeEntities(str: string): string {
     .replace(/&apos;/g, "'");
 }
 
-let videos: Video[] = [];
-try {
-  const res = await fetch(FEED_URL);
-  if (res.ok) {
-    const xml = await res.text();
-    // Cada vídeo é um <entry> com <yt:videoId> e <title>.
-    const entries = xml.split('<entry>').slice(1);
-    for (const entry of entries) {
-      const idMatch = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
-      const titleMatch = entry.match(/<title>([\s\S]*?)<\/title>/);
-      if (idMatch) {
-        videos.push({
-          id: idMatch[1].trim(),
-          title: titleMatch ? decodeEntities(titleMatch[1].trim()) : 'Vídeo no YouTube',
-        });
+// O YouTube às vezes responde 404 a requisições sem User-Agent (IP de datacenter).
+// Tenta algumas vezes com UA de navegador antes de cair no fallback.
+async function fetchFeed(): Promise<Video[]> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(FEED_URL, {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
+          Accept: 'application/atom+xml,application/xml,text/xml',
+        },
+      });
+      if (!res.ok) continue;
+      const xml = await res.text();
+      const out: Video[] = [];
+      for (const entry of xml.split('<entry>').slice(1)) {
+        const idMatch = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
+        const titleMatch = entry.match(/<title>([\s\S]*?)<\/title>/);
+        if (idMatch) {
+          out.push({
+            id: idMatch[1].trim(),
+            title: titleMatch ? decodeEntities(titleMatch[1].trim()) : 'Vídeo no YouTube',
+          });
+        }
+        if (out.length >= MAX) break;
       }
-      if (videos.length >= MAX) break;
+      if (out.length > 0) return out;
+    } catch {
+      /* tenta de novo */
     }
   }
-} catch {
-  videos = [];
+  return [];
 }
 
+const fetched = await fetchFeed();
+const videos: Video[] = fetched.length > 0 ? fetched : FALLBACK;
 const temVideos = videos.length > 0;
 ---
 <div class="yt">
