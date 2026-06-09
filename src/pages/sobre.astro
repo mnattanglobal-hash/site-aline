@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../site';
 import { Image } from 'astro:assets';
 import { img } from '../lib/images';
 const retrato = img('aa-sobre-retrato');
@@ -8,9 +9,9 @@ const retrato = img('aa-sobre-retrato');
   <section class="section intro-sec glow">
     <div class="wrap intro-grid">
       <div class="intro-copy">
-        <span class="eyebrow" data-reveal>Sobre</span>
+        <span class="eyebrow" data-reveal>Sobre mim</span>
         <h1 data-reveal style="--reveal-delay:80ms">Aline Antunes</h1>
-        <p class="lead" data-reveal style="--reveal-delay:140ms">Terapeuta e professora-mentora. Há cerca de oito anos ajudo pessoas a resgatar a maturidade emocional e a autonomia afetiva, e a romper padrões que se repetem, usando o símbolo como linguagem e o pragmatismo como método.</p>
+        <p class="lead" data-reveal style="--reveal-delay:140ms">Terapeuta e Mentora. Há cerca de oito anos acompanho pessoas que desejam compreender os padrões que moldaram suas vidas e fortalecer sua identidade, maturidade emocional e autonomia interior. Meu trabalho integra a linguagem simbólica à reflexão prática para apoiar processos profundos de autoconhecimento e individuação.</p>
       </div>
       <figure class="intro-portrait" data-reveal style="--reveal-delay:120ms">
         {retrato ? (
@@ -34,26 +35,24 @@ const retrato = img('aa-sobre-retrato');
 
   <section class="section-sm">
     <div class="read body">
-      <p>Antes da terapia, eu vim de outro mundo. Sou formada em <strong>Gestão Pública pela UFMG</strong> e fui servidora pública. Vivi na pele o que hoje nomeio como a <strong>anulação do eu pela função</strong>: primeiro tentei estruturar minha identidade através do cargo; depois, quando isso falhou, veio a apatia, o vazio, a desconexão de mim mesma. Em ambos os extremos, o eu estava anulado.</p>
+      <p>Nem sempre o sofrimento aparece como dor. Às vezes ele aparece como adaptação. A adaptação de quem aprendeu a corresponder às expectativas. A adaptação de quem se acostumou a ocupar papéis, cumprir funções e atender necessidades externas sem perceber o quanto estava se afastando de si mesma.</p>
 
-      <p>O que me tirou de lá foi a coragem de mudar de profissão. Não foi uma virada mística. Foi uma decisão. E é dessa travessia que vem a minha autoridade: eu não falo de fora. Falo de quem atravessou.</p>
+      <p>Antes de trabalhar com desenvolvimento emocional, eu também vivi essa experiência. Durante anos, busquei construir minha identidade a partir do que fazia, dos resultados que entregava e dos lugares que ocupava. Até perceber que existe uma diferença profunda entre desempenhar um papel e habitar a própria vida.</p>
 
-      <blockquote>Passei anos confortável num lugar pequeno demais para mim. Sair dali foi o começo da minha forma.</blockquote>
+      <p>Foi esse percurso que me levou ao trabalho que realizo hoje. Há cerca de oito anos acompanho pessoas que desejam compreender os padrões que se repetem em suas vidas, fortalecer sua identidade e desenvolver a maturidade emocional necessária para viver de forma mais consciente, autêntica e livre.</p>
 
-      <h2>O que eu faço, e o que eu não faço</h2>
-      <p>Trabalho <strong>maturidade e autonomia emocional, individuação e rompimento de padrões repetitivos</strong> com uma abordagem simbólica, arquetípica e pragmática. O Tarô é uma das ferramentas, não a minha identidade nem uma bola de cristal.</p>
-      <p>Não sou cartomante, vidente nem médium. Não faço adivinhação, não prometo milagre, não trabalho com "energias" rasas. <strong>O Tarô não vê o seu futuro. Ele te devolve a você mesma.</strong> Cada carta é um espelho de um padrão humano, um mapa para enxergar o que já está acontecendo dentro.</p>
+      <h2>Como eu trabalho</h2>
+      <p>Meu trabalho parte de uma premissa simples: <strong>aquilo que se repete merece ser compreendido</strong>. Os conflitos que voltam, os relacionamentos que seguem roteiros parecidos, a dificuldade de sustentar limites, a sensação de desconexão consigo mesma ou a busca constante por validação raramente surgem do nada. Eles costumam expressar adaptações emocionais construídas ao longo da vida.</p>
+      <p>Utilizo o Tarô como uma ferramenta de investigação simbólica e autoconhecimento. Não como instrumento de adivinhação. As cartas não servem para revelar o futuro. Servem para iluminar padrões, conflitos, potenciais e movimentos internos que muitas vezes permanecem invisíveis à consciência.</p>
+      <p><strong>O símbolo funciona como um espelho. E a consciência abre espaço para a escolha.</strong></p>
 
-      <h2>O método</h2>
-      <p>Todo o meu trabalho segue um mesmo motor, em quatro tempos:</p>
-      <p><strong>Nomear</strong> a dinâmica interna que estava invisível. <strong>Validar</strong> sem suavizar: sua dor faz sentido, e ainda assim ela é sua responsabilidade. A <strong>virada de chave</strong>, que reposiciona a dor como recurso. E <strong>ancorar num gesto</strong> concreto, porque símbolo que não vira ação não muda nada na prática.</p>
-      <p>A tese que sustenta tudo isso é simples de dizer e difícil de viver: <strong>transmutar a dor em recurso</strong>.</p>
+      <h2>O que eu não faço</h2>
+      <p>Não trabalho com promessas de respostas prontas. Utilizo o Tarô como uma linguagem simbólica de autoconhecimento e investigação emocional. As cartas não revelam um destino inevitável. Elas tornam visíveis os padrões, conflitos e potenciais que já estão atuando na sua vida.</p>
+      <p>Cada arcano funciona como um espelho da experiência humana, ajudando a reconhecer aquilo que muitas vezes permanece inconsciente. Porque aquilo que não é visto tende a se repetir. E aquilo que se torna consciente pode finalmente ser transformado.</p>
 
-      <h2>Hoje</h2>
-      <p>Além dos atendimentos individuais, eu ensino e oriento. Na <strong>Formação em Tarô para Gente Real</strong>, mostro como ler as cartas como mapa prático da vida real, sem decoreba e sem mistério. E acompanho mulheres no trabalho de <strong>cura dos padrões do feminino</strong>: aquilo que se herda em gesto e em silêncio. Em tudo, o centro é o mesmo: livre-arbítrio e responsabilidade sobre as próprias escolhas.</p>
-
-      <h2>Para quem é</h2>
-      <p>Para quem já sofreu o suficiente para reconhecer que precisa agir. Para quem cansou de atrair o mesmo tipo de relação, de se anular para caber, de viver mais por reação do que por direção. E para quem está aberto a uma linguagem que não é a da psicanálise acadêmica, mas que também não abre mão de profundidade.</p>
+      <h2>Para quem é este trabalho</h2>
+      <p>Para pessoas que desejam compreender a si mesmas com mais profundidade. Para quem percebe que está vivendo padrões repetitivos e quer construir novas possibilidades. Para quem busca fortalecer sua identidade, desenvolver autonomia emocional e ocupar a própria vida com mais presença e responsabilidade.</p>
+      <p>E para quem entende que autoconhecimento não é acumular respostas sobre si, mas ampliar a consciência necessária para viver de forma mais autêntica.</p>
     </div>
   </section>
 
@@ -61,7 +60,7 @@ const retrato = img('aa-sobre-retrato');
     <div class="read center">
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
       <p class="muted" data-reveal>O encontro começa por uma conversa.</p>
-      <div data-reveal style="--reveal-delay:100ms"><a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão individual</a></div>
+      <div data-reveal style="--reveal-delay:100ms"><a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Conhecer a sessão individual</a></div>
     </div>
   </section>
 </BaseLayout>

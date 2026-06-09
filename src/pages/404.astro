@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../site';
 ---
 <BaseLayout title="Página não encontrada · Aline Antunes" description="Esta página não existe ou foi movida.">
   <section class="section glow">
@@ -9,8 +10,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h1>Este caminho não leva a lugar nenhum</h1>
       <p class="muted">A página que você procurava não existe ou mudou de lugar. Mas há muito o que ler por aqui.</p>
       <div class="actions">
-        <a href="/" class="btn btn-primary">Voltar ao início</a>
-        <a href="/blog" class="btn btn-ghost">Ir para o blog</a>
+        <a href={withBase("/")} class="btn btn-primary">Voltar ao início</a>
+        <a href={withBase("/blog")} class="btn btn-ghost">Ir para o blog</a>
       </div>
     </div>
   </section>

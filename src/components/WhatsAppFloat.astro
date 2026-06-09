@@ -1,8 +1,8 @@
 ---
-import { whatsappLink } from '../site';
+import { whatsappLink, withBase } from '../site';
 const href = whatsappLink('Oi, Aline. Vim pelo site e queria saber mais sobre a sessão.');
 // Avatar da Aline (96px webp, ~2KB). Origem: public/aline-avatar.jpg, recorte quadrado.
-const avatar = '/aline-avatar.webp';
+const avatar = withBase('/aline-avatar.webp');
 ---
 <div class="wa" data-wa>
   <div class="wa-bubble" data-wa-bubble hidden>

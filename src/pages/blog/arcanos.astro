@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../site';
 import { Image } from 'astro:assets';
 import { img } from '../../lib/images';
 
@@ -28,14 +29,14 @@ const cartas = arcanos.filter((p) => (p.data.numeroArcano ?? 0) >= 0);
       </div>
     )}
     <div class="read ph-content">
-      <p class="trail"><a href="/blog">Blog</a> <span aria-hidden="true">›</span> Arcanos</p>
+      <p class="trail"><a href={withBase("/blog")}>Blog</a> <span aria-hidden="true">›</span> Arcanos</p>
       <span class="eyebrow" data-reveal>Série</span>
       <h1 data-reveal style="--reveal-delay:80ms">A Jornada do Louco no Tarot</h1>
       <p class="lead" data-reveal style="--reveal-delay:140ms">A história do amadurecer, contada carta a carta: o filme da alma. Não para saber o futuro, mas para reconhecer, com nome e clareza, quem você está virando.</p>
       {intro && (
         <p class="open" data-reveal style="--reveal-delay:200ms">
-          Comece pela porta de entrada: <a href={`/blog/${intro.slug}`}>{intro.data.titulo}</a>.
-          {extras.map((e) => (<> Veja também <a href={`/blog/${e.slug}`}>{e.data.titulo}</a>.</>))}
+          Comece pela porta de entrada: <a href={withBase(`/blog/${intro.slug}`)}>{intro.data.titulo}</a>.
+          {extras.map((e) => (<> Veja também <a href={withBase(`/blog/${e.slug}`)}>{e.data.titulo}</a>.</>))}
           Depois, percorra carta a carta. A série vai sendo publicada aos poucos.
         </p>
       )}
@@ -46,7 +47,7 @@ const cartas = arcanos.filter((p) => (p.data.numeroArcano ?? 0) >= 0);
     <ol class="journey" role="list">
       {cartas.map((p) => (
         <li class="step">
-          <a href={`/blog/${p.slug}`} class="step-link">
+          <a href={withBase(`/blog/${p.slug}`)} class="step-link">
             <span class="num" aria-hidden="true">{String(p.data.numeroArcano).padStart(2, '0')}</span>
             <span class="body">
               <span class="card-name">{p.data.arcano ?? p.data.titulo}</span>
@@ -64,7 +65,7 @@ const cartas = arcanos.filter((p) => (p.data.numeroArcano ?? 0) >= 0);
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
       <h2 data-reveal>O Tarô como espelho</h2>
       <p class="muted" data-reveal style="--reveal-delay:100ms">Cada carta é um padrão que mora em você. Uma sessão é o lugar de olhar o seu.</p>
-      <div data-reveal style="--reveal-delay:180ms"><a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão individual</a></div>
+      <div data-reveal style="--reveal-delay:180ms"><a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Conhecer a sessão individual</a></div>
     </div>
   </section>
 </BaseLayout>

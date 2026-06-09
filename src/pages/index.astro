@@ -9,7 +9,7 @@ import SeloGirando from '../components/SeloGirando.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import YouTubeFeed from '../components/YouTubeFeed.astro';
 import depoimentos from '../data/depoimentos.json';
-import { SITE } from '../site';
+import { SITE, withBase } from '../site';
 import { Image } from 'astro:assets';
 import { img } from '../lib/images';
 
@@ -53,11 +53,11 @@ const jsonLd = [
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="eyebrow" data-reveal>Tarô terapêutico · sessões individuais</span>
-        <h1 data-reveal style="--reveal-delay:80ms">Por que a mesma dor sempre volta, só que com outro rosto?</h1>
-        <p class="sub" data-reveal style="--reveal-delay:160ms">Sou a Aline. Na sessão individual, a gente usa o Tarô como um espelho (não como adivinhação) para entender o padrão que se repete na sua vida e achar um caminho concreto para sair dele.</p>
+        <h1 data-reveal style="--reveal-delay:80ms">Antes de uma nova vida, uma nova autoconsciência.</h1>
+        <p class="sub" data-reveal style="--reveal-delay:160ms">A gente quer mudar a relação, o trabalho, o jeito de amar. Quer uma vida nova. Mas a vida não muda de fora pra dentro. Ela muda no instante em que você enxerga, sem se enganar, o padrão que vem te conduzindo há anos.</p>
         <div class="actions" data-reveal style="--reveal-delay:240ms">
-          <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Agendar uma sessão</a>
-          <a href="/blog" class="btn btn-ghost">Ler o blog</a>
+          <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma sessão</a>
+          <a href={withBase("/blog")} class="btn btn-ghost">Ler o blog</a>
         </div>
       </div>
       <figure class="hero-media" data-reveal style="--reveal-delay:120ms">
@@ -96,8 +96,8 @@ const jsonLd = [
   <section class="section anchor tese-sec">
     <div class="read center">
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
-      <blockquote class="thesis" data-reveal>A vítima quer justiça do passado. A consciência quer liberdade no presente.</blockquote>
-      <p class="thesis-body muted" data-reveal style="--reveal-delay:120ms">Muita gente chega até mim depois de já ter tentado bastante, terapia inclusive, e ainda sentindo que uma questão não fecha. Eu não prometo milagre, e não leio o futuro. O que eu faço é te ajudar a dar nome ao que você sente e não consegue explicar, enxergar a dinâmica que segura esse padrão de pé e transformar isso em algo prático, que você usa pra escolher diferente.</p>
+      <blockquote class="thesis" data-reveal>A consciência vem primeiro. Sempre.</blockquote>
+      <p class="thesis-body muted" data-reveal style="--reveal-delay:120ms">Porque a mesma dor não volta por acaso. Ela volta porque existe um ciclo — um caminho que você não escolheu, mas continua repetindo, só que com nomes e rostos diferentes. As cartas reconhecem, com uma precisão que às vezes assusta, o que já está se movendo dentro de você: o que você sente e não nomeia, o ciclo que se repete, o ponto cego que organiza as suas escolhas.</p>
     </div>
   </section>
 
@@ -105,31 +105,34 @@ const jsonLd = [
   <section class="wrap section section-band">
     <div class="center" data-reveal>
       <span class="eyebrow">Talvez você reconheça</span>
-      <h2>A mesma dor, com outro rosto</h2>
+      <h2>Oito frases. Quantas você já pensou?</h2>
     </div>
     <ul class="voc-home" data-reveal>
-      <li>"Sempre atraio o mesmo tipo de pessoa."</li>
-      <li>"Sei que faz mal, mas sempre volto."</li>
-      <li>"Me anulo para o outro ficar confortável."</li>
-      <li>"Vivo mais por reação do que por direção."</li>
-      <li>"Já fiz terapia e não chego no lugar de resolução."</li>
-      <li>"Parte de mim tem medo de melhorar."</li>
+      <li>"Às vezes nem sei o que estou sentindo."</li>
+      <li>"Tenho dificuldade de ocupar meu espaço."</li>
+      <li>"Estou vivendo o que quero ou o que esperam de mim?"</li>
+      <li>"Será que isso é desejo ou apenas hábito?"</li>
+      <li>"Parece que estou sempre buscando aprovação."</li>
+      <li>"Parte de mim quer mudar. Outra parte resiste."</li>
+      <li>"Sinto que eu me afastei de mim."</li>
+      <li>"Esse relacionamento tem propósito na minha vida?"</li>
     </ul>
     <div class="center voc-cta" data-reveal>
       <p class="muted">Se bateu o <em>"é exatamente isso"</em>, é disso que a sessão cuida.</p>
-      <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão</a>
+      <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Conhecer a sessão</a>
     </div>
   </section>
 
   <!-- Pilares -->
   <section class="wrap section">
     <div class="center" data-reveal>
-      <span class="eyebrow">Por onde caminhamos</span>
-      <h2>Seis territórios de trabalho</h2>
+      <span class="eyebrow">O blog por território</span>
+      <h2>Seis territórios para se olhar</h2>
+      <p class="muted pilares-sub">Os artigos do blog, organizados por território de trabalho. Escolha por onde começar a leitura.</p>
     </div>
     <div class="card-grid pilares" data-reveal>
       {pilares.map((p) => (
-        <a class="card pilar-card" href={`/blog/pilar/${p.slug}`}>
+        <a class="card pilar-card" href={withBase(`/blog/pilar/${p.slug}`)}>
           {p.img && (
             <span class="pilar-thumb">
               <Image src={p.img} alt={p.alt} widths={[320, 560]} sizes="(max-width: 600px) 90vw, 340px" format="webp" quality={70} loading="lazy" />
@@ -153,17 +156,17 @@ const jsonLd = [
       </div>
       <div class="card-grid" data-reveal>
         {destaques.map((p) => (
-          <ArticleCard href={`/blog/${p.slug}`} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
+          <ArticleCard href={withBase(`/blog/${p.slug}`)} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
         ))}
       </div>
-      <p class="center more-link"><a href="/blog" class="btn btn-ghost">Ver todos os artigos</a></p>
+      <p class="center more-link"><a href={withBase("/blog")} class="btn btn-ghost">Ver todos os artigos</a></p>
     </section>
   )}
 
   <!-- Depoimentos -->
   <section class="wrap section">
     <div class="center" data-reveal>
-      <span class="eyebrow">Prova viva</span>
+      <span class="eyebrow">Depoimentos</span>
       <h2>O que dizem as clientes</h2>
     </div>
     <div class="depo-wrap" data-reveal>
@@ -187,7 +190,7 @@ const jsonLd = [
   <section class="wrap section section-band">
     <div class="center" data-reveal>
       <span class="eyebrow">No Instagram</span>
-      <h2>Acompanhe o dia a dia do trabalho</h2>
+      <h2>Esteja comigo nas redes sociais</h2>
     </div>
     <div class="ig-home" data-reveal>
       <InstagramFeed />
@@ -211,7 +214,7 @@ const jsonLd = [
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
       <h2 data-reveal>Quer dar o primeiro passo?</h2>
       <p class="muted" data-reveal style="--reveal-delay:100ms">A sessão é uma conversa de clareza, não de previsão. Você sai entendendo o padrão e com algo concreto para fazer com isso.</p>
-      <div data-reveal style="--reveal-delay:180ms"><a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Agendar uma sessão</a></div>
+      <div data-reveal style="--reveal-delay:180ms"><a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma sessão</a></div>
     </div>
   </section>
 </BaseLayout>
@@ -263,9 +266,20 @@ const jsonLd = [
   .ig-home, .yt-home { margin-top: var(--s7); }
   .more-link { margin-top: var(--s7); }
 
-  /* Reconhecimento da dor (voz-do-cliente) */
-  .voc-home { list-style: none; padding: 0; margin: var(--s7) auto 0; max-width: 780px; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
-  .voc-home li { font-family: var(--font-serif); font-style: italic; font-size: 1.12rem; line-height: 1.4; color: var(--ink); padding: var(--s4) var(--s5); background: var(--paper); border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: 0 10px 10px 0; }
+  .pilares-sub { max-width: 56ch; margin: var(--s4) auto 0; }
+
+  /* Reconhecimento da dor (voz-do-cliente) — cards verdes, respirados */
+  .voc-home { list-style: none; padding: 0; margin: var(--s7) auto 0; max-width: 880px; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); }
+  .voc-home li {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 1.32rem; line-height: 1.42; color: var(--ink);
+    padding: var(--s5) var(--s6);
+    background: color-mix(in srgb, var(--moss-soft) 22%, var(--paper-2));
+    border: 1px solid color-mix(in srgb, var(--moss) 30%, var(--line));
+    border-radius: var(--radius);
+    transition: border-color .25s ease, transform .2s var(--ease), box-shadow .3s ease;
+  }
+  .voc-home li:hover { border-color: var(--moss); transform: translateY(-3px); box-shadow: var(--shadow-soft); }
   .voc-cta { margin-top: var(--s7); }
   .voc-cta p { margin-bottom: var(--s4); font-size: 1.1rem; }
   .voc-cta em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }

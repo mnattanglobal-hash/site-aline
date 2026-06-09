@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../site';
+import { SITE, withBase } from '../site';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer anchor">
@@ -18,11 +18,11 @@ const year = new Date().getFullYear();
     </div>
     <nav aria-label="Rodapé" class="cols">
       <p class="col-title">Navegar</p>
-      <a href="/sobre">Sobre</a>
-      <a href="/atendimentos">Atendimentos</a>
-      <a href="/cursos">Cursos</a>
-      <a href="/blog">Blog</a>
-      <a href="/contato">Contato</a>
+      <a href={withBase('/sobre')}>Sobre</a>
+      <a href={withBase('/atendimentos')}>Atendimentos</a>
+      <a href={withBase('/cursos')}>Cursos</a>
+      <a href={withBase('/blog')}>Blog</a>
+      <a href={withBase('/contato')}>Contato</a>
     </nav>
     <nav aria-label="Mais" class="cols">
       <p class="col-title">Mais</p>

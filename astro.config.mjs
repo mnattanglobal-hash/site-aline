@@ -6,10 +6,7 @@ import remarkWikilinks from './remark-wikilinks.mjs';
 // servida na raiz de um repositório <usuario>.github.io (base = '/').
 export default defineConfig({
   site: 'https://mnattanglobal-hash.github.io',
-  // Rota antiga /sessoes foi reorganizada em /atendimentos.
-  redirects: {
-    '/sessoes': '/atendimentos/taro-terapeutico',
-  },
+  base: '/site-aline',
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkWikilinks],

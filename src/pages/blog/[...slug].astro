@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { pilarSlug } from '../../content/config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../site';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
@@ -76,10 +77,10 @@ const jsonLd = [article, breadcrumbs, ...(faqLd ? [faqLd] : [])];
   <header class="art-head glow">
     <div class="read">
       <p class="trail">
-        <a href="/blog">Blog</a> <span aria-hidden="true">›</span>
+        <a href={withBase("/blog")}>Blog</a> <span aria-hidden="true">›</span>
         {d.pilar === 'Arcanos'
-          ? <a href="/blog/arcanos">Arcanos</a>
-          : <a href={`/blog/pilar/${pilarSlug(d.pilar)}`}>{d.pilar}</a>}
+          ? <a href={withBase("/blog/arcanos")}>Arcanos</a>
+          : <a href={withBase(`/blog/pilar/${pilarSlug(d.pilar)}`)}>{d.pilar}</a>}
       </p>
       <span class="badge">{d.arcano ? `Arcano · ${d.arcano}` : d.pilar}</span>
       <h1>{d.titulo}</h1>
@@ -123,7 +124,7 @@ const jsonLd = [article, breadcrumbs, ...(faqLd ? [faqLd] : [])];
 
     <div class="read cta-box">
       <p class="muted">Se algo aqui te reconheceu, talvez seja hora de olhar mais de perto.</p>
-      <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão individual</a>
+      <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Conhecer a sessão individual</a>
     </div>
 
     {related.length > 0 && (
@@ -133,7 +134,7 @@ const jsonLd = [article, breadcrumbs, ...(faqLd ? [faqLd] : [])];
         <ul class="related">
           {related.map((r) => (
             <li>
-              <a href={`/blog/${r.slug}`}>{r.data.titulo}</a>
+              <a href={withBase(`/blog/${r.slug}`)}>{r.data.titulo}</a>
               <span class="muted"> · {r.data.hook}</span>
             </li>
           ))}
@@ -152,7 +153,7 @@ const jsonLd = [article, breadcrumbs, ...(faqLd ? [faqLd] : [])];
     )}
 
     <div class="read back">
-      <a href="/blog"><span aria-hidden="true">←</span> Todos os artigos</a>
+      <a href={withBase("/blog")}><span aria-hidden="true">←</span> Todos os artigos</a>
     </div>
   </article>
 </BaseLayout>

@@ -6,32 +6,8 @@
    só os VALORES foram remapeados para a paleta da referência.
    =========================================================== */
 
-/* ---- Fontes reais (woff2 auto-hospedados em /public/fonts) ---- */
-@font-face {
-  font-family: 'Bradford';
-  src: url('/fonts/bradford-medium.woff2') format('woff2');
-  font-weight: 400 600; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Bradford Black';
-  src: url('/fonts/bradford-black.woff2') format('woff2');
-  font-weight: 700 900; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Prophet';
-  src: url('/fonts/abc-prophet.woff2') format('woff2');
-  font-weight: 400 600; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'GT Alpina';
-  src: url('/fonts/gt-alpina.woff2') format('woff2');
-  font-weight: 400 500; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Modern Era';
-  src: url('/fonts/modern-era.woff2') format('woff2');
-  font-weight: 400 600; font-style: normal; font-display: swap;
-}
+/* Fontes reais (Bradford, ABC Prophet, GT Alpina, Modern Era) declaradas via
+   @font-face injetado no BaseLayout, com o base path correto (/site-aline/fonts). */
 
 :root {
   /* ---- Papel & tinta (creme quente + marrom-oliva da referência) ---- */

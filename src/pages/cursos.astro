@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { whatsappLink } from '../site';
+import { whatsappLink, withBase } from '../site';
 
 const checkout = 'https://alquimiaascensional.online/formacao-de-taro-para-gente-real-chkt-a';
 const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero tirar uma dúvida sobre a Formação em Tarô para Gente Real.');
@@ -33,7 +33,7 @@ const formato = [
   <!-- Hero -->
   <section class="section intro-sec glow">
     <div class="read center">
-      <span class="eyebrow" data-reveal>Formação · Tarô para Gente Real</span>
+      <span class="eyebrow" data-reveal>Curso de tarô terapêutico</span>
       <h1 data-reveal style="--reveal-delay:80ms">O Tarô não precisa ser um mistério medieval guardado em imagens difíceis</h1>
       <p class="lead" data-reveal style="--reveal-delay:140ms">Aprenda a ler as cartas como um mapa prático de quem você é e do momento que vive. Uma metodologia que liga cada arcano a uma figura que você já reconhece, para você ler com precisão desde a primeira aula, sem decorar significado nenhum.</p>
       <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
@@ -119,7 +119,7 @@ const formato = [
         <span class="eyebrow">Com quem você aprende</span>
         <h2>Aline Antunes</h2>
       </div>
-      <p data-reveal>Terapeuta e professora-mentora. Há cerca de oito anos trabalho maturidade e autonomia emocional usando o Tarô como ferramenta de consciência, não como bola de cristal. Ensino do jeito que eu queria ter aprendido: pé no chão, símbolo que vira gesto, autoridade de quem atende todos os dias. <a href="/sobre">Conhecer minha história</a>.</p>
+      <p data-reveal>Terapeuta e professora-mentora. Há cerca de oito anos trabalho maturidade e autonomia emocional usando o Tarô como ferramenta de consciência, não como bola de cristal. Ensino do jeito que eu queria ter aprendido: pé no chão, símbolo que vira gesto, autoridade de quem atende todos os dias. <a href={withBase("/sobre")}>Conhecer minha história</a>.</p>
     </div>
   </section>
 </BaseLayout>

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { PILARES, pilarSlug } from '../../content/config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../site';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { Image } from 'astro:assets';
 import { img } from '../../lib/images';
@@ -26,8 +27,8 @@ const arcanos = posts
     )}
     <div class="read center ph-content">
       <span class="eyebrow" data-reveal>Blog</span>
-      <h1 data-reveal style="--reveal-delay:80ms">Textos para quem quer se olhar de verdade</h1>
-      <p class="muted lead-sub" data-reveal style="--reveal-delay:140ms">Material autoral, sem fórmula pronta. Organizado por pilares de trabalho e pela série A Jornada do Louco no Tarot.</p>
+      <h1 data-reveal style="--reveal-delay:80ms">Textos para se olhar</h1>
+      <p class="muted lead-sub" data-reveal style="--reveal-delay:140ms">Material autoral.</p>
     </div>
   </section>
 
@@ -37,12 +38,12 @@ const arcanos = posts
     return (
       <section class="wrap pilar-block">
         <div class="block-head" data-reveal>
-          <h2><a href={`/blog/pilar/${pilarSlug(pilar)}`}>{pilar}</a></h2>
-          <a class="see-all" href={`/blog/pilar/${pilarSlug(pilar)}`}>Ver o pilar <span aria-hidden="true">→</span></a>
+          <h2><a href={withBase(`/blog/pilar/${pilarSlug(pilar)}`)}>{pilar}</a></h2>
+          <a class="see-all" href={withBase(`/blog/pilar/${pilarSlug(pilar)}`)}>Ver o pilar <span aria-hidden="true">→</span></a>
         </div>
         <div class="card-grid" data-reveal>
           {list.map((p) => (
-            <ArticleCard href={`/blog/${p.slug}`} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
+            <ArticleCard href={withBase(`/blog/${p.slug}`)} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
           ))}
         </div>
       </section>
@@ -52,13 +53,13 @@ const arcanos = posts
   {arcanos.length > 0 && (
     <section class="wrap pilar-block">
       <div class="block-head" data-reveal>
-        <h2><a href="/blog/arcanos">Série · A Jornada do Louco no Tarot</a></h2>
-        <a class="see-all" href="/blog/arcanos">Ver a série em ordem <span aria-hidden="true">→</span></a>
+        <h2><a href={withBase("/blog/arcanos")}>Série · A Jornada do Louco no Tarot</a></h2>
+        <a class="see-all" href={withBase("/blog/arcanos")}>Ver a série em ordem <span aria-hidden="true">→</span></a>
       </div>
       <p class="muted intro" data-reveal>Cada carta, uma etapa do amadurecimento. Cada arcano, uma figura cultural e um padrão humano. O Tarô como espelho, não como futuro.</p>
       <div class="card-grid" data-reveal>
         {arcanos.map((p) => (
-          <ArticleCard href={`/blog/${p.slug}`} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
+          <ArticleCard href={withBase(`/blog/${p.slug}`)} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
         ))}
       </div>
     </section>

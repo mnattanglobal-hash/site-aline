@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { PILAR_META } from '../../../content/config';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { withBase } from '../../../site';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import { Image } from 'astro:assets';
 import { img } from '../../../lib/images';
@@ -33,7 +34,7 @@ const pilarImg = img(meta.img);
   <section class="section glow">
     <div class="wrap pilar-head">
       <div class="pilar-copy">
-        <p class="trail"><a href="/blog">Blog</a> <span aria-hidden="true">›</span> Pilar</p>
+        <p class="trail"><a href={withBase("/blog")}>Blog</a> <span aria-hidden="true">›</span> Pilar</p>
         <span class="eyebrow" data-reveal>Pilar</span>
         <h1 data-reveal style="--reveal-delay:80ms">{nome}</h1>
         <p class="lead" data-reveal style="--reveal-delay:140ms">{meta.intro}</p>
@@ -49,7 +50,7 @@ const pilarImg = img(meta.img);
   <section class="wrap">
     <div class="card-grid" data-reveal>
       {posts.map((p) => (
-        <ArticleCard href={`/blog/${p.slug}`} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
+        <ArticleCard href={withBase(`/blog/${p.slug}`)} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
       ))}
     </div>
   </section>
@@ -59,8 +60,8 @@ const pilarImg = img(meta.img);
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
       <p class="muted">Esses padrões aparecem na sua vida? A sessão é o lugar de olhar o seu.</p>
       <div class="cta-actions">
-        <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Agendar uma sessão</a>
-        <a href="/blog" class="btn btn-ghost">Voltar ao blog</a>
+        <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma sessão</a>
+        <a href={withBase("/blog")} class="btn btn-ghost">Voltar ao blog</a>
       </div>
     </div>
   </section>

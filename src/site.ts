@@ -20,6 +20,16 @@ export const SITE = {
 export const whatsappLink = (mensagem: string): string =>
   `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
 
+// Prefixa caminhos internos com o base path do site (ex.: '/site-aline').
+// Necessário porque o site é servido em subcaminho no GitHub Pages.
+// URLs externas, âncoras e mailto/tel passam intactas.
+export const withBase = (path: string = '/'): string => {
+  if (/^(https?:|mailto:|tel:|#)/.test(path)) return path;
+  const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // '/site-aline'
+  const p = path.startsWith('/') ? path : `/${path}`;
+  return `${base}${p}` || '/';
+};
+
 // Posts do Instagram para embedar na Home.
 // Cole aqui os PERMALINKS dos posts (ex.: 'https://www.instagram.com/p/CXXXXXXXX/').
 // Use de 3 a 6. Se ficar vazio, a Home mostra um convite para seguir o perfil.
