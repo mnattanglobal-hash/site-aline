@@ -1,0 +1,385 @@
+/* ===========================================================
+   Aline Antunes — Design System  (réplica de identidade: Everbe Therapy)
+   Creme quente · marrom-oliva · pêssego/blush/rosa · verde-sálvia
+   Fontes reais auto-hospedadas: Bradford, ABC Prophet, GT Alpina, Modern Era
+   Os NOMES das variáveis são mantidos (compat. com estilos existentes);
+   só os VALORES foram remapeados para a paleta da referência.
+   =========================================================== */
+
+/* ---- Fontes reais (woff2 auto-hospedados em /public/fonts) ---- */
+@font-face {
+  font-family: 'Bradford';
+  src: url('/fonts/bradford-medium.woff2') format('woff2');
+  font-weight: 400 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Bradford Black';
+  src: url('/fonts/bradford-black.woff2') format('woff2');
+  font-weight: 700 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'ABC Prophet';
+  src: url('/fonts/abc-prophet.woff2') format('woff2');
+  font-weight: 400 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'GT Alpina';
+  src: url('/fonts/gt-alpina.woff2') format('woff2');
+  font-weight: 400 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Modern Era';
+  src: url('/fonts/modern-era.woff2') format('woff2');
+  font-weight: 400 600; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ---- Papel & tinta (creme quente + marrom-oliva da referência) ---- */
+  --paper:    #f4eee8;   /* fundo — creme (Everbe --white) */
+  --paper-2:  #fbf6ef;   /* blocos / cards — quase-branco quente */
+  --paper-3:  #ece2d3;   /* realce de bloco mais fundo */
+  --ink:      #574f2c;   /* texto principal — marrom-oliva (Everbe --black ~#6d6236) */
+  --ink-soft: #837a55;   /* texto secundário */
+
+  /* ---- Acentos da referência (pêssego / blush / rosa / terracota) ---- */
+  --gold:        #a1543c;  /* acento de texto/links — terracota legível (AA em creme) */
+  --gold-soft:   #d19ca3;  /* rosa-poeira — hover / realce / hairline */
+  --gold-bright: #f0cfa5;  /* pêssego — acento sobre escuro / botão */
+  --amber:       #e0a877;  /* calor */
+  --terra:       #c17a5a;  /* terracota quente */
+  --wine:        #a86a66;  /* citações — rosa-marrom */
+
+  /* ---- Verdes da referência (sálvia / limão) ---- */
+  --moss:        #6e7350;  /* sálvia escura — taxonomia (tags) · AA em creme */
+  --moss-soft:   #b0b47d;  /* sálvia clara — hairline / hover */
+  --moss-bright: #c7cba0;  /* sálvia sobre escuro */
+  --wine-deep:   #9b5b52;  /* terracota profunda — clímax */
+
+  /* ---- Marrom-quente escuro (seções-âncora) ---- */
+  --sepia:    #4a4326;
+  --sepia-2:  #574f2c;   /* cards sobre escuro */
+  --on-dark:  #f4eee8;   /* texto sobre escuro */
+
+  /* ---- Linhas ---- */
+  --line:        #e4dac9;
+  --line-strong: #d6c9b2;
+
+  /* ---- Tipografia (réplica) ---- */
+  --font-display: 'Bradford', Georgia, 'Times New Roman', serif;   /* títulos H1/H4 */
+  --font-prophet: 'ABC Prophet', Georgia, serif;                   /* H2 (lowercase) */
+  --font-label:   'Bradford Black', Georgia, serif;                /* eyebrows / labels */
+  --font-serif:   'GT Alpina', Georgia, 'Times New Roman', serif;  /* prosa / citações / botões */
+  --font-sans:    'Modern Era', system-ui, -apple-system, 'Segoe UI', sans-serif; /* corpo / nav / UI */
+
+  /* ---- Medidas ---- */
+  --w-read: 720px;
+  --w-wide: 1120px;
+
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
+
+  --radius: 16px;
+  --shadow-soft: 0 18px 48px -28px color-mix(in srgb, var(--ink) 45%, transparent);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---- Títulos ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 3.7rem); }
+/* H2 em ABC Prophet, lowercase — assinatura visual da referência. */
+h2 {
+  font-family: var(--font-prophet);
+  font-size: clamp(1.7rem, 3.6vw, 2.3rem);
+  text-transform: lowercase;
+  letter-spacing: -0.005em;
+  margin-top: var(--s8);
+}
+h3 { font-size: 1.4rem; margin-top: var(--s6); }
+
+p { margin: 0 0 var(--s5); }
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease, color .2s ease;
+}
+a:hover { color: var(--ink); border-color: var(--gold-soft); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+::selection { background: color-mix(in srgb, var(--gold-soft) 50%, transparent); color: var(--ink); }
+
+/* ---- Layout helpers ---- */
+.wrap   { width: 100%; max-width: var(--w-wide); margin-inline: auto; padding-inline: var(--s5); }
+.read   { width: 100%; max-width: var(--w-read); margin-inline: auto; padding-inline: var(--s5); }
+.section{ padding-block: var(--s9); }
+.section-sm { padding-block: var(--s7); }
+.center { text-align: center; }
+.muted  { color: var(--ink-soft); }
+
+/* ---- Eyebrow / label (Bradford Black, uppercase, .2em — como a referência) ---- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .5em;
+  font-family: var(--font-label);
+  font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink); font-weight: 700;
+}
+
+/* ---- Marca decorativa (substitui a antiga flor-de-lis) ---- */
+.sparkle, .brand-mark, .byline-mark, .hero-spark { font-variant-emoji: text; }
+.sparkle { color: var(--terra); font-style: normal; }
+
+.rule {
+  display: flex; align-items: center; gap: var(--s4);
+  color: var(--terra); margin: var(--s7) auto;
+  max-width: 22rem;
+}
+.rule::before, .rule::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--line-strong), transparent);
+}
+
+/* ---- Atmosfera: luz quente suave ---- */
+.glow { position: relative; isolation: isolate; }
+.glow::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(48% 60% at 78% 14%, color-mix(in srgb, var(--gold-bright) 38%, transparent), transparent 70%),
+    radial-gradient(42% 52% at 16% 4%, color-mix(in srgb, var(--gold-soft) 26%, transparent), transparent 72%);
+}
+
+/* ---- Seção-âncora (bloco marrom-quente + luz pêssego) ---- */
+.anchor {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(60% 90% at 50% -10%, color-mix(in srgb, var(--amber) 34%, transparent), transparent 66%),
+    linear-gradient(180deg, #5d5430 0%, var(--sepia) 64%);
+  color: var(--on-dark);
+}
+.anchor h1, .anchor h2, .anchor h3 { color: #f7f1e6; }
+.anchor .muted { color: color-mix(in srgb, var(--on-dark) 78%, transparent); }
+.anchor .eyebrow { color: var(--gold-bright); }
+.anchor a:not(.btn) { color: var(--gold-bright); }
+.anchor a:not(.btn):hover { color: #fff; border-color: var(--gold-bright); }
+.anchor .rule { color: var(--gold-bright); }
+.anchor .rule::before, .anchor .rule::after {
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--gold-bright) 55%, transparent), transparent);
+}
+
+/* Variante "clímax" — terracota profunda (1 momento por página). */
+.anchor.oxblood {
+  background:
+    radial-gradient(60% 90% at 50% -10%, color-mix(in srgb, var(--amber) 22%, transparent), transparent 64%),
+    linear-gradient(180deg, #b06a55 0%, var(--wine-deep) 64%);
+}
+
+/* ---- Banner de página com imagem velada ---- */
+.page-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.page-hero .ph-content { position: relative; z-index: 1; padding-block: var(--s9); }
+.ph-bg { position: absolute; inset: 0; z-index: 0; }
+.ph-bg img { width: 100%; height: 100%; object-fit: cover; }
+.ph-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(70% 80% at 50% 45%, color-mix(in srgb, var(--paper) 34%, transparent), color-mix(in srgb, var(--paper) 64%, transparent)),
+    color-mix(in srgb, var(--paper) 44%, transparent);
+}
+
+/* ---- Prosa do artigo (serifa literária: GT Alpina) ---- */
+.prose { font-family: var(--font-serif); font-size: 1.2rem; line-height: 1.75; font-optical-sizing: auto; }
+.prose p, .prose ul, .prose ol { max-width: 66ch; }
+.prose h2, .prose h3 { max-width: 66ch; }
+.prose h2 { margin-top: var(--s8); }
+.prose > p:first-of-type { font-size: 1.3rem; }
+.prose a { color: var(--gold); border-bottom: 1px solid var(--gold-soft); }
+.prose a:hover { color: var(--ink); border-color: var(--ink); }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose ul { list-style: none; padding-left: 1.5em; }
+.prose ul li { position: relative; margin-bottom: var(--s2); }
+.prose ul li::before {
+  content: ''; position: absolute; left: -1.4em; top: .62em;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--terra);
+}
+.prose blockquote {
+  font-family: var(--font-prophet);
+  font-style: normal; font-weight: 400;
+  font-size: 1.55rem; line-height: 1.4; text-transform: lowercase;
+  color: var(--wine-deep);
+  border-left: 2px solid var(--terra);
+  background: color-mix(in srgb, var(--gold-bright) 22%, var(--paper-2));
+  margin: var(--s7) 0;
+  padding: var(--s5) var(--s6);
+  border-radius: 0 10px 10px 0;
+}
+.prose blockquote p { margin: 0; max-width: none; }
+
+/* ---- Botões (réplica: pêssego, texto marrom, lowercase, arredondado) ---- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5em;
+  font-family: var(--font-serif);
+  font-weight: 500; font-size: 1.02rem; text-transform: lowercase;
+  padding: 13px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .18s var(--ease), background .25s ease, color .2s ease, box-shadow .25s ease, border-color .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+/* Primário sólido (marrom) — para contextos que pedem contraste forte. */
+.btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-primary:hover { background: #6d6236; color: var(--paper); box-shadow: var(--shadow-soft); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--paper-2); color: var(--ink); border-color: var(--ink); }
+/* CTA pêssego — botão protagonista da referência (peach → blush no hover). */
+.btn-gold {
+  background: var(--gold-bright);
+  color: var(--ink); border-color: transparent;
+  box-shadow: 0 10px 28px -14px color-mix(in srgb, var(--amber) 70%, transparent);
+}
+.btn-gold:hover { background: var(--gold-soft); color: var(--ink); box-shadow: 0 14px 34px -14px color-mix(in srgb, var(--gold-soft) 80%, transparent); }
+
+/* Botões dentro de seção escura */
+.anchor .btn-ghost { color: var(--on-dark); border-color: color-mix(in srgb, var(--on-dark) 42%, transparent); }
+.anchor .btn-ghost:hover { background: color-mix(in srgb, var(--on-dark) 12%, transparent); color: #fff; border-color: var(--on-dark); }
+.anchor .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.anchor .btn-primary:hover { background: #fff; color: var(--ink); }
+
+/* ---- Badge / selo ---- */
+.badge {
+  display: inline-flex; align-items: center; gap: .4em;
+  font-family: var(--font-label);
+  font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 700;
+  color: var(--wine);
+  background: color-mix(in srgb, var(--wine) 10%, var(--paper-2));
+  border: 1px solid color-mix(in srgb, var(--wine) 22%, var(--line));
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+.anchor .badge { color: var(--gold-bright); background: color-mix(in srgb, var(--gold-bright) 16%, transparent); border-color: color-mix(in srgb, var(--gold-bright) 36%, transparent); }
+
+/* ---- Tag / tema (taxonomia secundária — sálvia) ---- */
+.tag {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-sans);
+  font-size: .72rem; letter-spacing: .04em; font-weight: 600;
+  color: var(--moss);
+  background: color-mix(in srgb, var(--moss) 8%, var(--paper-2));
+  border: 1px solid color-mix(in srgb, var(--moss) 24%, var(--line));
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+.tag:hover { border-color: var(--moss-soft); color: var(--moss); }
+.anchor .tag { color: var(--moss-bright); background: color-mix(in srgb, var(--moss-bright) 14%, transparent); border-color: color-mix(in srgb, var(--moss-bright) 34%, transparent); }
+
+/* ---- Cards ---- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: var(--s6); }
+.card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s6);
+  background: var(--paper-2);
+  transition: border-color .25s ease, transform .2s var(--ease), box-shadow .3s ease;
+}
+.card::before {
+  content: ''; position: absolute; left: var(--s6); right: var(--s6); top: 0; height: 3px;
+  background: linear-gradient(to right, var(--gold-bright), var(--gold-soft));
+  opacity: 0; transition: opacity .25s ease;
+}
+.card:hover { border-color: var(--gold-soft); transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+.card:hover::before { opacity: 1; }
+.card h3 { margin: var(--s3) 0 var(--s2); font-size: 1.3rem; }
+.card a { color: var(--ink); border: 0; }
+.card .hook { color: var(--ink-soft); font-size: 1rem; line-height: 1.55; }
+
+/* ---- Foco visível ---- */
+:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; border-radius: 3px; }
+
+hr { border: 0; border-top: 1px solid var(--line); margin: var(--s8) 0; }
+
+/* ===========================================================
+   MOVIMENTO (réplica do Everbe): reveal, selo girando, marquee
+   =========================================================== */
+
+/* Reveal no scroll (progressive enhancement) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s ease, transform .8s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal].in { opacity: 1; transform: none; }
+
+/* Selo circular girando lentamente (como o emblema da referência). */
+@keyframes spin-seal { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.selo-girando { animation: spin-seal 24s linear infinite; transform-origin: 50% 50%; }
+
+/* Faixa marquee — texto rolando na horizontal. */
+@keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee {
+  overflow: hidden; white-space: nowrap;
+  border-block: 1px solid var(--line);
+  background: color-mix(in srgb, var(--gold-bright) 22%, var(--paper));
+  padding-block: var(--s4);
+}
+.marquee__track {
+  display: inline-flex; align-items: center; gap: var(--s6);
+  will-change: transform;
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__item {
+  font-family: var(--font-label);
+  font-size: .82rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ink); white-space: nowrap;
+}
+.marquee__sep { color: var(--terra); }
+
+/* Label vertical decorativo (writing-mode) — toque editorial da referência. */
+.v-label {
+  font-family: var(--font-label);
+  font-size: .72rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--ink-soft);
+  writing-mode: vertical-rl;
+}
+
+/* Respeita quem pediu menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .btn:hover, .card:hover { transform: none; }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .selo-girando, .marquee__track { animation: none !important; }
+}

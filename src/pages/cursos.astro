@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { whatsappLink } from '../site';
+
+const checkout = 'https://alquimiaascensional.online/formacao-de-taro-para-gente-real-chkt-a';
+const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero tirar uma dúvida sobre a Formação em Tarô para Gente Real.');
+
+const aprende = [
+  'A base técnica e a história das 78 cartas, do zero, sem pré-requisito.',
+  'Os 22 Arcanos Maiores lidos por personalidades reconhecíveis, para você reconhecer o arquétipo na hora, sem decoreba.',
+  'Uma metodologia própria para os Arcanos Menores, organizada pelos números.',
+  'A tiragem da mandala astrológica: as 12 casas da vida em uma leitura completa.',
+  'A Cruz Celta e a técnica de pergunta direta para questões objetivas.',
+  'Como ativar o seu baralho e abrir o seu canal de leitura.',
+  'Bônus: duas aulas exclusivas sobre leitura terapêutica e a arte de fazer a pergunta certa.',
+];
+
+const paraQuem = [
+  'Quem quer virar a chave de profissão e viver de uma ferramenta de autoconhecimento.',
+  'Quem já tentou aprender Tarô antes e travou na insegurança das leituras abstratas.',
+  'Terapeutas e mentores que querem um instrumento de diagnóstico preciso.',
+  'Quem busca autonomia no próprio autoconhecimento, sem depender de terceiros.',
+];
+
+const formato = [
+  ['Início imediato', 'Você entra e já começa. Novas aulas toda semana na área de membros.'],
+  ['No seu ritmo', 'Conteúdo autoguiado, para assistir quando e quantas vezes quiser.'],
+  ['Certificado', 'Formação com certificado de conclusão ao final.'],
+  ['Garantia de 7 dias', 'Entrou, não era para você? Devolvo 100% do valor, sem pergunta.'],
+];
+---
+<BaseLayout title="Formação em Tarô para Gente Real · Curso com Aline Antunes" description="Aprenda a ler Tarô como um mapa prático da vida real: os arcanos por personalidades reconhecíveis, sem decoreba e sem mistério. Início imediato, certificado e garantia de 7 dias.">
+  <!-- Hero -->
+  <section class="section intro-sec glow">
+    <div class="read center">
+      <span class="eyebrow" data-reveal>Formação · Tarô para Gente Real</span>
+      <h1 data-reveal style="--reveal-delay:80ms">O Tarô não precisa ser um mistério medieval guardado em imagens difíceis</h1>
+      <p class="lead" data-reveal style="--reveal-delay:140ms">Aprenda a ler as cartas como um mapa prático de quem você é e do momento que vive. Uma metodologia que liga cada arcano a uma figura que você já reconhece, para você ler com precisão desde a primeira aula, sem decorar significado nenhum.</p>
+      <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
+        <a href={checkout} class="btn btn-gold" target="_blank" rel="noopener">Quero fazer a formação</a>
+        <p class="proof-mini">Acesso imediato · em até 12x de R$ 160,99 · garantia de 7 dias</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dor / promessa -->
+  <section class="section-sm">
+    <div class="read body">
+      <div data-reveal>
+        <span class="eyebrow">Por que esta formação existe</span>
+        <h2>O problema não é você. É o jeito como o Tarô costuma ser ensinado.</h2>
+      </div>
+      <p data-reveal>A maioria dos cursos te entrega uma pilha de significados para decorar, e te deixa insegura na hora de juntar tudo numa leitura que faça sentido. Aí a carta vira um enigma, e você trava.</p>
+      <p data-reveal>Aqui o caminho é outro. Em vez de decorar, você reconhece. Cada arcano ganha o rosto de uma personalidade que você já conhece da vida, então o significado gruda. O Tarô deixa de ser adivinhação e vira o que ele sempre foi: uma tecnologia de autoconhecimento, precisa, para a vida real.</p>
+    </div>
+  </section>
+
+  <!-- O que você vai aprender -->
+  <section class="section anchor what-sec">
+    <div class="read">
+      <div class="center" data-reveal>
+        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+        <span class="eyebrow">O que você vai aprender</span>
+        <h2>Do zero à leitura completa</h2>
+      </div>
+      <ul class="learn" data-reveal>
+        {aprende.map((item) => (<li>{item}</li>))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Para quem é -->
+  <section class="section-sm">
+    <div class="read">
+      <div data-reveal>
+        <span class="eyebrow">Para quem é</span>
+        <h2>Talvez você se reconheça aqui</h2>
+      </div>
+      <ul class="voc" data-reveal>
+        {paraQuem.map((item) => (<li>{item}</li>))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Formato -->
+  <section class="section-sm">
+    <div class="read">
+      <div data-reveal>
+        <span class="eyebrow">Como funciona</span>
+        <h2>Tudo na sua mão, do seu jeito</h2>
+      </div>
+      <div class="formato-grid" data-reveal>
+        {formato.map(([t, d]) => (
+          <div class="formato-item"><h3>{t}</h3><p>{d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Preço + garantia + CTA -->
+  <section class="section anchor preco-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <span class="eyebrow">Matrícula aberta</span>
+      <h2 data-reveal>Comece hoje a ler com segurança</h2>
+      <p class="preco" data-reveal>até <strong>12x de R$ 160,99</strong></p>
+      <p class="muted preco-sub" data-reveal>Acesso imediato à área de membros. Certificado de conclusão. E uma garantia incondicional: se em 7 dias você sentir que não era para você, devolvo todo o valor.</p>
+      <div class="preco-cta" data-reveal style="--reveal-delay:120ms">
+        <a href={checkout} class="btn btn-gold" target="_blank" rel="noopener">Garantir minha matrícula</a>
+        <a href={whatsapp} class="btn btn-ghost-light" rel="noopener">Tirar uma dúvida no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instrutora -->
+  <section class="section-sm">
+    <div class="read body center">
+      <div data-reveal>
+        <span class="eyebrow">Com quem você aprende</span>
+        <h2>Aline Antunes</h2>
+      </div>
+      <p data-reveal>Terapeuta e professora-mentora. Há cerca de oito anos trabalho maturidade e autonomia emocional usando o Tarô como ferramenta de consciência, não como bola de cristal. Ensino do jeito que eu queria ter aprendido: pé no chão, símbolo que vira gesto, autoridade de quem atende todos os dias. <a href="/sobre">Conhecer minha história</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) auto 0; max-width: 60ch; }
+
+  .hero-cta { margin-top: var(--s6); }
+  .proof-mini { margin: var(--s4) 0 0; font-size: .92rem; color: var(--ink-soft); }
+
+  .body { font-size: 1.12rem; }
+  .body strong { color: var(--ink); font-weight: 600; }
+
+  /* O que você aprende (sobre fundo escuro) */
+  .learn { list-style: none; padding: 0; margin: var(--s7) 0 0; display: grid; gap: var(--s3); }
+  .learn li {
+    position: relative; padding: var(--s4) var(--s5) var(--s4) calc(var(--s6) + var(--s4));
+    border: 1px solid color-mix(in srgb, var(--on-dark) 16%, transparent); border-radius: 12px;
+    background: color-mix(in srgb, var(--on-dark) 5%, transparent);
+    color: color-mix(in srgb, var(--on-dark) 88%, transparent); font-size: 1.05rem; line-height: 1.5;
+  }
+  .learn li::before {
+    content: '✦'; position: absolute; left: var(--s5); top: 50%; transform: translateY(-50%);
+    color: var(--gold-bright); font-variant-emoji: text;
+  }
+
+  /* Para quem (voz-do-cliente reuso) */
+  .voc { list-style: none; padding: 0; margin: var(--s6) 0 0; display: grid; gap: var(--s3); }
+  .voc li {
+    font-family: var(--font-serif); font-size: 1.18rem; line-height: 1.45; color: var(--ink);
+    padding: var(--s4) var(--s5); background: var(--paper-2);
+    border-left: 2px solid var(--gold); border-radius: 0 10px 10px 0;
+  }
+
+  /* Formato */
+  .formato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s6); }
+  .formato-item { padding: var(--s5); border: 1px solid var(--line); border-radius: 14px; background: var(--paper-2); }
+  .formato-item h3 { margin: 0 0 var(--s2); font-size: 1.18rem; color: var(--gold); }
+  .formato-item p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.55; }
+  @media (max-width: 600px) { .formato-grid { grid-template-columns: 1fr; } }
+
+  /* Preço */
+  .preco-sec .rule { margin-top: 0; }
+  .preco { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); margin: var(--s4) 0 var(--s2); color: var(--gold-bright); }
+  .preco strong { color: #fff; font-weight: 600; }
+  .preco-sub { max-width: 54ch; margin-inline: auto; }
+  .preco-cta { margin-top: var(--s6); display: flex; gap: var(--s4); justify-content: center; flex-wrap: wrap; }
+  .btn-ghost-light { color: var(--gold-bright); border: 1px solid color-mix(in srgb, var(--gold-bright) 50%, transparent); }
+  .btn-ghost-light:hover { color: #fff; border-color: var(--gold-bright); }
+
+  @media (max-width: 600px) {
+    .hero-cta .btn, .preco-cta .btn { width: 100%; justify-content: center; }
+  }
+</style>

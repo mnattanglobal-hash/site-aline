@@ -1,0 +1,41 @@
+---
+import { SITE } from '../site';
+
+// Feed automático (mais recentes) via widget oficial do Behold.
+// Se SITE.beholdFeedId estiver vazio, cai no fallback: convite para seguir o perfil.
+const feedId = SITE.beholdFeedId;
+const temFeed = Boolean(feedId);
+---
+<div class="ig">
+  {temFeed ? (
+    <div class="ig-feed">
+      <behold-widget feed-id={feedId}></behold-widget>
+    </div>
+  ) : (
+    <div class="ig-fallback">
+      <p class="muted">Conteúdo, reflexões e bastidores do trabalho ficam por lá.</p>
+      <a class="btn btn-primary" href={SITE.instagram} target="_blank" rel="noopener">
+        Seguir {SITE.instagramHandle}
+      </a>
+    </div>
+  )}
+  <p class="ig-link">
+    <a href={SITE.instagram} target="_blank" rel="noopener">Ver o perfil completo no Instagram →</a>
+  </p>
+</div>
+{temFeed && (
+  <script type="module" is:inline src="https://w.behold.so/widget.js"></script>
+)}
+<style>
+  .ig-feed { min-height: 1px; }
+  .ig-fallback {
+    text-align: center;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    padding: var(--s7) var(--s5);
+    background: var(--paper-2);
+  }
+  .ig-fallback p { margin-bottom: var(--s4); }
+  .ig-link { text-align: center; margin-top: var(--s5); }
+  .ig-link a { font-weight: 600; }
+</style>

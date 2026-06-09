@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, whatsappLink } from '../site';
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+const whatsapp = whatsappLink('Oi, Aline. Vim pelo site.');
+const instagram = SITE.instagram;
+const luz = img('aa-contato-luz');
+---
+<BaseLayout title="Contato · Aline Antunes" description="Fale com a Aline. Agende uma sessão ou tire suas dúvidas pelo WhatsApp ou Instagram.">
+  <section class="section intro-sec glow">
+    <div class="wrap intro-grid">
+      <div class="intro-copy">
+        <span class="eyebrow" data-reveal>Contato</span>
+        <h1 data-reveal style="--reveal-delay:80ms">Vamos conversar</h1>
+        <p class="lead" data-reveal style="--reveal-delay:140ms">Se algo te trouxe até aqui, já é um bom motivo para a gente conversar. Escolha por onde prefere começar.</p>
+      </div>
+      {luz && (
+        <figure class="intro-img" data-reveal style="--reveal-delay:120ms">
+          <Image
+            src={luz}
+            alt="Quarto ensolarado com cortinas leves ao vento e luz dourada entrando pela janela"
+            widths={[360, 560, 820]}
+            sizes="(max-width: 820px) 80vw, 40vw"
+            format="webp"
+            quality={72}
+            loading="lazy"
+          />
+        </figure>
+      )}
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="read">
+      <div class="channels" data-reveal>
+        <a href={whatsapp} class="card channel" rel="noopener">
+          <span class="badge">Mais rápido</span>
+          <h3>WhatsApp</h3>
+          <p class="muted">Para agendar uma sessão ou tirar dúvidas diretamente.</p>
+          <span class="more">Abrir conversa <span aria-hidden="true">→</span></span>
+        </a>
+        <a href={instagram} class="card channel" rel="noopener">
+          <span class="badge">Acompanhar</span>
+          <h3>Instagram</h3>
+          <p class="muted">Conteúdo e bastidores do trabalho. {SITE.instagramHandle}</p>
+          <span class="more">Ver o perfil <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
+
+  .intro-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s8); align-items: center; }
+  .intro-img { margin: 0; }
+  .intro-img :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; box-shadow: var(--shadow-soft); }
+  @media (max-width: 820px) {
+    .intro-grid { grid-template-columns: 1fr; gap: var(--s6); }
+    .intro-img { order: -1; max-width: 460px; }
+  }
+
+  .channels { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); margin: 0; }
+  @media (max-width: 560px) { .channels { grid-template-columns: 1fr; } }
+  .channel { display: flex; flex-direction: column; color: var(--ink); }
+  .channel h3 { margin: var(--s3) 0 var(--s2); }
+  .channel .more { margin-top: var(--s4); display: inline-flex; align-items: center; gap: .4em; font-family: var(--font-sans); font-size: .92rem; font-weight: 600; color: var(--gold); }
+  .channel .more span { transition: transform .2s var(--ease); }
+  .channel:hover .more { color: var(--ink); }
+  .channel:hover .more span { transform: translateX(4px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .channel:hover .more span { transform: none; }
+  }
+</style>

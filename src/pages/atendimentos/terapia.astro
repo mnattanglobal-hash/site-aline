@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Depoimentos from '../../components/Depoimentos.astro';
+import depoimentos from '../../data/depoimentos.json';
+import { whatsappLink } from '../../site';
+import { Image } from 'astro:assets';
+import { img } from '../../lib/images';
+const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero entender o acompanhamento de Terapia.');
+const whatsappValores = whatsappLink('Oi, Aline. Vim pelo site e queria entender a Terapia e como funciona o investimento.');
+const ambiente = img('aa-contato-luz');
+
+const depoDestaque = depoimentos.filter((d) => d.destaque);
+---
+<BaseLayout title="Terapia · Orientação e acompanhamento · Aline Antunes" description="Um espaço de orientação para reorganizar o que está por dentro e sair de ciclos que se repetem. Acompanhamento contínuo, com verdade direta e foco em autonomia emocional.">
+  <!-- Hero -->
+  <section class="section intro-sec glow">
+    <div class="read">
+      <span class="eyebrow" data-reveal>Atendimento individual · Terapia</span>
+      <h1 data-reveal style="--reveal-delay:80ms">Clareza e direção para o que se repete, de um jeito que dura</h1>
+      <p class="lead" data-reveal style="--reveal-delay:140ms">Um espaço de orientação para reorganizar o que está por dentro e sair dos ciclos que voltam sempre. Aqui a gente não fica esperando o tempo passar para a dor aliviar. A gente olha a verdade de frente e transforma ela em recurso, no seu ritmo, com acompanhamento.</p>
+      <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
+        <a href={whatsapp} class="btn btn-gold" rel="noopener">Conversar pelo WhatsApp</a>
+        <p class="proof-mini"><span class="sparkle" aria-hidden="true">✦</span> Acompanhamento individual · online · no seu ritmo</p>
+      </div>
+    </div>
+  </section>
+
+  {ambiente && (
+    <section class="wrap">
+      <figure class="ambiente" data-reveal>
+        <Image
+          src={ambiente}
+          alt="Luz dourada e suave atravessando um ambiente sereno"
+          widths={[720, 1080, 1440]}
+          sizes="(max-width: 1160px) 92vw, 1080px"
+          format="webp"
+          quality={72}
+          loading="lazy"
+        />
+      </figure>
+    </section>
+  )}
+
+  <!-- Para quem é -->
+  <section class="section-sm">
+    <div class="read">
+      <div data-reveal>
+        <span class="eyebrow">Para quem é</span>
+        <h2>Quando a vontade é de virar a chave de verdade</h2>
+      </div>
+      <ul class="voc" data-reveal>
+        <li>"Quero sair de um ciclo que já entendi, mas continuo repetindo."</li>
+        <li>"Preciso de alguém que caminhe junto, não só de uma conversa solta."</li>
+        <li>"Vim de uma perda, uma transição, e ainda não me reorganizei."</li>
+        <li>"Quero parar de viver por reação e começar a viver por direção."</li>
+      </ul>
+      <p class="recognition" data-reveal>Se você quer reorganização interna e autonomia, e não uma promessa mágica, é aqui.</p>
+    </div>
+  </section>
+
+  <!-- A abordagem -->
+  <section class="section-sm">
+    <div class="read body">
+      <div data-reveal>
+        <span class="eyebrow">A abordagem</span>
+        <h2>Verdade direta, sem te deixar no escuro</h2>
+      </div>
+      <p data-reveal>O trabalho amplia a sua visão sobre o que você vive e fortalece os recursos que já existem em você, mesmo que agora estejam abafados. A gente reconhece a dor sem se instalar nela: a vítima interna não é fraca, é uma inteligência de sobrevivência. O ponto é não deixar ela no comando.</p>
+      <p data-reveal>Quando faz sentido, uso ferramentas simbólicas como o Tarô e os oráculos para enxergar mais rápido o que está em jogo. Elas são instrumento de consciência, nunca adivinhação. O centro é sempre o seu livre-arbítrio e a sua responsabilidade sobre as próprias escolhas.</p>
+    </div>
+  </section>
+
+  <!-- O que muda -->
+  <section class="section anchor what-sec">
+    <div class="read">
+      <div class="center" data-reveal>
+        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+        <span class="eyebrow">O que o acompanhamento constrói</span>
+        <h2>Reorganização, não alívio passageiro</h2>
+      </div>
+      <div class="what-grid" data-reveal>
+        <div class="what-item"><h3>Direção</h3><p>Sair da reação automática e voltar a decidir a partir do que é seu.</p></div>
+        <div class="what-item"><h3>Autonomia</h3><p>Deixar de depender do conflito ou do outro para saber quem você é.</p></div>
+        <div class="what-item"><h3>Ressensibilização</h3><p>Aprender a sentir de novo o que a sobrevivência tinha anestesiado.</p></div>
+        <div class="what-item"><h3>Continuidade</h3><p>Um processo que sustenta a virada no tempo, não só no dia da conversa.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="section-sm">
+    <div class="read">
+      <div data-reveal>
+        <span class="eyebrow">Como acontece na prática</span>
+        <h2>Um processo no seu ritmo</h2>
+      </div>
+      <ol class="steps" data-reveal>
+        <li><span class="step-n" aria-hidden="true">1</span><div><h3>A gente começa por uma conversa</h3><p>Você me conta onde está e o que quer reorganizar. A partir daí desenhamos o acompanhamento.</p></div></li>
+        <li><span class="step-n" aria-hidden="true">2</span><div><h3>Sessões individuais e online</h3><p>De cerca de 1 hora, com a consistência que o seu momento pede: semanal, quinzenal ou mensal.</p></div></li>
+        <li><span class="step-n" aria-hidden="true">3</span><div><h3>Cada encontro deixa um próximo passo</h3><p>Não é só falar e sair igual. Você sai com algo concreto para praticar até a próxima.</p></div></li>
+      </ol>
+      <blockquote data-reveal>Honrar a sua história sem ficar presa a ela. É disso que se trata.</blockquote>
+    </div>
+  </section>
+
+  <!-- Prova social -->
+  <section class="wrap section section-band">
+    <div class="center" data-reveal>
+      <span class="eyebrow">Quem já caminhou comigo</span>
+      <h2>O que dizem as clientes</h2>
+    </div>
+    <div class="depo-band" data-reveal>
+      <Depoimentos items={depoDestaque} />
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="section anchor cta-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <h2 data-reveal>Dê o primeiro passo</h2>
+      <p class="muted" data-reveal style="--reveal-delay:100ms">Me conta o que está pedindo reorganização. A gente vê juntas o melhor formato e o investimento, sem compromisso. <a href={whatsappValores} rel="noopener">Falar sobre valores</a>.</p>
+      <div data-reveal style="--reveal-delay:180ms"><a href={whatsapp} class="btn btn-gold" rel="noopener">Falar com a Aline no WhatsApp</a></div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
+
+  .hero-cta { margin-top: var(--s6); }
+  .proof-mini { margin: var(--s4) 0 0; font-size: .92rem; color: var(--ink-soft); display: flex; align-items: center; gap: .5em; flex-wrap: wrap; }
+  .proof-mini .sparkle { color: var(--gold); }
+
+  .ambiente { margin: var(--s6) 0 0; }
+  .ambiente :global(img) { width: 100%; aspect-ratio: 3 / 2; max-height: 560px; object-fit: cover; object-position: center; border-radius: 18px; box-shadow: var(--shadow-soft); }
+  @media (min-width: 760px) { .ambiente :global(img) { aspect-ratio: 16 / 9; } }
+
+  .voc { list-style: none; padding: 0; margin: var(--s6) 0 var(--s5); display: grid; gap: var(--s3); }
+  .voc li {
+    font-family: var(--font-serif); font-style: italic; font-size: 1.22rem; line-height: 1.4; color: var(--ink);
+    padding: var(--s4) var(--s5); background: var(--paper-2);
+    border-left: 2px solid var(--gold); border-radius: 0 10px 10px 0;
+  }
+  .recognition { font-size: 1.15rem; }
+  .recognition em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }
+
+  .what-sec .rule { margin-top: 0; }
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); margin-top: var(--s7); }
+  .what-item { padding: var(--s5); border: 1px solid color-mix(in srgb, var(--on-dark) 16%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--on-dark) 5%, transparent); }
+  .what-item h3 { margin: 0 0 var(--s2); color: var(--gold-bright); font-size: 1.25rem; }
+  .what-item p { margin: 0; color: color-mix(in srgb, var(--on-dark) 82%, transparent); font-size: 1rem; line-height: 1.55; }
+  @media (max-width: 600px) { .what-grid { grid-template-columns: 1fr; } }
+
+  .steps { list-style: none; padding: 0; margin: var(--s6) 0; display: grid; gap: var(--s4); }
+  .steps li { display: flex; gap: var(--s4); align-items: flex-start; }
+  .step-n {
+    flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+    display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem;
+    color: var(--gold); border: 1px solid var(--gold-soft); background: var(--paper-2);
+  }
+  .steps h3 { margin: .15rem 0 var(--s1); font-size: 1.2rem; }
+  .steps p { margin: 0; color: var(--ink-soft); }
+  .read > blockquote {
+    font-family: var(--font-display); font-style: italic; font-weight: 420;
+    font-size: clamp(1.4rem, 3.2vw, 1.85rem); line-height: 1.34; color: var(--wine);
+    border-left: 2px solid var(--gold); background: var(--paper-2);
+    padding: var(--s5) var(--s6); border-radius: 0 8px 8px 0; margin: var(--s7) 0 0;
+  }
+
+  .depo-band { margin-top: var(--s6); }
+
+  .cta-sec .rule { margin-top: 0; }
+  .cta-sec p { max-width: 54ch; margin-inline: auto; }
+  .cta-sec div { margin-top: var(--s6); }
+
+  @media (max-width: 600px) {
+    .hero-cta .btn, .cta-sec .btn { width: 100%; justify-content: center; }
+    .voc li { font-size: 1.12rem; }
+  }
+</style>

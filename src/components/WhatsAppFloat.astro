@@ -1,0 +1,134 @@
+---
+import { whatsappLink } from '../site';
+const href = whatsappLink('Oi, Aline. Vim pelo site e queria saber mais sobre a sessão.');
+// Avatar da Aline (96px webp, ~2KB). Origem: public/aline-avatar.jpg, recorte quadrado.
+const avatar = '/aline-avatar.webp';
+---
+<div class="wa" data-wa>
+  <div class="wa-bubble" data-wa-bubble hidden>
+    <button class="wa-close" type="button" data-wa-close aria-label="Fechar">&times;</button>
+    <div class="wa-bubble-head">
+      <img class="wa-photo" src={avatar} alt="Aline Antunes" width="44" height="44" loading="lazy" data-wa-img />
+      <div>
+        <p class="wa-name">Aline Antunes</p>
+        <p class="wa-status">Online · responde pessoalmente</p>
+      </div>
+    </div>
+    <p class="wa-msg">Quer conversar sobre uma sessão? Me chama aqui, eu respondo pessoalmente.</p>
+    <a class="wa-cta" href={href} target="_blank" rel="noopener">Conversar no WhatsApp →</a>
+  </div>
+  <a class="wa-float" href={href} target="_blank" rel="noopener" aria-label="Falar com a Aline no WhatsApp" data-wa-button>
+    <span class="wa-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="26" height="26" focusable="false">
+        <path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm4.52 11.97c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/>
+      </svg>
+    </span>
+    <span class="wa-label">Falar com a Aline</span>
+  </a>
+</div>
+<style>
+  .wa { position: fixed; right: clamp(16px, 4vw, 28px); bottom: clamp(16px, 4vw, 28px); z-index: 40; display: flex; flex-direction: column; align-items: flex-end; gap: var(--s3); }
+
+  .wa-float {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    padding: 11px 20px 11px 12px; border-radius: 999px;
+    background: var(--ink); color: var(--paper); border: 0;
+    box-shadow: 0 6px 22px rgba(33, 27, 36, 0.30);
+    transition: transform .15s ease, background .2s ease;
+  }
+  .wa-float:hover { transform: translateY(-2px); background: #0f0a12; color: var(--paper); }
+  .wa-label { font-family: var(--font-sans); font-weight: 600; font-size: .95rem; }
+
+  /* Ícone do WhatsApp em tom da marca (dourado sobre tinta), discreto. */
+  .wa-icon { flex: none; display: inline-grid; place-items: center; width: 30px; height: 30px; color: var(--gold-bright); }
+  .wa-icon svg { display: block; }
+
+  /* Foto da Aline some sem quebrar caso falhe o carregamento. */
+  .wa.img-failed .wa-photo { display: none; }
+  .wa.img-failed .wa-bubble-head { gap: 0; }
+
+  .wa-bubble {
+    position: relative; max-width: 290px;
+    background: var(--paper); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 16px;
+    padding: var(--s4) var(--s5) var(--s4) var(--s4);
+    box-shadow: 0 12px 32px rgba(33, 27, 36, 0.20);
+    transform-origin: bottom right;
+    animation: wa-pop .25s ease-out;
+  }
+  .wa-bubble::after {
+    content: ''; position: absolute; right: 28px; bottom: -7px;
+    width: 14px; height: 14px; background: var(--paper);
+    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    transform: rotate(45deg);
+  }
+  .wa-bubble-head { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s3); }
+  .wa-photo { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; border: 2px solid var(--gold-soft); }
+  .wa-name { margin: 0; font-family: var(--font-serif); font-weight: 600; font-size: 1.05rem; line-height: 1.1; }
+  .wa-status { margin: 2px 0 0; font-size: .78rem; color: var(--ink-soft); }
+  .wa-status::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #25D366; margin-right: 6px; vertical-align: middle; }
+  .wa-msg { margin: 0 0 var(--s3); font-size: .98rem; line-height: 1.5; }
+  .wa-cta { font-weight: 600; font-size: .92rem; color: var(--gold); border: 0; }
+  .wa-cta:hover { color: var(--ink); }
+  .wa-close { position: absolute; top: 6px; right: 10px; background: none; border: 0; cursor: pointer; font-size: 1.3rem; line-height: 1; color: var(--ink-soft); }
+  .wa-close:hover { color: var(--ink); }
+
+  @keyframes wa-pop { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: none; } }
+  @media (max-width: 520px) {
+    .wa-label { display: none; }
+    .wa-float { padding: 13px; }
+    .wa-bubble { max-width: 230px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-float { transition: none; }
+    .wa-float:hover { transform: none; }
+    .wa-bubble { animation: none; }
+  }
+</style>
+<script>
+  (() => {
+    const root = document.querySelector('[data-wa]');
+    if (!root) return;
+
+    // Fallback gracioso: se a foto da Aline falhar (404, offline, cache quebrado),
+    // troca para o ícone do WhatsApp em vez de deixar imagem quebrada.
+    const fail = () => root.classList.add('img-failed');
+    root.querySelectorAll('[data-wa-img]').forEach((img) => {
+      if (img.complete && img.naturalWidth === 0) fail();
+      img.addEventListener('error', fail);
+    });
+
+    const bubble = root.querySelector('[data-wa-bubble]');
+    const close = root.querySelector('[data-wa-close]');
+    if (!bubble) return;
+
+    const KEY = 'wa-invite-dismissed';
+    let shown = false;
+
+    const dismissed = () => {
+      try { return sessionStorage.getItem(KEY) === '1'; } catch { return false; }
+    };
+    const show = () => {
+      if (shown || dismissed()) return;
+      shown = true;
+      bubble.hidden = false;
+    };
+    const hide = () => {
+      bubble.hidden = true;
+      try { sessionStorage.setItem(KEY, '1'); } catch {}
+    };
+
+    close?.addEventListener('click', (e) => { e.preventDefault(); hide(); });
+
+    // Convida conforme a pessoa navega: aparece após um tempo OU ao rolar a página.
+    const timer = window.setTimeout(show, 8000);
+    const onScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.6) { show(); cleanup(); }
+    };
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>

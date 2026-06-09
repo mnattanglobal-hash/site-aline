@@ -1,0 +1,315 @@
+---
+import { getCollection } from 'astro:content';
+import { PILAR_META } from '../content/config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Depoimentos from '../components/Depoimentos.astro';
+import Marquee from '../components/Marquee.astro';
+import SeloGirando from '../components/SeloGirando.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
+import YouTubeFeed from '../components/YouTubeFeed.astro';
+import depoimentos from '../data/depoimentos.json';
+import { SITE } from '../site';
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+
+const heroImg = img('aa-hero-home');
+
+const depoDestaque = depoimentos.filter((d) => d.destaque).slice(0, 4);
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const destaques = posts.slice(0, 3);
+
+const pilares = Object.entries(PILAR_META)
+  .filter(([nome]) => nome !== 'Arcanos')
+  .map(([nome, meta]) => ({ nome, desc: meta.desc, slug: meta.slug, img: img(meta.img), alt: meta.alt }));
+
+const site = Astro.site ?? new URL('https://alineantunes.site');
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Aline Antunes',
+    url: site.href,
+    inLanguage: 'pt-BR',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Aline Antunes',
+    jobTitle: 'Terapeuta de maturidade e autonomia emocional',
+    url: site.href,
+    description:
+      'Terapeuta que trabalha maturidade e autonomia emocional, individuação e rompimento de padrões repetitivos, usando o Tarô como ferramenta de consciência.',
+    sameAs: ['https://instagram.com/alinea.antunes', SITE.youtube],
+  },
+];
+---
+<BaseLayout jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="hero glow">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-reveal>Tarô terapêutico · sessões individuais</span>
+        <h1 data-reveal style="--reveal-delay:80ms">Por que a mesma dor sempre volta, só que com outro rosto?</h1>
+        <p class="sub" data-reveal style="--reveal-delay:160ms">Sou a Aline. Na sessão individual, a gente usa o Tarô como um espelho (não como adivinhação) para entender o padrão que se repete na sua vida e achar um caminho concreto para sair dele.</p>
+        <div class="actions" data-reveal style="--reveal-delay:240ms">
+          <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Agendar uma sessão</a>
+          <a href="/blog" class="btn btn-ghost">Ler o blog</a>
+        </div>
+      </div>
+      <figure class="hero-media" data-reveal style="--reveal-delay:120ms">
+        {heroImg ? (
+          <Image
+            src={heroImg}
+            alt="Retrato de Aline Antunes, de cabelos ruivos e blusa de linho clara, apoiando o queixo na mão, diante de prateleiras de madeira"
+            widths={[480, 768, 1120]}
+            sizes="(max-width: 860px) 92vw, 46vw"
+            format="webp"
+            quality={72}
+            loading="eager"
+            fetchpriority="high"
+          />
+        ) : (
+          <div class="hero-fallback" role="img" aria-label="Luz quente">
+            <span class="hero-spark" aria-hidden="true">✦</span>
+          </div>
+        )}
+        <span class="hero-selo"><SeloGirando size={128} /></span>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Faixa marquee (texto rolando, como na referência) -->
+  <Marquee items={[
+    'maturidade emocional',
+    'autonomia afetiva',
+    'romper padrões',
+    'o tarô como espelho',
+    'individuação',
+    'escolher por direção',
+  ]} />
+
+  <!-- Tese (seção-âncora escura) -->
+  <section class="section anchor tese-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <blockquote class="thesis" data-reveal>A vítima quer justiça do passado. A consciência quer liberdade no presente.</blockquote>
+      <p class="thesis-body muted" data-reveal style="--reveal-delay:120ms">Muita gente chega até mim depois de já ter tentado bastante, terapia inclusive, e ainda sentindo que uma questão não fecha. Eu não prometo milagre, e não leio o futuro. O que eu faço é te ajudar a dar nome ao que você sente e não consegue explicar, enxergar a dinâmica que segura esse padrão de pé e transformar isso em algo prático, que você usa pra escolher diferente.</p>
+    </div>
+  </section>
+
+  <!-- Reconhecimento da dor → sessão -->
+  <section class="wrap section section-band">
+    <div class="center" data-reveal>
+      <span class="eyebrow">Talvez você reconheça</span>
+      <h2>A mesma dor, com outro rosto</h2>
+    </div>
+    <ul class="voc-home" data-reveal>
+      <li>"Sempre atraio o mesmo tipo de pessoa."</li>
+      <li>"Sei que faz mal, mas sempre volto."</li>
+      <li>"Me anulo para o outro ficar confortável."</li>
+      <li>"Vivo mais por reação do que por direção."</li>
+      <li>"Já fiz terapia e não chego no lugar de resolução."</li>
+      <li>"Parte de mim tem medo de melhorar."</li>
+    </ul>
+    <div class="center voc-cta" data-reveal>
+      <p class="muted">Se bateu o <em>"é exatamente isso"</em>, é disso que a sessão cuida.</p>
+      <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão</a>
+    </div>
+  </section>
+
+  <!-- Pilares -->
+  <section class="wrap section">
+    <div class="center" data-reveal>
+      <span class="eyebrow">Por onde caminhamos</span>
+      <h2>Seis territórios de trabalho</h2>
+    </div>
+    <div class="card-grid pilares" data-reveal>
+      {pilares.map((p) => (
+        <a class="card pilar-card" href={`/blog/pilar/${p.slug}`}>
+          {p.img && (
+            <span class="pilar-thumb">
+              <Image src={p.img} alt={p.alt} widths={[320, 560]} sizes="(max-width: 600px) 90vw, 340px" format="webp" quality={70} loading="lazy" />
+            </span>
+          )}
+          <span class="badge">Pilar</span>
+          <h3>{p.nome}</h3>
+          <p class="hook">{p.desc}</p>
+          <span class="more">Ver o pilar <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Destaques do blog -->
+  {destaques.length > 0 && (
+    <section class="wrap section section-band">
+      <div class="center" data-reveal>
+        <span class="eyebrow">Do blog</span>
+        <h2>Para começar a leitura</h2>
+      </div>
+      <div class="card-grid" data-reveal>
+        {destaques.map((p) => (
+          <ArticleCard href={`/blog/${p.slug}`} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
+        ))}
+      </div>
+      <p class="center more-link"><a href="/blog" class="btn btn-ghost">Ver todos os artigos</a></p>
+    </section>
+  )}
+
+  <!-- Depoimentos -->
+  <section class="wrap section">
+    <div class="center" data-reveal>
+      <span class="eyebrow">Prova viva</span>
+      <h2>O que dizem as clientes</h2>
+    </div>
+    <div class="depo-wrap" data-reveal>
+      <Depoimentos items={depoDestaque} />
+    </div>
+  </section>
+
+  <!-- Ferramenta gratuita: Descubra seu Arcano -->
+  <section class="wrap section">
+    <div class="arcano-banner glow" data-reveal>
+      <div class="arcano-txt">
+        <span class="eyebrow">Gratuito</span>
+        <h2>Descubra seu Arcano Pessoal e do Ano</h2>
+        <p class="muted">Uma porta de entrada para o simbólico. Descubra a carta que fala de quem você é e do momento que você está vivendo, e o que ela tem pra te mostrar.</p>
+      </div>
+      <a class="btn btn-gold" href={SITE.arcanoApp} target="_blank" rel="noopener">Descobrir meu arcano →</a>
+    </div>
+  </section>
+
+  <!-- Instagram -->
+  <section class="wrap section section-band">
+    <div class="center" data-reveal>
+      <span class="eyebrow">No Instagram</span>
+      <h2>Acompanhe o dia a dia do trabalho</h2>
+    </div>
+    <div class="ig-home" data-reveal>
+      <InstagramFeed />
+    </div>
+  </section>
+
+  <!-- YouTube -->
+  <section class="wrap section">
+    <div class="center" data-reveal>
+      <span class="eyebrow">No YouTube</span>
+      <h2>Aulas e conversas</h2>
+    </div>
+    <div class="yt-home" data-reveal>
+      <YouTubeFeed />
+    </div>
+  </section>
+
+  <!-- CTA final (seção-âncora escura) -->
+  <section class="section anchor oxblood cta-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <h2 data-reveal>Quer dar o primeiro passo?</h2>
+      <p class="muted" data-reveal style="--reveal-delay:100ms">A sessão é uma conversa de clareza, não de previsão. Você sai entendendo o padrão e com algo concreto para fazer com isso.</p>
+      <div data-reveal style="--reveal-delay:180ms"><a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Agendar uma sessão</a></div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  /* ---- Hero ---- */
+  .hero { padding-block: var(--s9) var(--s9); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: var(--s8); align-items: center; }
+  .hero h1 { font-size: clamp(2.5rem, 5.6vw, 4rem); margin: var(--s4) 0; }
+  .sub { font-size: 1.2rem; color: var(--ink-soft); max-width: 52ch; }
+  .actions { display: flex; gap: var(--s4); margin-top: var(--s6); flex-wrap: wrap; }
+
+  .hero-media { margin: 0; position: relative; order: -1; }
+  .hero-selo {
+    position: absolute; left: -28px; bottom: -28px; z-index: 2;
+    display: grid; place-items: center;
+    width: 128px; height: 128px; border-radius: 50%;
+    background: var(--paper); box-shadow: var(--shadow-soft);
+  }
+  @media (max-width: 860px) { .hero-selo { left: auto; right: -14px; bottom: -22px; width: 104px; height: 104px; transform: scale(.82); } }
+  .hero-media :global(img) {
+    width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 28% center;
+    border-radius: 18px;
+    box-shadow: 0 30px 70px -36px color-mix(in srgb, var(--ink) 70%, transparent);
+  }
+  .hero-fallback {
+    position: relative; width: 100%; aspect-ratio: 4 / 5;
+    border-radius: 18px; border: 1px solid var(--line);
+    background:
+      radial-gradient(60% 60% at 50% 38%, color-mix(in srgb, var(--amber) 32%, transparent), transparent 70%),
+      linear-gradient(160deg, var(--paper-2), var(--paper-3));
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .hero-spark { font-size: clamp(4rem, 12vw, 8rem); color: var(--gold-soft); opacity: .9; }
+
+  /* ---- Tese (âncora) ---- */
+  .tese-sec .rule { margin-top: 0; }
+  .thesis {
+    font-family: var(--font-display); font-style: italic; font-weight: 420;
+    font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.28;
+    color: #f6efe1; margin: var(--s5) 0 var(--s6); border: 0; padding: 0; background: none;
+  }
+  .thesis-body { font-size: 1.12rem; max-width: 60ch; margin-inline: auto; }
+  .thesis-body strong { color: var(--gold-bright); }
+
+  /* ---- Seções ---- */
+  .section-band { background: var(--paper-2); border-block: 1px solid var(--line); }
+  .pilares { margin-top: var(--s7); }
+  .depo-wrap { margin-top: var(--s7); }
+  .ig-home, .yt-home { margin-top: var(--s7); }
+  .more-link { margin-top: var(--s7); }
+
+  /* Reconhecimento da dor (voz-do-cliente) */
+  .voc-home { list-style: none; padding: 0; margin: var(--s7) auto 0; max-width: 780px; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+  .voc-home li { font-family: var(--font-serif); font-style: italic; font-size: 1.12rem; line-height: 1.4; color: var(--ink); padding: var(--s4) var(--s5); background: var(--paper); border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: 0 10px 10px 0; }
+  .voc-cta { margin-top: var(--s7); }
+  .voc-cta p { margin-bottom: var(--s4); font-size: 1.1rem; }
+  .voc-cta em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }
+  @media (max-width: 600px) {
+    .voc-home { grid-template-columns: 1fr; }
+    .voc-cta .btn, .actions .btn { width: 100%; justify-content: center; }
+  }
+  .card-grid + .more-link { margin-top: var(--s7); }
+
+  .pilar-card { display: flex; flex-direction: column; color: var(--ink); overflow: hidden; }
+  .pilar-thumb { display: block; margin: calc(-1 * var(--s6)) calc(-1 * var(--s6)) var(--s5); }
+  .pilar-thumb :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+  .pilar-card::before { left: 0; right: 0; }
+  .pilar-card h3 { margin: var(--s3) 0 var(--s2); }
+  .pilar-card .hook { color: var(--ink-soft); }
+  .pilar-card .more { margin-top: auto; padding-top: var(--s4); display: inline-flex; align-items: center; gap: .4em; font-family: var(--font-sans); font-size: .92rem; font-weight: 600; color: var(--gold); }
+  .pilar-card .more span { transition: transform .2s var(--ease); }
+  .pilar-card:hover .more { color: var(--ink); }
+  .pilar-card:hover .more span { transform: translateX(4px); }
+
+  /* ---- Banner do Arcano ---- */
+  .arcano-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s6);
+    flex-wrap: wrap; padding: var(--s8) var(--s7);
+    border: 1px solid var(--line-strong); border-radius: 18px;
+    background: linear-gradient(135deg, var(--paper-2), color-mix(in srgb, var(--amber) 12%, var(--paper-2)));
+  }
+  .arcano-txt { max-width: 58ch; }
+  .arcano-txt h2 { margin: var(--s2) 0 var(--s3); }
+
+  /* ---- CTA âncora ---- */
+  .cta-sec .rule { margin-top: 0; }
+  .cta-sec h2 { margin-top: 0; }
+  .cta-sec p { max-width: 52ch; margin-inline: auto; }
+  .cta-sec div { margin-top: var(--s6); }
+
+  @media (max-width: 860px) {
+    .hero { padding-block: var(--s8) var(--s7); }
+    .hero-grid { grid-template-columns: 1fr; gap: var(--s7); }
+    .hero-copy { order: 2; }
+    .hero-media { order: 1; max-width: 420px; }
+    .hero-media img, .hero-fallback { aspect-ratio: 5 / 4; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pilar-card:hover .more span { transform: none; }
+  }
+</style>

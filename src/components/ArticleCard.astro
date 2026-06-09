@@ -1,0 +1,31 @@
+---
+interface Props {
+  href: string;
+  titulo: string;
+  hook: string;
+  pilar: string;
+  arcano?: string;
+}
+const { href, titulo, hook, pilar, arcano } = Astro.props;
+---
+<article class="card art-card">
+  <span class="badge">{arcano ? `Arcano · ${arcano}` : pilar}</span>
+  <h3><a href={href}>{titulo}</a></h3>
+  <p class="hook">{hook}</p>
+  <a href={href} class="more" aria-label={`Ler: ${titulo}`}>Ler o artigo <span aria-hidden="true">→</span></a>
+</article>
+<style>
+  .art-card { display: flex; flex-direction: column; }
+  .art-card .hook { margin-bottom: var(--s5); }
+  .more {
+    margin-top: auto; display: inline-flex; align-items: center; gap: .4em;
+    font-family: var(--font-sans); font-size: .92rem; font-weight: 600;
+    color: var(--gold); border: 0;
+  }
+  .more span { transition: transform .2s var(--ease); }
+  .art-card:hover .more { color: var(--ink); }
+  .art-card:hover .more span { transform: translateX(4px); }
+  @media (prefers-reduced-motion: reduce) {
+    .art-card:hover .more span { transform: none; }
+  }
+</style>

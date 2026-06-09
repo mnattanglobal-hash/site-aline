@@ -1,0 +1,102 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: string;
+  ogImage?: string;
+  publishedTime?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+const {
+  title = 'Aline Antunes · Maturidade e Autonomia Emocional',
+  description = 'Terapia simbólica para amadurecimento emocional, autonomia afetiva e rompimento de padrões repetitivos. O Tarô como ferramenta de consciência.',
+  ogType = 'website',
+  ogImage = '/aa-og-default.jpg',
+  publishedTime,
+  jsonLd,
+} = Astro.props;
+const site = Astro.site ?? new URL('https://alineantunes.site');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImageAbs = new URL(ogImage, site);
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Fontes reais auto-hospedadas (Bradford, ABC Prophet, GT Alpina, Modern Era)
+         declaradas via @font-face em global.css. Pré-carrega as duas críticas. -->
+    <link rel="preload" href="/fonts/bradford-medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/modern-era.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Marca a presença de JS o quanto antes (evita flash do reveal). -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:site_name" content="Aline Antunes" />
+    <meta property="og:locale" content="pt_BR" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body>
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+    <Header />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+    <script is:inline>
+      (() => {
+        const els = document.querySelectorAll('[data-reveal]');
+        if (!els.length) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('in'));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>
+<style>
+  .skip-link {
+    position: absolute;
+    left: var(--s4);
+    top: -60px;
+    z-index: 100;
+    background: var(--ink);
+    color: var(--paper);
+    padding: var(--s3) var(--s4);
+    border-radius: 8px;
+    border: 0;
+    transition: top .15s ease;
+  }
+  .skip-link:focus { top: var(--s4); color: var(--paper); }
+</style>

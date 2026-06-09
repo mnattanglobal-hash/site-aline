@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Depoimentos from '../../components/Depoimentos.astro';
+import depoimentos from '../../data/depoimentos.json';
+import { whatsappLink } from '../../site';
+import { Image } from 'astro:assets';
+import { img } from '../../lib/images';
+const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero agendar uma sessão de Tarot Terapêutico.');
+const whatsappValores = whatsappLink('Oi, Aline. Vim pelo site e queria entender o Tarot Terapêutico e como funciona o investimento.');
+const ambiente = img('aa-sessoes-clareza');
+
+const depoDestaque = depoimentos.filter((d) => d.destaque);
+const depoRestante = depoimentos.filter((d) => !d.destaque);
+---
+<BaseLayout title="Tarot Terapêutico · Atendimento individual · Aline Antunes" description="Uma sessão para escutar o que se repete na sua vida, enxergar a dinâmica por trás do padrão e sair com clareza e um gesto concreto. O Tarô como espelho do presente, não previsão de futuro.">
+  <!-- Hero -->
+  <section class="section intro-sec glow">
+    <div class="read">
+      <span class="eyebrow" data-reveal>Atendimento individual · Tarot Terapêutico</span>
+      <h1 data-reveal style="--reveal-delay:80ms">Para aquela questão que se repete, mesmo depois de muita terapia</h1>
+      <p class="lead" data-reveal style="--reveal-delay:140ms">Uma sessão para escutar o que o seu próprio inconsciente já sabe sobre o momento que você vive. A gente dá nome ao padrão que volta sempre, enxerga o que segura ele de pé e decide como agir. O Tarô entra como espelho do presente, nunca como previsão do futuro.</p>
+      <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
+        <a href={whatsapp} class="btn btn-gold" rel="noopener">Agendar pelo WhatsApp</a>
+        <p class="proof-mini"><span class="sparkle" aria-hidden="true">✦</span> Avaliação 5 no Google · clientes que voltam há anos · a maioria chega por indicação</p>
+      </div>
+    </div>
+  </section>
+
+  {ambiente && (
+    <section class="wrap">
+      <figure class="ambiente" data-reveal>
+        <Image
+          src={ambiente}
+          alt="Luz dourada sobre águas calmas ao amanhecer, imagem de travessia e clareza"
+          widths={[720, 1080, 1440]}
+          sizes="(max-width: 1160px) 92vw, 1080px"
+          format="webp"
+          quality={72}
+          loading="lazy"
+        />
+      </figure>
+    </section>
+  )}
+
+  <!-- Dor / reconhecimento (voz-do-cliente) -->
+  <section class="section-sm">
+    <div class="read">
+      <div data-reveal>
+        <span class="eyebrow">Talvez você reconheça</span>
+        <h2>A mesma dor, com outro rosto</h2>
+      </div>
+      <ul class="voc" data-reveal>
+        <li>"Sempre atraio o mesmo tipo de pessoa."</li>
+        <li>"Sei que faz mal, mas sempre volto."</li>
+        <li>"Me anulo para o outro ficar confortável. Cedo antes mesmo de me pedirem."</li>
+        <li>"Vivo mais por reação do que por direção."</li>
+        <li>"Já fiz terapia e ainda sinto que uma questão não fecha."</li>
+        <li>"Parte de mim tem medo de melhorar."</li>
+      </ul>
+      <p class="recognition" data-reveal>Se você leu isso e pensou <em>"é exatamente isso"</em>, é com isso que a gente trabalha na sessão.</p>
+    </div>
+  </section>
+
+  <!-- Abordagem: o que é o Tarot Terapêutico -->
+  <section class="section-sm">
+    <div class="read body">
+      <div data-reveal>
+        <span class="eyebrow">A abordagem</span>
+        <h2>Um farol, não uma bola de cristal</h2>
+      </div>
+      <p data-reveal>Boa parte do que trava a sua vida funciona no automático: comportamentos que você herdou, decisões que você toma antes mesmo de perceber. O Tarô aqui é um farol que ilumina esse automático. Ele não adivinha o que vai acontecer. Ele mostra o que já está em movimento dentro de você e que, no escuro, você não conseguia nomear.</p>
+      <p data-reveal>Só aquilo que é reconhecido pode ser transformado. Por isso a sessão não para no diagnóstico: a gente parte do que apareceu para um caminho prático de escolha consciente.</p>
+    </div>
+  </section>
+
+  <!-- O que muda (método como resultado) -->
+  <section class="section anchor what-sec">
+    <div class="read">
+      <div class="center" data-reveal>
+        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+        <span class="eyebrow">O que você leva de uma sessão</span>
+        <h2>Clareza, não previsão</h2>
+      </div>
+      <div class="what-grid" data-reveal>
+        <div class="what-item"><h3>Um nome</h3><p>Para aquilo que você sente e não consegue explicar. Costuma ser o momento em que a ficha cai.</p></div>
+        <div class="what-item"><h3>A dinâmica</h3><p>O mecanismo por trás do padrão que se repete, enfim visível para você.</p></div>
+        <div class="what-item"><h3>A virada</h3><p>A dor deixa de ser sentença e vira recurso. A ideia não é remoer, é transformar.</p></div>
+        <div class="what-item"><h3>Um gesto</h3><p>Uma ação concreta para praticar, porque símbolo que não vira atitude fica só na ideia.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="section-sm">
+    <div class="read">
+      <div data-reveal>
+        <span class="eyebrow">Como acontece na prática</span>
+        <h2>Simples de começar</h2>
+      </div>
+      <ol class="steps" data-reveal>
+        <li><span class="step-n" aria-hidden="true">1</span><div><h3>Você me chama no WhatsApp</h3><p>A gente combina o melhor horário. A sessão é individual e online, com cerca de 1h15 de duração.</p></div></li>
+        <li><span class="step-n" aria-hidden="true">2</span><div><h3>Partimos da sua questão real</h3><p>Abro a leitura simbólica e nomeamos a dinâmica por trás do que se repete.</p></div></li>
+        <li><span class="step-n" aria-hidden="true">3</span><div><h3>Você sai com clareza e um gesto</h3><p>Não com uma profecia: com o padrão entendido e algo concreto para fazer diferente.</p></div></li>
+        <li><span class="step-n" aria-hidden="true">4</span><div><h3>Recebe a devolutiva escrita</h3><p>Um texto com o que veio à tona e uma prática para ancorar. É seu, para revisitar quando precisar.</p></div></li>
+      </ol>
+      <blockquote data-reveal>O Tarô não vê o seu futuro. Ele te devolve a você mesma.</blockquote>
+    </div>
+  </section>
+
+  <!-- Prova social -->
+  <section class="wrap section section-band">
+    <div class="center" data-reveal>
+      <span class="eyebrow">Quem já se sentou comigo</span>
+      <h2>O que dizem as clientes</h2>
+      <p class="muted band-sub">Avaliações no Google e mensagens de quem passou pela sessão. Muitas voltam ano após ano.</p>
+    </div>
+    <div class="depo-band" data-reveal>
+      <Depoimentos items={depoDestaque} />
+      {depoRestante.length > 0 && (
+        <details class="ver-mais">
+          <summary>Ver mais avaliações ({depoRestante.length})</summary>
+          <div class="ver-mais-grid">
+            <Depoimentos items={depoRestante} />
+          </div>
+        </details>
+      )}
+    </div>
+  </section>
+
+  <!-- Objeções / FAQ -->
+  <section class="section-sm">
+    <div class="read body">
+      <div data-reveal>
+        <span class="eyebrow">Antes de marcar</span>
+        <h2>Dúvidas comuns</h2>
+      </div>
+      <div class="faq" data-reveal>
+        <p><strong>Isso é previsão de futuro?</strong> Não. É um trabalho de consciência sobre o presente. O Tarô aqui é espelho, não oráculo: ilumina o que já está em movimento dentro de você.</p>
+        <p><strong>Preciso "acreditar" em alguma coisa?</strong> Não. Você precisa estar disposta a se olhar. A linguagem é simbólica, mas o trabalho é concreto.</p>
+        <p><strong>E se eu tiver vergonha de me abrir?</strong> A sessão é um espaço reservado e sem julgamento. Você conduz o ritmo, e a gente só olha o que você se sentir pronta para olhar.</p>
+        <p><strong>Substitui terapia?</strong> Não substitui acompanhamento psicológico. Ele caminha junto. Muita gente chega justamente para destravar um padrão que a terapia tradicional não fechou.</p>
+        <p><strong>Quanto custa?</strong> O valor da sessão avulsa e dos pacotes de acompanhamento eu te passo na conversa, de acordo com o formato que faz sentido para o seu momento. <a href={whatsappValores} rel="noopener">Me chama no WhatsApp</a> que eu explico tudo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="section anchor cta-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <h2 data-reveal>Comece por uma conversa</h2>
+      <p class="muted" data-reveal style="--reveal-delay:100ms">Sem compromisso: a gente conversa, você sente se faz sentido e só então marca. O primeiro passo para sair do padrão é olhar para ele.</p>
+      <div data-reveal style="--reveal-delay:180ms"><a href={whatsapp} class="btn btn-gold" rel="noopener">Falar com a Aline no WhatsApp</a></div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
+
+  .hero-cta { margin-top: var(--s6); }
+  .proof-mini { margin: var(--s4) 0 0; font-size: .92rem; color: var(--ink-soft); display: flex; align-items: center; gap: .5em; flex-wrap: wrap; }
+  .proof-mini .sparkle { color: var(--gold); }
+
+  .ambiente { margin: var(--s6) 0 0; }
+  .ambiente :global(img) { width: 100%; aspect-ratio: 3 / 2; max-height: 560px; object-fit: cover; object-position: center; border-radius: 18px; box-shadow: var(--shadow-soft); }
+  @media (min-width: 760px) { .ambiente :global(img) { aspect-ratio: 16 / 9; } }
+
+  /* Voz-do-cliente */
+  .voc { list-style: none; padding: 0; margin: var(--s6) 0 var(--s5); display: grid; gap: var(--s3); }
+  .voc li {
+    font-family: var(--font-serif); font-style: italic; font-size: 1.22rem; line-height: 1.4; color: var(--ink);
+    padding: var(--s4) var(--s5); background: var(--paper-2);
+    border-left: 2px solid var(--gold); border-radius: 0 10px 10px 0;
+  }
+  .recognition { font-size: 1.15rem; }
+  .recognition em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }
+
+  /* O que muda */
+  .what-sec .rule { margin-top: 0; }
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); margin-top: var(--s7); }
+  .what-item { padding: var(--s5); border: 1px solid color-mix(in srgb, var(--on-dark) 16%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--on-dark) 5%, transparent); }
+  .what-item h3 { margin: 0 0 var(--s2); color: var(--gold-bright); font-size: 1.25rem; }
+  .what-item p { margin: 0; color: color-mix(in srgb, var(--on-dark) 82%, transparent); font-size: 1rem; line-height: 1.55; }
+  @media (max-width: 600px) { .what-grid { grid-template-columns: 1fr; } }
+
+  /* Como funciona */
+  .steps { list-style: none; padding: 0; margin: var(--s6) 0; display: grid; gap: var(--s4); }
+  .steps li { display: flex; gap: var(--s4); align-items: flex-start; }
+  .step-n {
+    flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+    display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem;
+    color: var(--gold); border: 1px solid var(--gold-soft); background: var(--paper-2);
+  }
+  .steps h3 { margin: .15rem 0 var(--s1); font-size: 1.2rem; }
+  .steps p { margin: 0; color: var(--ink-soft); }
+  .body blockquote, .read > blockquote {
+    font-family: var(--font-display); font-style: italic; font-weight: 420;
+    font-size: clamp(1.4rem, 3.2vw, 1.85rem); line-height: 1.34; color: var(--wine);
+    border-left: 2px solid var(--gold); background: var(--paper-2);
+    padding: var(--s5) var(--s6); border-radius: 0 8px 8px 0; margin: var(--s7) 0 0;
+  }
+
+  /* Prova */
+  .band-sub { max-width: 52ch; margin-inline: auto; }
+  .depo-band { margin-top: var(--s6); }
+  .ver-mais { margin-top: var(--s5); }
+  .ver-mais summary { cursor: pointer; font-weight: 600; color: var(--gold); padding: var(--s2) 0; list-style-position: inside; }
+  .ver-mais summary:hover { color: var(--ink); }
+  .ver-mais[open] summary { margin-bottom: var(--s5); }
+
+  /* FAQ */
+  .body { font-size: 1.12rem; }
+  .faq { margin-top: var(--s5); }
+  .faq p { margin: 0 0 var(--s5); }
+  .body strong { color: var(--ink); font-weight: 600; }
+
+  /* CTA */
+  .cta-sec .rule { margin-top: 0; }
+  .cta-sec p { max-width: 52ch; margin-inline: auto; }
+  .cta-sec div { margin-top: var(--s6); }
+
+  /* Mobile: CTAs e blocos com bom toque */
+  @media (max-width: 600px) {
+    .hero-cta .btn, .cta-sec .btn { width: 100%; justify-content: center; }
+    .voc li { font-size: 1.12rem; }
+  }
+</style>

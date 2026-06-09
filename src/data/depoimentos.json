@@ -1,0 +1,154 @@
+[
+  {
+    "id": "lorena-fernandes",
+    "nome": "Lorena Fernandes",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": true,
+    "texto": "A Aline é excelente! Super dedicada, séria e comprometida. Amei meu atendimento: foi acolhedor e muito esclarecedor. Com toda certeza vou seguir com o acompanhamento dela como minha terapeuta de confiança."
+  },
+  {
+    "id": "cliente-chavinha",
+    "nome": "Cliente em acompanhamento",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": true,
+    "texto": "Ser atendida pela Aline virou uma chavinha na minha vida. Passei a ter mais consciência sobre a minha forma de viver, sobre os meus processos, sobre como me autossaboto — e também sobre como sou especial. Eu vivia numa fase triste, angustiada, 'sem vida'. Hoje, após as sessões, começo a resgatar a esperança: a acreditar em dias melhores mesmo em meio ao caos, porque a gente começa a se entender. Ela faz o que diz: 'te ajudo a não se abandonar mais'. Sou eternamente grata."
+  },
+  {
+    "id": "cliente-mais-que-sessao",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": true,
+    "texto": "Muito mais do que uma sessão de tarô. O nível de entrega e de acolhimento faz toda a diferença — um trabalho humanizado impecável. Confio de olhos fechados e coração aberto. Todas as experiências que tive foram brilhantes; o atendimento da Aline é endereço certo e seguro. Recomendo com louvor."
+  },
+  {
+    "id": "aline-cordeiro",
+    "nome": "Aline Cordeiro de Miranda",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": true,
+    "texto": "A Aline é sempre muito assertiva, cuidadosa e carinhosa nas sessões. Sempre me deixa reflexiva e me dá bons direcionamentos. Já tive vários insights durante as consultas, que me fizeram entender melhor as minhas questões. Maravilhosa!"
+  },
+  {
+    "id": "cesar-medeiros",
+    "nome": "César Augusto Costa de Medeiros",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": true,
+    "texto": "Sem dúvidas uma pessoa que foi divisora de águas na minha vida. Me ajudou a crescer, a ser melhor, e devo muito a ela. Profissional incrível, que eu mais que recomendo."
+  },
+  {
+    "id": "cliente-uma-vez-por-ano",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": true,
+    "texto": "Me consulto com a Aline há alguns anos. Pelo menos uma vez por ano sinto a necessidade de ouvir as palavras e as perspectivas dela. Nunca me arrependi — pelo contrário: sempre saio da sessão melhor do que entrei. Gosto da profundidade, da sinceridade, da sensibilidade e da abrangência da sua leitura. Recomendo mil vezes."
+  },
+  {
+    "id": "cliente-clareza-momento",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": true,
+    "texto": "Foi uma das experiências mais profundas que já tive. Ela acessou camadas do meu inconsciente com sensibilidade, inteligência e maestria. A leitura trouxe clareza sobre o meu momento atual e apontou caminhos valiosos para a minha evolução pessoal. Me senti visto, compreendido e conduzido com muito cuidado e verdade."
+  },
+  {
+    "id": "diandra-silva",
+    "nome": "Diandra Silva",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Está comigo há alguns anos e me auxiliou num momento muito delicado. Tão atenciosa, gentil e profunda — ela te lapida com muita sabedoria. Recomendo!"
+  },
+  {
+    "id": "alessandra-pedrosa",
+    "nome": "Alessandra Moraes Pedrosa",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": false,
+    "texto": "A Aline é uma pessoa maravilhosa, com muita escuta e sensibilidade. Me auxiliou a enxergar coisas que estavam na minha cara, mas que eu não conseguia ver. Super indico — uma profissional amável e querida."
+  },
+  {
+    "id": "cliente-uniao-tarot-terapia",
+    "nome": "Cliente em acompanhamento",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Sem palavras para o quanto é sério o trabalho da Aline. A união do tarô e da terapia fez, e ainda faz, com que eu evolua e consiga superar os desafios."
+  },
+  {
+    "id": "cliente-porta-profunda",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": false,
+    "texto": "A leitura da Aline é uma porta para espaços profundos da nossa existência. Com a delicadeza de quem recebe um visitante em sua casa, vai nos conduzindo de modo preciso para o encontro de nós mesmos. É uma leitura humanizada e repleta de sentido."
+  },
+  {
+    "id": "fernanda-de-lazari",
+    "nome": "Fernanda De Lazari",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Melhor terapeuta da vida! Tenho uma gratidão imensa pelo trabalho que vem desenvolvendo comigo."
+  },
+  {
+    "id": "ana-valladares",
+    "nome": "Ana Valladares",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Amei minha consulta com a Aline. Foi muito atenciosa desde o primeiro contato, me senti acolhida desde o início. Recomendo 100%."
+  },
+  {
+    "id": "cliente-delicada-certeira",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": false,
+    "texto": "A Aline é delicada e certeira no que faz. Entende o próximo e faz com que você se sinta mais do que acolhido. Agradeço pela troca."
+  },
+  {
+    "id": "cliente-atenciosa-respeitosa",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Excelente atendimento! Sempre muito atenciosa e respeitosa com todas as demandas e necessidades individuais. Recomendo demais."
+  },
+  {
+    "id": "andre-neves",
+    "nome": "André Neves de Sá",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Sou cliente faz tempo. Excelente profissional."
+  },
+  {
+    "id": "regina-maruyama",
+    "nome": "Regina Maruyama",
+    "fonte": "Avaliação no Google",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Excelente profissional."
+  },
+  {
+    "id": "cliente-maravilhosa-assertiva",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": false,
+    "texto": "Maravilhosa! Super profissional e assertiva."
+  },
+  {
+    "id": "cliente-orientacao",
+    "nome": "Cliente de sessão",
+    "fonte": "Depoimento de cliente",
+    "nota": 5,
+    "destaque": false,
+    "texto": "A Aline é uma estudiosa séria da espiritualidade. Adoro as mensagens dela, sempre me orientaram muito. Recomendo demais."
+  }
+]

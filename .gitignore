@@ -1,0 +1,16 @@
+# build output
+dist/
+# generated types
+.astro/
+# deps
+node_modules/
+# logs
+npm-debug.log*
+# env
+.env
+.env.production
+# os
+.DS_Store
+# material de feedback (entrada do curador, não versionar)
+.feedback-work/
+feedback-revisao-site-aline.zip

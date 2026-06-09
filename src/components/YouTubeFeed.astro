@@ -1,0 +1,121 @@
+---
+import { SITE } from '../site';
+
+// Feed automático do YouTube, resolvido NO BUILD (sem API key, sem dependência nova).
+// Lê o feed público RSS do canal, extrai os vídeos mais recentes e embeda com iframes.
+// Se o fetch falhar no build, cai no fallback "Ver o canal no YouTube".
+
+interface Video {
+  id: string;
+  title: string;
+}
+
+const FEED_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${SITE.youtubeChannelId}`;
+const MAX = 3;
+
+function decodeEntities(str: string): string {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'");
+}
+
+let videos: Video[] = [];
+try {
+  const res = await fetch(FEED_URL);
+  if (res.ok) {
+    const xml = await res.text();
+    // Cada vídeo é um <entry> com <yt:videoId> e <title>.
+    const entries = xml.split('<entry>').slice(1);
+    for (const entry of entries) {
+      const idMatch = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
+      const titleMatch = entry.match(/<title>([\s\S]*?)<\/title>/);
+      if (idMatch) {
+        videos.push({
+          id: idMatch[1].trim(),
+          title: titleMatch ? decodeEntities(titleMatch[1].trim()) : 'Vídeo no YouTube',
+        });
+      }
+      if (videos.length >= MAX) break;
+    }
+  }
+} catch {
+  videos = [];
+}
+
+const temVideos = videos.length > 0;
+---
+<div class="yt">
+  {temVideos ? (
+    <div class="yt-grid">
+      {videos.map((v) => (
+        <div class="yt-card">
+          <div class="yt-frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${v.id}`}
+              title={v.title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="yt-title">{v.title}</p>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="yt-fallback">
+      <p class="muted">Aulas, leituras e conversas sobre maturidade emocional e símbolo.</p>
+      <a class="btn btn-primary" href={SITE.youtube} target="_blank" rel="noopener">
+        Ver o canal no YouTube
+      </a>
+    </div>
+  )}
+  <p class="yt-link">
+    <a href={SITE.youtube} target="_blank" rel="noopener">Ver o canal completo no YouTube →</a>
+  </p>
+</div>
+<style>
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: var(--s5);
+    align-items: start;
+  }
+  .yt-card { display: flex; flex-direction: column; gap: var(--s3); }
+  .yt-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+  }
+  .yt-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .yt-title {
+    font-size: .98rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .yt-fallback {
+    text-align: center;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    padding: var(--s7) var(--s5);
+    background: var(--paper-2);
+  }
+  .yt-fallback p { margin-bottom: var(--s4); }
+  .yt-link { text-align: center; margin-top: var(--s5); }
+  .yt-link a { font-weight: 600; }
+</style>

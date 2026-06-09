@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { img } from '../../lib/images';
+
+const header = img('aa-arcanos-serie');
+
+const arcanos = (await getCollection('blog'))
+  .filter((p) => !p.data.draft && p.data.pilar === 'Arcanos')
+  .sort((a, b) => (a.data.numeroArcano ?? 0) - (b.data.numeroArcano ?? 0));
+
+// Artigos de moldura (numeroArcano < 0): a abertura da jornada e o texto sobre o tarô como espelho.
+// As cartas numeradas (numeroArcano >= 0) vêm em ordem. A série é lançada aos poucos.
+const intro = arcanos.find((p) => (p.data.numeroArcano ?? 0) <= -1);
+const extras = arcanos
+  .filter((p) => { const n = p.data.numeroArcano ?? 0; return n > -1 && n < 0; });
+const cartas = arcanos.filter((p) => (p.data.numeroArcano ?? 0) >= 0);
+---
+<BaseLayout
+  title="A Jornada do Louco no Tarot | Aline Antunes"
+  description="Os Arcanos Maiores como mapa do amadurecimento: cada carta, uma etapa da consciência. O Tarô como espelho, não como oráculo. Uma série publicada aos poucos."
+>
+  <section class={`page-hero ${header ? 'has-img' : 'glow'}`}>
+    {header && (
+      <div class="ph-bg" aria-hidden="true">
+        <Image src={header} alt="" widths={[768, 1200, 1600]} sizes="100vw" format="webp" quality={70} loading="eager" />
+      </div>
+    )}
+    <div class="read ph-content">
+      <p class="trail"><a href="/blog">Blog</a> <span aria-hidden="true">›</span> Arcanos</p>
+      <span class="eyebrow" data-reveal>Série</span>
+      <h1 data-reveal style="--reveal-delay:80ms">A Jornada do Louco no Tarot</h1>
+      <p class="lead" data-reveal style="--reveal-delay:140ms">A história do amadurecer, contada carta a carta: o filme da alma. Não para saber o futuro, mas para reconhecer, com nome e clareza, quem você está virando.</p>
+      {intro && (
+        <p class="open" data-reveal style="--reveal-delay:200ms">
+          Comece pela porta de entrada: <a href={`/blog/${intro.slug}`}>{intro.data.titulo}</a>.
+          {extras.map((e) => (<> Veja também <a href={`/blog/${e.slug}`}>{e.data.titulo}</a>.</>))}
+          Depois, percorra carta a carta. A série vai sendo publicada aos poucos.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <section class="read">
+    <ol class="journey" role="list">
+      {cartas.map((p) => (
+        <li class="step">
+          <a href={`/blog/${p.slug}`} class="step-link">
+            <span class="num" aria-hidden="true">{String(p.data.numeroArcano).padStart(2, '0')}</span>
+            <span class="body">
+              <span class="card-name">{p.data.arcano ?? p.data.titulo}</span>
+              <span class="card-hook">{p.data.hook}</span>
+            </span>
+            <span class="go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section anchor cta-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <h2 data-reveal>O Tarô como espelho</h2>
+      <p class="muted" data-reveal style="--reveal-delay:100ms">Cada carta é um padrão que mora em você. Uma sessão é o lugar de olhar o seu.</p>
+      <div data-reveal style="--reveal-delay:180ms"><a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão individual</a></div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .trail { font-size: .9rem; color: var(--ink-soft); margin-bottom: var(--s3); }
+  .trail a { color: var(--ink-soft); }
+  .trail a:hover { color: var(--gold); }
+  .lead { font-family: var(--font-display); font-style: italic; font-weight: 420; font-size: clamp(1.4rem, 3vw, 1.8rem); line-height: 1.36; color: var(--wine); margin: var(--s5) 0 var(--s5); }
+  .open { color: var(--ink-soft); }
+  .journey { list-style: none; counter-reset: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .step { border-bottom: 1px solid var(--line); }
+  .step-link { display: flex; align-items: center; gap: var(--s5); padding: var(--s5) var(--s3); color: var(--ink); border: 0; transition: background .2s ease, padding-left .2s var(--ease); }
+  .step-link:hover { background: var(--paper-2); padding-left: var(--s5); }
+  .num { font-family: var(--font-display); font-size: 1.4rem; color: var(--gold); min-width: 2.4ch; text-align: right; font-variant-numeric: tabular-nums; }
+  .body { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+  .card-name { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.2; }
+  .card-hook { color: var(--ink-soft); font-size: 1rem; line-height: 1.45; }
+  .go { color: var(--gold); font-size: 1.1rem; opacity: 0; transform: translateX(-6px); transition: opacity .2s ease, transform .2s var(--ease); }
+  .step-link:hover .go { opacity: 1; transform: none; }
+  .cta-sec .rule { margin-top: 0; }
+  .cta-sec h2 { margin-top: 0; }
+  .cta-sec p { max-width: 50ch; margin-inline: auto; }
+  .cta-sec div { margin-top: var(--s6); }
+  @media (prefers-reduced-motion: reduce) {
+    .step-link:hover { padding-left: var(--s3); }
+    .go { opacity: 1; transform: none; }
+  }
+</style>

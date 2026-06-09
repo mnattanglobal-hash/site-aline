@@ -1,0 +1,23 @@
+---
+// Faixa de texto rolando na horizontal (réplica do marquee do Everbe).
+// Recebe uma lista de frases curtas; o trilho é duplicado para loop contínuo.
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+// Duplicado: o keyframe translada -50%, então duas cópias dão um loop sem emenda.
+const loop = [...items, ...items];
+---
+<div class="marquee" role="presentation" aria-hidden="true">
+  <div class="marquee__track">
+    {loop.map((t) => (
+      <span class="marquee__group">
+        <span class="marquee__item">{t}</span>
+        <span class="marquee__sep">✦</span>
+      </span>
+    ))}
+  </div>
+</div>
+<style>
+  .marquee__group { display: inline-flex; align-items: center; gap: var(--s6); }
+</style>

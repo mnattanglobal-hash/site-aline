@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { whatsappLink } from '../../site';
+const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero entender os atendimentos individuais.');
+
+const modalidades = [
+  {
+    href: '/atendimentos/taro-terapeutico',
+    titulo: 'Tarot Terapêutico',
+    desc: 'Uma sessão para dar nome ao padrão que se repete, enxergar a dinâmica por trás dele e sair com clareza e um gesto concreto. O Tarô como espelho do presente.',
+    cta: 'Conhecer o Tarot Terapêutico',
+  },
+  {
+    href: '/atendimentos/terapia',
+    titulo: 'Terapia',
+    desc: 'Um acompanhamento para reorganizar o que está por dentro e sair de ciclos que voltam sempre. Verdade direta, no seu ritmo, com foco em autonomia.',
+    cta: 'Conhecer a Terapia',
+  },
+];
+---
+<BaseLayout title="Atendimentos Individuais · Aline Antunes" description="Dois caminhos de trabalho individual com a Aline: o Tarot Terapêutico, uma sessão de consciência sobre o presente, e a Terapia, um acompanhamento contínuo para reorganização interna e autonomia emocional.">
+  <section class="section intro-sec glow">
+    <div class="read">
+      <span class="eyebrow" data-reveal>Atendimentos Individuais</span>
+      <h1 data-reveal style="--reveal-delay:80ms">Dois caminhos para olhar de frente o que se repete</h1>
+      <p class="lead" data-reveal style="--reveal-delay:140ms">Tudo começa por uma conversa. A partir do seu momento, a gente escolhe o formato: uma sessão pontual para clarear uma questão, ou um acompanhamento que sustenta a virada no tempo.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="mod-grid" data-reveal>
+      {modalidades.map((m) => (
+        <a class="card mod-card" href={m.href}>
+          <span class="badge">Atendimento</span>
+          <h2>{m.titulo}</h2>
+          <p class="hook">{m.desc}</p>
+          <span class="more">{m.cta} <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section anchor cta-sec">
+    <div class="read center">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <h2 data-reveal>Não sabe por qual começar?</h2>
+      <p class="muted" data-reveal style="--reveal-delay:100ms">Me chama no WhatsApp e me conta o que está pedindo atenção. A gente decide juntas o caminho que faz sentido para você agora.</p>
+      <div data-reveal style="--reveal-delay:180ms"><a href={whatsapp} class="btn btn-gold" rel="noopener">Falar com a Aline no WhatsApp</a></div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
+
+  .mod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); }
+  @media (max-width: 720px) { .mod-grid { grid-template-columns: 1fr; } }
+  .mod-card { display: flex; flex-direction: column; gap: var(--s3); padding: var(--s7) var(--s6); }
+  .mod-card h2 { margin: 0; font-size: 1.6rem; }
+  .mod-card .hook { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; }
+  .mod-card .more { margin-top: auto; color: var(--gold); font-weight: 600; }
+
+  .cta-sec .rule { margin-top: 0; }
+  .cta-sec p { max-width: 54ch; margin-inline: auto; }
+  .cta-sec div { margin-top: var(--s6); }
+  @media (max-width: 600px) { .cta-sec .btn { width: 100%; justify-content: center; } }
+</style>

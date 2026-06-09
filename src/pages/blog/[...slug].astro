@@ -1,0 +1,203 @@
+---
+import { getCollection } from 'astro:content';
+import { pilarSlug } from '../../content/config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post, posts },
+  }));
+}
+
+const { post, posts } = Astro.props;
+const { Content, headings } = await post.render();
+const d = post.data;
+
+// Sumário a partir dos H2 do artigo (best practice: skimmability + jump links).
+const toc = headings.filter((h) => h.depth === 2 && h.text.toLowerCase() !== 'perguntas frequentes');
+
+const related = (d.relacionados ?? [])
+  .map((slug) => posts.find((p) => p.slug === slug))
+  .filter(Boolean)
+  .slice(0, 4);
+
+const dateFmt = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long' }).format(d.date);
+
+// Tempo de leitura estimado (~200 palavras/min) a partir do corpo do artigo.
+const words = post.body.trim().split(/\s+/).length;
+const readMin = Math.max(1, Math.round(words / 200));
+
+const pilarHref = d.pilar === 'Arcanos' ? '/blog/arcanos' : `/blog/pilar/${pilarSlug(d.pilar)}`;
+const site = Astro.site ?? new URL('https://alineantunes.site');
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.titulo,
+  description: d.description,
+  datePublished: d.date.toISOString(),
+  inLanguage: 'pt-BR',
+  articleSection: d.pilar,
+  keywords: (d.tags ?? []).join(', '),
+  author: { '@type': 'Person', name: 'Aline Antunes', url: new URL('/sobre', site).href },
+  publisher: { '@type': 'Person', name: 'Aline Antunes' },
+  mainEntityOfPage: new URL(`/blog/${post.slug}`, site).href,
+};
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Blog', item: new URL('/blog', site).href },
+    { '@type': 'ListItem', position: 2, name: d.pilar, item: new URL(pilarHref, site).href },
+    { '@type': 'ListItem', position: 3, name: d.titulo, item: new URL(`/blog/${post.slug}`, site).href },
+  ],
+};
+const faqLd = d.faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: d.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    }
+  : null;
+const jsonLd = [article, breadcrumbs, ...(faqLd ? [faqLd] : [])];
+---
+<BaseLayout
+  title={`${d.titulo} · Aline Antunes`}
+  description={d.description}
+  ogType="article"
+  publishedTime={d.date.toISOString()}
+  jsonLd={jsonLd}
+>
+  <header class="art-head glow">
+    <div class="read">
+      <p class="trail">
+        <a href="/blog">Blog</a> <span aria-hidden="true">›</span>
+        {d.pilar === 'Arcanos'
+          ? <a href="/blog/arcanos">Arcanos</a>
+          : <a href={`/blog/pilar/${pilarSlug(d.pilar)}`}>{d.pilar}</a>}
+      </p>
+      <span class="badge">{d.arcano ? `Arcano · ${d.arcano}` : d.pilar}</span>
+      <h1>{d.titulo}</h1>
+      <p class="lead">{d.hook}</p>
+      <div class="byline">
+        <span class="byline-mark" aria-hidden="true">✦</span>
+        <span><strong>Aline Antunes</strong> · Terapeuta de maturidade e autonomia emocional</span>
+      </div>
+      <p class="muted meta">{dateFmt} · {readMin} min de leitura</p>
+    </div>
+  </header>
+
+  <article>
+    {toc.length >= 3 && (
+      <nav class="read toc" aria-label="Neste artigo">
+        <p class="toc-title">Neste artigo</p>
+        <ol>
+          {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ol>
+      </nav>
+    )}
+
+    <div class="read prose">
+      <Content />
+    </div>
+
+    {d.faq.length > 0 && (
+      <section class="read faq-sec">
+        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+        <h2>Perguntas frequentes</h2>
+        <dl class="faq">
+          {d.faq.map((f) => (
+            <div class="faq-item">
+              <dt>{f.q}</dt>
+              <dd>{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    <div class="read cta-box">
+      <p class="muted">Se algo aqui te reconheceu, talvez seja hora de olhar mais de perto.</p>
+      <a href="/atendimentos/taro-terapeutico" class="btn btn-gold">Conhecer a sessão individual</a>
+    </div>
+
+    {related.length > 0 && (
+      <div class="read related-sec">
+        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+        <h2>Leituras relacionadas</h2>
+        <ul class="related">
+          {related.map((r) => (
+            <li>
+              <a href={`/blog/${r.slug}`}>{r.data.titulo}</a>
+              <span class="muted"> · {r.data.hook}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {(d.tags ?? []).length > 0 && (
+      <div class="read tags-sec">
+        <ul class="tags">
+          {d.tags.map((t) => (
+            <li><span class="tag">{t}</span></li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <div class="read back">
+      <a href="/blog"><span aria-hidden="true">←</span> Todos os artigos</a>
+    </div>
+  </article>
+</BaseLayout>
+<style>
+  .art-head { padding-block: var(--s9) var(--s6); border-bottom: 1px solid var(--line); }
+  .trail { font-size: .9rem; color: var(--ink-soft); margin-bottom: var(--s4); }
+  .trail a { color: var(--ink-soft); }
+  .trail a:hover { color: var(--gold); }
+  .art-head h1 { margin: var(--s4) 0 0; }
+  .lead { font-family: var(--font-display); font-style: italic; font-weight: 420; font-size: clamp(1.4rem, 3vw, 1.8rem); line-height: 1.36; color: var(--wine); margin-top: var(--s5); }
+  .byline { display: flex; align-items: center; gap: .5em; margin-top: var(--s5); font-size: .95rem; color: var(--ink-soft); }
+  .byline strong { color: var(--ink); font-weight: 600; }
+  .byline-mark { color: var(--gold); }
+  .meta { font-family: var(--font-sans); font-size: .88rem; letter-spacing: .02em; margin-top: var(--s2); }
+
+  article { padding-top: var(--s7); }
+
+  /* Sumário (TOC) */
+  .toc {
+    margin-bottom: var(--s7); padding: var(--s5) var(--s6);
+    background: var(--paper-2); border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: 0 12px 12px 0;
+  }
+  .toc-title { font-family: var(--font-sans); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 var(--s3); }
+  .toc ol { margin: 0; padding-left: 1.2em; display: grid; gap: var(--s2); }
+  .toc a { color: var(--ink); border: 0; font-size: 1rem; }
+  .toc a:hover { color: var(--gold); }
+
+  /* FAQ */
+  .faq-sec .rule { margin: var(--s9) 0 var(--s5); }
+  .faq { margin: var(--s5) 0 0; }
+  .faq-item { padding: var(--s5) 0; border-bottom: 1px solid var(--line); }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq dt { font-family: var(--font-display); font-size: 1.25rem; color: var(--ink); margin-bottom: var(--s3); line-height: 1.25; }
+  .faq dd { margin: 0; color: var(--ink-soft); font-size: 1.08rem; line-height: 1.6; }
+
+  .cta-box { margin-top: var(--s9); padding: var(--s7) var(--s6); border: 1px solid var(--line-strong); border-radius: 18px; background: linear-gradient(135deg, var(--paper-2), color-mix(in srgb, var(--amber) 10%, var(--paper-2))); text-align: center; }
+  .cta-box p { margin-bottom: var(--s4); }
+
+  .related-sec .rule { margin: var(--s9) 0 var(--s5); }
+  .related { list-style: none; padding: 0; }
+  .related li { padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
+  .related a { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); font-weight: 500; border: 0; }
+  .related a:hover { color: var(--gold); }
+  .tags-sec { margin-top: var(--s7); }
+  .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .back { margin-top: var(--s7); }
+  .back a { font-weight: 600; border: 0; }
+</style>

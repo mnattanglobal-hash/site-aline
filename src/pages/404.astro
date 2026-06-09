@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Página não encontrada · Aline Antunes" description="Esta página não existe ou foi movida.">
+  <section class="section glow">
+    <div class="read center notfound">
+      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
+      <span class="eyebrow">Erro 404</span>
+      <h1>Este caminho não leva a lugar nenhum</h1>
+      <p class="muted">A página que você procurava não existe ou mudou de lugar. Mas há muito o que ler por aqui.</p>
+      <div class="actions">
+        <a href="/" class="btn btn-primary">Voltar ao início</a>
+        <a href="/blog" class="btn btn-ghost">Ir para o blog</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .notfound { padding-block: var(--s8); }
+  .actions { display: flex; gap: var(--s4); justify-content: center; margin-top: var(--s6); flex-wrap: wrap; }
+</style>

@@ -1,0 +1,39 @@
+---
+// Selo circular com texto curvo que gira lentamente (réplica do emblema do Everbe).
+// SVG próprio — nenhum ativo copiado da referência.
+interface Props {
+  texto?: string;       // texto que circula a borda
+  size?: number;        // diâmetro em px
+}
+const {
+  texto = 'aline antunes · tarô como ferramenta de consciência · ',
+  size = 132,
+} = Astro.props;
+const id = `selo-${Math.random().toString(36).slice(2, 8)}`;
+---
+<span class="selo" style={`--selo-size:${size}px`} aria-hidden="true">
+  <svg class="selo-girando" viewBox="0 0 200 200" width={size} height={size} role="img">
+    <defs>
+      <path id={id} d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" />
+    </defs>
+    <text class="selo-text">
+      <textPath href={`#${id}`} startOffset="0">{texto.repeat(2)}</textPath>
+    </text>
+  </svg>
+  <span class="selo-core" aria-hidden="true">✦</span>
+</span>
+<style>
+  .selo {
+    position: relative; display: inline-grid; place-items: center;
+    width: var(--selo-size); height: var(--selo-size);
+  }
+  .selo-text {
+    font-family: var(--font-label);
+    font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase;
+    fill: var(--terra);
+  }
+  .selo-core {
+    position: absolute; font-size: 1.5rem; color: var(--terra);
+    font-variant-emoji: text; line-height: 1;
+  }
+</style>
