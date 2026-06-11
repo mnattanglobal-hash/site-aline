@@ -1,13 +1,12 @@
 /* ===========================================================
    Aline Antunes — Design System  (réplica de identidade: Everbe Therapy)
    Creme quente · marrom-oliva · pêssego/blush/rosa · verde-sálvia
-   Fontes reais auto-hospedadas: Bradford, ABC Prophet, GT Alpina, Modern Era
-   Os NOMES das variáveis são mantidos (compat. com estilos existentes);
-   só os VALORES foram remapeados para a paleta da referência.
+   + paleta colorida nova usada como fundo claro alternado por bloco.
+   Fontes GRATUITAS (Google Fonts, produção-safe): Fraunces · Newsreader · Hanken Grotesk.
+   Os NOMES das variáveis são mantidos (compat. com estilos existentes).
    =========================================================== */
 
-/* Fontes reais (Bradford, ABC Prophet, GT Alpina, Modern Era) declaradas via
-   @font-face injetado no BaseLayout, com o base path correto (/site-aline/fonts). */
+/* Fontes carregadas via <link> Google Fonts no BaseLayout (sem @font-face local). */
 
 :root {
   /* ---- Papel & tinta (creme quente + marrom-oliva da referência) ---- */
@@ -40,12 +39,22 @@
   --line:        #e4dac9;
   --line-strong: #d6c9b2;
 
-  /* ---- Tipografia (réplica) ---- */
-  --font-display: 'Bradford', Georgia, 'Times New Roman', serif;   /* títulos H1/H4 */
-  --font-prophet: 'ABC Prophet', Georgia, serif;                   /* H2 (lowercase) */
-  --font-label:   'Bradford Black', Georgia, serif;                /* eyebrows / labels */
-  --font-serif:   'GT Alpina', Georgia, 'Times New Roman', serif;  /* prosa / citações / botões */
-  --font-sans:    'Modern Era', system-ui, -apple-system, 'Segoe UI', sans-serif; /* corpo / nav / UI */
+  /* ---- Paleta nova (photo_44) — usada como FUNDO claro alternado por bloco ---- */
+  --c-sand:      #f4a460;  /* SandyBrown */
+  --c-salmon:    #ffa07a;  /* LightSalmon */
+  --c-indian:    #cd5c5c;  /* IndianRed */
+  --c-sienna:    #a0522d;  /* Sienna */
+  --c-olive:     #a2cd5a;  /* DarkOliveGreen3 */
+  --c-firebrick: #8b1a1a;  /* Firebrick4 */
+  --c-wheat:     #f5deb3;  /* Wheat — fundo principal claro */
+  --c-blush:     #f3d9d3;  /* rosa-pastel do hero (derivado) */
+
+  /* ---- Tipografia (gratuita / produção-safe — equivalentes do mapa Everbe) ---- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;     /* títulos H1/H4 (Bradford→Fraunces) */
+  --font-prophet: 'Newsreader', Georgia, serif;                      /* H2 (lowercase) (ABC Prophet→Newsreader) */
+  --font-label:   'Fraunces', Georgia, serif;                        /* eyebrows / labels (Bradford Black→Fraunces 700) */
+  --font-serif:   'Newsreader', Georgia, 'Times New Roman', serif;   /* prosa / citações / botões (GT Alpina→Newsreader) */
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif; /* corpo / nav / UI (Modern Era→Hanken) */
 
   /* ---- Medidas ---- */
   --w-read: 720px;
@@ -118,6 +127,47 @@ img { max-width: 100%; height: auto; display: block; }
 .section-sm { padding-block: var(--s7); }
 .center { text-align: center; }
 .muted  { color: var(--ink-soft); }
+
+/* ---- Fundos claros alternados por bloco (paleta nova, tons leves p/ AA) ---- */
+.bg-cream  { background: var(--paper); }
+.bg-wheat  { background: color-mix(in srgb, var(--c-wheat) 50%, #fff); }
+.bg-sand   { background: color-mix(in srgb, var(--c-sand) 26%, #fff); }
+.bg-salmon { background: color-mix(in srgb, var(--c-salmon) 24%, #fff); }
+.bg-blush  { background: color-mix(in srgb, var(--c-blush) 62%, #fff); }
+.bg-peach  { background: color-mix(in srgb, var(--gold-bright) 48%, #fff); }
+.bg-olive  { background: color-mix(in srgb, var(--c-olive) 26%, #fff); }
+.bg-cream, .bg-wheat, .bg-sand, .bg-salmon, .bg-blush, .bg-peach, .bg-olive {
+  border-block: 1px solid color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+/* ---- Seção em duas cores (réplica two-tone do Everbe; tons claros p/ AA) ---- */
+.two-tone {
+  position: relative;
+  background: linear-gradient(90deg,
+    var(--tt-a, color-mix(in srgb, var(--c-blush) 62%, #fff)) 0 50%,
+    var(--tt-b, color-mix(in srgb, var(--c-sand) 26%, #fff)) 50% 100%);
+}
+@media (max-width: 860px) {
+  .two-tone {
+    background: linear-gradient(180deg,
+      var(--tt-a, color-mix(in srgb, var(--c-blush) 62%, #fff)) 0 46%,
+      var(--tt-b, color-mix(in srgb, var(--c-sand) 26%, #fff)) 46% 100%);
+  }
+}
+
+/* ---- Bloco "split": imagem/arte de um lado, texto do outro ---- */
+.split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: center; }
+.split-grid.rev .split-media { order: 2; }
+.split-media { margin: 0; position: relative; display: grid; place-items: center; }
+.split-media :global(img), .split-media img {
+  width: 100%; border-radius: 18px;
+  box-shadow: 0 26px 60px -36px color-mix(in srgb, var(--ink) 64%, transparent);
+}
+.split-gif { width: min(360px, 78%); height: auto; border-radius: 0 !important; box-shadow: none !important; }
+@media (max-width: 860px) {
+  .split-grid { grid-template-columns: 1fr; gap: var(--s6); }
+  .split-grid.rev .split-media { order: -1; }
+}
 
 /* ---- Eyebrow / label (Bradford Black, uppercase, .2em — como a referência) ---- */
 .eyebrow {

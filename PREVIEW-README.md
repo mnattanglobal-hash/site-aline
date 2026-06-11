@@ -1,24 +1,26 @@
-# Site da Aline Antunes — VERSÃO DE PREVIEW (réplica do estilo Everbe)
+# Site da Aline Antunes — estilo Everbe (publicado no GitHub Pages)
 
-> ⚠️ **Esta é uma versão de avaliação para a cliente, separada da produção.**
-> A produção atual (`alineantunes.site`) **não foi alterada** — este é um repositório à parte.
+> Publicado em `https://mnattanglobal-hash.github.io/site-aline` via GitHub Pages.
+> Inclui a **Revisão Parte 2** (10/06): paleta colorida, novos blocos da Home,
+> acordeão de dúvidas, carrossel de frases, GIFs e fontes gratuitas.
 
 ## O que mudou
 Redesign completo da identidade visual replicando o estilo do
 [everbetherapy.com](https://everbetherapy.com/), **mantendo todo o conteúdo** da Aline:
 
-- **Cores reais** da referência: creme `#F4EEE8`, marrom-oliva `#6D6236`, pêssego `#F0CFA5`,
-  blush `#ECBFB9`, rosa-poeira `#D19CA3`, verde-sálvia.
-- **Fontes reais** da referência (auto-hospedadas em `public/fonts/`): Bradford (títulos),
-  ABC Prophet (H2 lowercase), GT Alpina (corpo/citações), Modern Era (UI/nav), Bradford Black (labels).
-- **Movimento**: reveal no scroll, **selo circular girando**, **faixa marquee**, hover suave.
+- **Paleta colorida** (paleta nova da Aline, usada como fundo claro alternado por bloco):
+  SandyBrown `#F4A460`, LightSalmon `#FFA07A`, IndianRed `#CD5C5C`, Sienna `#A0522D`,
+  DarkOliveGreen3 `#A2CD5A`, Firebrick4 `#8B1A1A`, Wheat `#F5DEB3`.
+- **Fontes gratuitas** (Google Fonts, produção-safe): **Fraunces** (títulos/labels),
+  **Newsreader** (H2/prosa/citações), **Hanken Grotesk** (corpo/UI). As fontes comerciais
+  da preview (Bradford, ABC Prophet, GT Alpina, Modern Era) foram **removidas**.
+- **Movimento**: reveal no scroll, **faixa marquee**, GIFs (mãos/yin-yang, sol, bagua), hover suave.
+- **Interação**: acordeão de dúvidas comuns e carrossel de frases ("a mesma dor, com outro rosto").
 - Conteúdo dos artigos e das páginas intacto.
 
-## ⚠️ Licenciamento de fontes (ler antes de ir para produção)
-As fontes Bradford, ABC Prophet, GT Alpina e Modern Era são **comerciais**. Foram auto-hospedadas
-**apenas para esta preview de aprovação**. Antes de publicar em produção é preciso **licenciá-las**
-ou **trocar pelos equivalentes gratuitos** (mapa pronto: Bradford→Fraunces, ABC Prophet→Newsreader,
-Modern Era→Hanken Grotesk, GT Alpina→Fraunces itálico).
+## Fontes (produção-safe)
+Todas as fontes são gratuitas (Google Fonts), carregadas no `BaseLayout`. Não há mais
+dependência de fontes comerciais — pode publicar sem questão de licenciamento.
 
 ## Rodar local
 ```bash

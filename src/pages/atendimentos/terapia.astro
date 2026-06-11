@@ -1,48 +1,48 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Depoimentos from '../../components/Depoimentos.astro';
+import Acordeao from '../../components/Acordeao.astro';
 import depoimentos from '../../data/depoimentos.json';
-import { whatsappLink } from '../../site';
+import { whatsappLink, withBase } from '../../site';
 import { Image } from 'astro:assets';
 import { img } from '../../lib/images';
 const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero entender o acompanhamento de Terapia.');
 const whatsappValores = whatsappLink('Oi, Aline. Vim pelo site e queria entender a Terapia e como funciona o investimento.');
-const ambiente = img('aa-contato-luz');
+const porta = img('aa-contato-luz');
+const gifBagua = withBase('/img/gif-bagua.gif');
 
 const depoDestaque = depoimentos.filter((d) => d.destaque);
+
+const faq = [
+  { q: 'O acompanhamento substitui psicoterapia ou acompanhamento psiquiátrico?', a: 'Não. O acompanhamento que ofereço é um espaço de desenvolvimento pessoal e emocional. Ele pode caminhar junto com a psicoterapia ou o acompanhamento psiquiátrico, mas não os substitui.' },
+  { q: 'Com que frequência acontecem os encontros?', a: 'Os encontros são individuais, online, com cerca de uma hora de duração. A frequência é definida de acordo com o seu momento e com aquilo que você deseja trabalhar.' },
+  { q: 'Preciso saber alguma coisa sobre Tarô para esse acompanhamento?', a: 'Não. Aqui o foco é o seu processo. O Tarô pode entrar como linguagem simbólica quando faz sentido, mas o centro é você e aquilo que está pedindo reorganização.' },
+  { q: 'Como eu começo?', a: `É simples. Basta <a href="${whatsapp}" rel="noopener">me chamar no WhatsApp</a>. A gente conversa, eu entendo o seu momento e vemos juntas(os) o melhor formato.` },
+];
 ---
 <BaseLayout title="Terapia · Orientação e acompanhamento · Aline Antunes" description="Um espaço de orientação para reorganizar o que está por dentro e sair de ciclos que se repetem. Acompanhamento contínuo, com verdade direta e foco em autonomia emocional.">
-  <!-- Hero -->
-  <section class="section intro-sec glow">
-    <div class="read">
-      <span class="eyebrow" data-reveal>Atendimento individual · Terapia</span>
-      <h1 data-reveal style="--reveal-delay:80ms">Para quem está cansada(o) de apenas sobreviver aos próprios conflitos.</h1>
-      <p class="lead" data-reveal style="--reveal-delay:140ms">O acompanhamento oferece um espaço contínuo de reflexão, apoio e desenvolvimento pessoal. Um lugar para compreender suas dificuldades com mais profundidade, fortalecer sua identidade e construir uma relação mais madura consigo mesma(o).</p>
-      <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
-        <a href={whatsapp} class="btn btn-gold" rel="noopener">Conversar pelo WhatsApp</a>
-        <p class="proof-mini"><span class="sparkle" aria-hidden="true">✦</span> Acompanhamento individual · online · no seu ritmo</p>
+  <!-- Hero: texto + imagem (porta/cortina) na lateral, no topo -->
+  <section class="section two-tone hero-sec" style="--tt-a: color-mix(in srgb, var(--c-blush) 62%, #fff); --tt-b: color-mix(in srgb, var(--c-sand) 26%, #fff);">
+    <div class="wrap split-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-reveal>Atendimento individual · Terapia</span>
+        <h1 data-reveal style="--reveal-delay:80ms">Para quem está cansada(o) de apenas sobreviver aos próprios conflitos.</h1>
+        <p class="lead" data-reveal style="--reveal-delay:140ms">O acompanhamento oferece um espaço contínuo de reflexão, apoio e desenvolvimento pessoal. Um lugar para compreender suas dificuldades com mais profundidade, fortalecer sua identidade e construir uma relação mais madura consigo mesma(o).</p>
+        <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
+          <a href={whatsapp} class="btn btn-gold" rel="noopener">Conversar pelo WhatsApp</a>
+          <p class="proof-mini"><span class="sparkle" aria-hidden="true">✦</span> Acompanhamento individual · online · no seu ritmo</p>
+        </div>
       </div>
+      <figure class="split-media" data-reveal style="--reveal-delay:120ms">
+        {porta && (
+          <Image src={porta} alt="Porta aberta com cortina ao vento, luz suave entrando" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="eager" />
+        )}
+      </figure>
     </div>
   </section>
 
-  {ambiente && (
-    <section class="wrap">
-      <figure class="ambiente" data-reveal>
-        <Image
-          src={ambiente}
-          alt="Luz dourada e suave atravessando um ambiente sereno"
-          widths={[720, 1080, 1440]}
-          sizes="(max-width: 1160px) 92vw, 1080px"
-          format="webp"
-          quality={72}
-          loading="lazy"
-        />
-      </figure>
-    </section>
-  )}
-
   <!-- A abordagem -->
-  <section class="section-sm">
+  <section class="section bg-wheat">
     <div class="read body">
       <div data-reveal>
         <span class="eyebrow">A abordagem</span>
@@ -54,11 +54,10 @@ const depoDestaque = depoimentos.filter((d) => d.destaque);
     </div>
   </section>
 
-  <!-- O que muda -->
-  <section class="section anchor what-sec">
+  <!-- O que você desenvolve -->
+  <section class="section bg-olive what-sec">
     <div class="read">
       <div class="center" data-reveal>
-        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
         <span class="eyebrow">O que o acompanhamento constrói</span>
         <h2>O que você desenvolve ao longo do processo</h2>
       </div>
@@ -71,8 +70,8 @@ const depoDestaque = depoimentos.filter((d) => d.destaque);
     </div>
   </section>
 
-  <!-- Como funciona -->
-  <section class="section-sm">
+  <!-- Como acontece na prática -->
+  <section class="section bg-salmon">
     <div class="read">
       <div data-reveal>
         <span class="eyebrow">Como acontece na prática</span>
@@ -87,13 +86,24 @@ const depoDestaque = depoimentos.filter((d) => d.destaque);
   </section>
 
   <!-- Prova social -->
-  <section class="wrap section section-band">
+  <section class="wrap section bg-cream">
     <div class="center" data-reveal>
       <span class="eyebrow">Quem já caminhou comigo</span>
       <h2>O que dizem as clientes</h2>
     </div>
     <div class="depo-band" data-reveal>
       <Depoimentos items={depoDestaque} />
+    </div>
+  </section>
+
+  <!-- Dúvidas comuns (acordeão + gif yin-yang à esquerda) -->
+  <section class="section bg-blush">
+    <div class="wrap">
+      <div class="center" data-reveal>
+        <span class="eyebrow">Antes de começar</span>
+        <h2>Dúvidas comuns</h2>
+      </div>
+      <Acordeao items={faq} gifSrc={gifBagua} gifAlt="" gifSide="left" />
     </div>
   </section>
 
@@ -108,47 +118,28 @@ const depoDestaque = depoimentos.filter((d) => d.destaque);
   </section>
 </BaseLayout>
 <style>
-  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
-
+  .hero-sec { padding-block: var(--s9); }
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.4rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
   .hero-cta { margin-top: var(--s6); }
   .proof-mini { margin: var(--s4) 0 0; font-size: .92rem; color: var(--ink-soft); display: flex; align-items: center; gap: .5em; flex-wrap: wrap; }
   .proof-mini .sparkle { color: var(--gold); }
+  .hero-sec .split-media :global(img) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 
-  .ambiente { margin: var(--s6) 0 0; }
-  .ambiente :global(img) { width: 100%; aspect-ratio: 3 / 2; max-height: 560px; object-fit: cover; object-position: center; border-radius: 18px; box-shadow: var(--shadow-soft); }
-  @media (min-width: 760px) { .ambiente :global(img) { aspect-ratio: 16 / 9; } }
+  .body { font-size: 1.12rem; }
+  .body p { color: var(--ink-soft); }
+  .body strong { color: var(--ink); font-weight: 600; }
 
-  .voc { list-style: none; padding: 0; margin: var(--s6) 0 var(--s5); display: grid; gap: var(--s3); }
-  .voc li {
-    font-family: var(--font-serif); font-style: italic; font-size: 1.22rem; line-height: 1.4; color: var(--ink);
-    padding: var(--s4) var(--s5); background: var(--paper-2);
-    border-left: 2px solid var(--gold); border-radius: 0 10px 10px 0;
-  }
-  .recognition { font-size: 1.15rem; }
-  .recognition em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }
-
-  .what-sec .rule { margin-top: 0; }
   .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); margin-top: var(--s7); }
-  .what-item { padding: var(--s5); border: 1px solid color-mix(in srgb, var(--moss-bright) 38%, transparent); border-left: 3px solid var(--moss-bright); border-radius: 14px; background: color-mix(in srgb, var(--moss-bright) 9%, transparent); }
-  .what-item h3 { margin: 0 0 var(--s2); color: var(--gold-bright); font-size: 1.25rem; }
-  .what-item p { margin: 0; color: color-mix(in srgb, var(--on-dark) 84%, transparent); font-size: 1rem; line-height: 1.55; }
+  .what-item { padding: var(--s5); border: 1px solid color-mix(in srgb, var(--moss) 26%, var(--line)); border-left: 3px solid var(--moss); border-radius: 14px; background: color-mix(in srgb, #fff 64%, transparent); }
+  .what-item h3 { margin: 0 0 var(--s2); color: var(--gold); font-size: 1.25rem; }
+  .what-item p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.55; }
   @media (max-width: 600px) { .what-grid { grid-template-columns: 1fr; } }
 
   .steps { list-style: none; padding: 0; margin: var(--s6) 0; display: grid; gap: var(--s4); }
   .steps li { display: flex; gap: var(--s4); align-items: flex-start; }
-  .step-n {
-    flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%;
-    display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem;
-    color: var(--gold); border: 1px solid var(--gold-soft); background: var(--paper-2);
-  }
+  .step-n { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); border: 1px solid var(--gold-soft); background: #fff; }
   .steps h3 { margin: .15rem 0 var(--s1); font-size: 1.2rem; }
   .steps p { margin: 0; color: var(--ink-soft); }
-  .read > blockquote {
-    font-family: var(--font-display); font-style: italic; font-weight: 420;
-    font-size: clamp(1.4rem, 3.2vw, 1.85rem); line-height: 1.34; color: var(--wine);
-    border-left: 2px solid var(--gold); background: var(--paper-2);
-    padding: var(--s5) var(--s6); border-radius: 0 8px 8px 0; margin: var(--s7) 0 0;
-  }
 
   .depo-band { margin-top: var(--s6); }
 
@@ -158,6 +149,5 @@ const depoDestaque = depoimentos.filter((d) => d.destaque);
 
   @media (max-width: 600px) {
     .hero-cta .btn, .cta-sec .btn { width: 100%; justify-content: center; }
-    .voc li { font-size: 1.12rem; }
   }
 </style>

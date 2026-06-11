@@ -50,25 +50,26 @@ const { items } = Astro.props;
   }
   .depo-card:hover { border-color: var(--gold-soft); box-shadow: var(--shadow-soft); transform: translateY(-3px); }
   .stars {
-    margin: 0 0 var(--s4);
+    margin: 0 0 var(--s3);
     color: var(--gold-soft);
-    font-size: .95rem;
-    letter-spacing: 4px;
+    font-size: .82rem;
+    letter-spacing: 1.5px;
     line-height: 1;
     font-variant-emoji: text;
   }
   .depo-texto {
-    /* Texto em destaque: serifa literária, na voz de quem escreveu. */
+    /* Serifa literária elegante, corpo menor e menos espaçado (pedido da Aline). */
     font-family: var(--font-serif);
-    font-size: 1.18rem;
-    line-height: 1.6;
+    font-size: 1.02rem;
+    line-height: 1.55;
+    letter-spacing: -0.002em;
     color: var(--ink);
     margin: 0;
     padding: 0;
     border: 0;
     background: none;
   }
-  .depo-texto::before { content: '“'; font-family: var(--font-display); color: var(--gold-soft); font-size: 1.4em; line-height: 0; vertical-align: -0.35em; margin-right: .05em; }
+  .depo-texto::before { content: '“'; font-family: var(--font-display); color: var(--gold-soft); font-size: 1.3em; line-height: 0; vertical-align: -0.32em; margin-right: .04em; }
   .depo-meta {
     display: flex;
     flex-wrap: wrap;

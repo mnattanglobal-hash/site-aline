@@ -1,70 +1,72 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Depoimentos from '../../components/Depoimentos.astro';
+import Carrossel from '../../components/Carrossel.astro';
+import Acordeao from '../../components/Acordeao.astro';
 import depoimentos from '../../data/depoimentos.json';
-import { whatsappLink } from '../../site';
+import { whatsappLink, withBase } from '../../site';
 import { Image } from 'astro:assets';
 import { img } from '../../lib/images';
 const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero agendar uma sessão de Tarot Terapêutico.');
-const whatsappValores = whatsappLink('Oi, Aline. Vim pelo site e queria entender o Tarot Terapêutico e como funciona o investimento.');
-const ambiente = img('aa-sessoes-clareza');
+const heroImg = img('aa-contato-luz');
+const gifSun = withBase('/img/gif-sun.gif');
 
 const depoDestaque = depoimentos.filter((d) => d.destaque);
 const depoRestante = depoimentos.filter((d) => !d.destaque);
+
+const frases = [
+  'Às vezes nem sei o que estou sentindo.',
+  'Tenho dificuldade de ocupar meu espaço.',
+  'Estou vivendo o que quero ou o que esperam de mim?',
+  'Será que isso é desejo ou apenas hábito?',
+  'Parece que estou sempre buscando aprovação.',
+  'Parte de mim quer mudar. Outra parte resiste.',
+  'Sinto que eu me afastei de mim.',
+  'Esse relacionamento tem propósito na minha vida?',
+];
+
+const faq = [
+  { q: 'Eu preciso saber alguma coisa sobre Tarô?', a: 'Não. Você não precisa conhecer as cartas nem ter experiência com esse tipo de trabalho. Meu papel é conduzir a sessão e traduzir o que surge de forma clara e acessível.' },
+  { q: 'E se eu não souber exatamente o que trazer para a sessão?', a: 'Tudo bem! Muitas pessoas chegam querendo ampliar a visão sobre o seu momento, ou com uma sensação de confusão, um incômodo difícil de explicar, bem como a percepção de que algo precisa mudar. A partir daí, construímos juntas(os) a conversa.' },
+  { q: 'A sessão substitui terapia?', a: 'O trabalho não tem como objetivo substituir acompanhamento terapêutico, mas pode complementar processos de terapia e oferecer novas perspectivas sobre questões que você está vivendo ou viveu.' },
+  { q: 'Como funciona o agendamento?', a: `É simples. Basta <a href="${whatsapp}" rel="noopener">me chamar no WhatsApp</a>. Lá conversamos sobre a sessão e esclareço qualquer dúvida que você tiver.` },
+];
 ---
 <BaseLayout title="Tarot Terapêutico · Atendimento individual · Aline Antunes" description="Uma sessão para escutar o que se repete na sua vida, enxergar a dinâmica por trás do padrão e sair com clareza e um gesto concreto. O Tarô como espelho do presente, não previsão de futuro.">
-  <!-- Hero -->
-  <section class="section intro-sec glow">
-    <div class="read">
-      <span class="eyebrow" data-reveal>Atendimento individual · Tarot Terapêutico</span>
-      <h1 data-reveal style="--reveal-delay:80ms">Você não está sem saída. Está sem clareza.</h1>
-      <p class="lead" data-reveal style="--reveal-delay:140ms">Através do Tarô, olhamos para as questões que estão tirando sua paz, gerando dúvidas ou fazendo você se sentir travada(o). O objetivo é trazer clareza, ampliar a compreensão sobre o que está acontecendo e ajudar você a encontrar seu próximo passo.</p>
-      <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
-        <a href={whatsapp} class="btn btn-gold" rel="noopener">Agendar pelo WhatsApp</a>
-        <p class="proof-mini"><span class="sparkle" aria-hidden="true">✦</span> Avaliação 5 no Google · clientes que voltam há anos · a maioria chega por indicação</p>
+  <!-- Hero: texto + imagem na lateral (sem a antiga imagem do portal) -->
+  <section class="section two-tone hero-sec" style="--tt-a: color-mix(in srgb, var(--c-blush) 62%, #fff); --tt-b: color-mix(in srgb, var(--c-sand) 26%, #fff);">
+    <div class="wrap split-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-reveal>Atendimento individual · Tarot Terapêutico</span>
+        <h1 data-reveal style="--reveal-delay:80ms">Você não está sem saída. Está sem clareza.</h1>
+        <p class="lead" data-reveal style="--reveal-delay:140ms">Através do Tarô, olhamos para as questões que estão tirando sua paz, gerando dúvidas ou fazendo você se sentir travada(o). O objetivo é trazer clareza, ampliar a compreensão sobre o que está acontecendo e ajudar você a encontrar seu próximo passo.</p>
+        <div class="hero-cta" data-reveal style="--reveal-delay:200ms">
+          <a href={whatsapp} class="btn btn-gold" rel="noopener">Agendar pelo WhatsApp</a>
+          <p class="proof-mini"><span class="sparkle" aria-hidden="true">✦</span> Avaliação 5 no Google · clientes que voltam há anos · a maioria chega por indicação</p>
+        </div>
       </div>
+      <figure class="split-media" data-reveal style="--reveal-delay:120ms">
+        {heroImg && (
+          <Image src={heroImg} alt="Luz suave atravessando um ambiente sereno" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="eager" />
+        )}
+      </figure>
     </div>
   </section>
 
-  {ambiente && (
-    <section class="wrap">
-      <figure class="ambiente" data-reveal>
-        <Image
-          src={ambiente}
-          alt="Luz dourada sobre águas calmas ao amanhecer, imagem de travessia e clareza"
-          widths={[720, 1080, 1440]}
-          sizes="(max-width: 1160px) 92vw, 1080px"
-          format="webp"
-          quality={72}
-          loading="lazy"
-        />
-      </figure>
-    </section>
-  )}
-
-  <!-- Dor / reconhecimento (voz-do-cliente) -->
-  <section class="section-sm">
-    <div class="read">
+  <!-- Dor / reconhecimento — carrossel de frases -->
+  <section class="section bg-wheat">
+    <div class="read center">
       <div data-reveal>
         <span class="eyebrow">Talvez você reconheça</span>
         <h2>A mesma dor, com outro rosto</h2>
       </div>
-      <ul class="voc" data-reveal>
-        <li>"Às vezes nem sei o que estou sentindo."</li>
-        <li>"Tenho dificuldade de ocupar meu espaço."</li>
-        <li>"Estou vivendo o que quero ou o que esperam de mim?"</li>
-        <li>"Será que isso é desejo ou apenas hábito?"</li>
-        <li>"Parece que estou sempre buscando aprovação."</li>
-        <li>"Parte de mim quer mudar. Outra parte resiste."</li>
-        <li>"Sinto que eu me afastei de mim."</li>
-        <li>"Esse relacionamento tem propósito na minha vida?"</li>
-      </ul>
-      <p class="recognition" data-reveal>Se você leu isso e pensou <em>"é exatamente isso"</em>, é com isso que a gente trabalha na sessão.</p>
     </div>
+    <Carrossel items={frases} fundo="verde" />
+    <p class="recognition center" data-reveal>Se você leu isso e pensou <em>"é exatamente isso"</em>, é com isso que a gente trabalha na sessão.</p>
   </section>
 
-  <!-- Abordagem: o que é o Tarot Terapêutico -->
-  <section class="section-sm">
+  <!-- Abordagem -->
+  <section class="section bg-salmon">
     <div class="read body">
       <div data-reveal>
         <span class="eyebrow">A abordagem</span>
@@ -75,11 +77,10 @@ const depoRestante = depoimentos.filter((d) => !d.destaque);
     </div>
   </section>
 
-  <!-- O que muda (método como resultado) -->
-  <section class="section anchor what-sec">
+  <!-- O que você leva da sessão -->
+  <section class="section bg-olive what-sec">
     <div class="read">
       <div class="center" data-reveal>
-        <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
         <span class="eyebrow">O que você leva</span>
         <h2>O que você leva da sessão</h2>
       </div>
@@ -92,8 +93,8 @@ const depoRestante = depoimentos.filter((d) => !d.destaque);
     </div>
   </section>
 
-  <!-- Como funciona -->
-  <section class="section-sm">
+  <!-- Como funciona (fundo com flores de lótus) -->
+  <section class="section bg-wheat lotus-bg como-sec">
     <div class="read">
       <div data-reveal>
         <span class="eyebrow">Como funciona</span>
@@ -110,7 +111,7 @@ const depoRestante = depoimentos.filter((d) => !d.destaque);
   </section>
 
   <!-- Prova social -->
-  <section class="wrap section section-band">
+  <section class="wrap section bg-cream">
     <div class="center" data-reveal>
       <span class="eyebrow">Quem já se sentou comigo</span>
       <h2>O que dizem as clientes</h2>
@@ -129,19 +130,14 @@ const depoRestante = depoimentos.filter((d) => !d.destaque);
     </div>
   </section>
 
-  <!-- Objeções / FAQ -->
-  <section class="section-sm">
-    <div class="read body">
-      <div data-reveal>
+  <!-- Dúvidas comuns (acordeão + gif do sol) -->
+  <section class="section bg-blush">
+    <div class="wrap">
+      <div class="center" data-reveal>
         <span class="eyebrow">Antes de marcar</span>
         <h2>Dúvidas comuns</h2>
       </div>
-      <div class="faq" data-reveal>
-        <p><strong>Eu preciso saber alguma coisa sobre Tarô?</strong> Não. Você não precisa conhecer as cartas nem ter experiência com esse tipo de trabalho. Meu papel é conduzir a sessão e traduzir o que surge de forma clara e acessível.</p>
-        <p><strong>E se eu não souber exatamente o que trazer para a sessão?</strong> Tudo bem! Muitas pessoas chegam querendo ampliar a visão sobre o seu momento, ou com uma sensação de confusão, um incômodo difícil de explicar, bem como a percepção de que algo precisa mudar. A partir daí, construímos juntas(os) a conversa.</p>
-        <p><strong>A sessão substitui terapia?</strong> O trabalho não tem como objetivo substituir acompanhamento terapêutico, mas pode complementar processos de terapia e oferecer novas perspectivas sobre questões que você está vivendo ou viveu.</p>
-        <p><strong>Como funciona o agendamento?</strong> É simples. Basta <a href={whatsapp} rel="noopener">me chamar no WhatsApp</a>. Lá conversamos sobre a sessão e esclareço qualquer dúvida que você tiver.</p>
-      </div>
+      <Acordeao items={faq} gifSrc={gifSun} gifAlt="" gifSide="left" />
     </div>
   </section>
 
@@ -156,57 +152,44 @@ const depoRestante = depoimentos.filter((d) => !d.destaque);
   </section>
 </BaseLayout>
 <style>
-  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
-
+  .hero-sec { padding-block: var(--s9); }
+  .lead { font-family: var(--font-serif); font-style: italic; font-size: 1.4rem; line-height: 1.42; color: var(--wine); margin: var(--s4) 0 0; }
   .hero-cta { margin-top: var(--s6); }
   .proof-mini { margin: var(--s4) 0 0; font-size: .92rem; color: var(--ink-soft); display: flex; align-items: center; gap: .5em; flex-wrap: wrap; }
   .proof-mini .sparkle { color: var(--gold); }
+  .hero-sec .split-media :global(img) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 
-  .ambiente { margin: var(--s6) 0 0; }
-  .ambiente :global(img) { width: 100%; aspect-ratio: 3 / 2; max-height: 560px; object-fit: cover; object-position: center; border-radius: 18px; box-shadow: var(--shadow-soft); }
-  @media (min-width: 760px) { .ambiente :global(img) { aspect-ratio: 16 / 9; } }
-
-  /* Voz-do-cliente — cards verdes, respirados */
-  .voc { list-style: none; padding: 0; margin: var(--s6) 0 var(--s5); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); }
-  .voc li {
-    font-family: var(--font-serif); font-style: italic; font-size: 1.28rem; line-height: 1.42; color: var(--ink);
-    padding: var(--s5) var(--s6);
-    background: color-mix(in srgb, var(--moss-soft) 22%, var(--paper-2));
-    border: 1px solid color-mix(in srgb, var(--moss) 30%, var(--line));
-    border-radius: var(--radius);
-    transition: border-color .25s ease, transform .2s var(--ease), box-shadow .3s ease;
-  }
-  .voc li:hover { border-color: var(--moss); transform: translateY(-3px); box-shadow: var(--shadow-soft); }
-  @media (max-width: 600px) { .voc { grid-template-columns: 1fr; } }
-  .recognition { font-size: 1.15rem; }
+  .recognition { font-size: 1.15rem; margin-top: var(--s7); }
   .recognition em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }
 
-  /* O que muda */
-  .what-sec .rule { margin-top: 0; }
+  .body { font-size: 1.12rem; }
+  .body p { color: var(--ink-soft); }
+  .body strong { color: var(--ink); font-weight: 600; }
+
+  /* O que você leva — agora claro (sálvia) */
   .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); margin-top: var(--s7); }
-  .what-item { padding: var(--s5); border: 1px solid color-mix(in srgb, var(--moss-bright) 38%, transparent); border-left: 3px solid var(--moss-bright); border-radius: 14px; background: color-mix(in srgb, var(--moss-bright) 9%, transparent); }
-  .what-item h3 { margin: 0 0 var(--s2); color: var(--gold-bright); font-size: 1.25rem; }
-  .what-item p { margin: 0; color: color-mix(in srgb, var(--on-dark) 84%, transparent); font-size: 1rem; line-height: 1.55; }
+  .what-item { padding: var(--s5); border: 1px solid color-mix(in srgb, var(--moss) 26%, var(--line)); border-left: 3px solid var(--moss); border-radius: 14px; background: color-mix(in srgb, #fff 64%, transparent); }
+  .what-item h3 { margin: 0 0 var(--s2); color: var(--gold); font-size: 1.25rem; }
+  .what-item p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.55; }
   @media (max-width: 600px) { .what-grid { grid-template-columns: 1fr; } }
 
-  /* Como funciona */
+  /* Como funciona — fundo de flores de lótus */
+  .lotus-bg {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='92'%20height='92'%20viewBox='0%200%2080%2080'%3E%3Cg%20fill='none'%20stroke='%238b1a1a'%20stroke-opacity='0.10'%20stroke-width='1.2'%3E%3Ccircle%20cx='40'%20cy='40'%20r='5'/%3E%3Cellipse%20cx='40'%20cy='26'%20rx='6'%20ry='13'/%3E%3Cellipse%20cx='40'%20cy='54'%20rx='6'%20ry='13'/%3E%3Cellipse%20cx='26'%20cy='40'%20rx='13'%20ry='6'/%3E%3Cellipse%20cx='54'%20cy='40'%20rx='13'%20ry='6'/%3E%3Cellipse%20cx='30'%20cy='30'%20rx='6'%20ry='13'%20transform='rotate(45%2030%2030)'/%3E%3Cellipse%20cx='50'%20cy='50'%20rx='6'%20ry='13'%20transform='rotate(45%2050%2050)'/%3E%3Cellipse%20cx='50'%20cy='30'%20rx='6'%20ry='13'%20transform='rotate(-45%2050%2030)'/%3E%3Cellipse%20cx='30'%20cy='50'%20rx='6'%20ry='13'%20transform='rotate(-45%2030%2050)'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat; background-size: 92px;
+  }
   .steps { list-style: none; padding: 0; margin: var(--s6) 0; display: grid; gap: var(--s4); }
   .steps li { display: flex; gap: var(--s4); align-items: flex-start; }
-  .step-n {
-    flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%;
-    display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem;
-    color: var(--gold); border: 1px solid var(--gold-soft); background: var(--paper-2);
-  }
+  .step-n { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); border: 1px solid var(--gold-soft); background: #fff; }
   .steps h3 { margin: .15rem 0 var(--s1); font-size: 1.2rem; }
   .steps p { margin: 0; color: var(--ink-soft); }
-  .body blockquote, .read > blockquote {
+  .read > blockquote {
     font-family: var(--font-display); font-style: italic; font-weight: 420;
     font-size: clamp(1.4rem, 3.2vw, 1.85rem); line-height: 1.34; color: var(--wine);
-    border-left: 2px solid var(--gold); background: var(--paper-2);
+    border-left: 2px solid var(--gold); background: color-mix(in srgb, #fff 60%, transparent);
     padding: var(--s5) var(--s6); border-radius: 0 8px 8px 0; margin: var(--s7) 0 0;
   }
 
-  /* Prova */
   .band-sub { max-width: 52ch; margin-inline: auto; }
   .depo-band { margin-top: var(--s6); }
   .ver-mais { margin-top: var(--s5); }
@@ -214,20 +197,11 @@ const depoRestante = depoimentos.filter((d) => !d.destaque);
   .ver-mais summary:hover { color: var(--ink); }
   .ver-mais[open] summary { margin-bottom: var(--s5); }
 
-  /* FAQ */
-  .body { font-size: 1.12rem; }
-  .faq { margin-top: var(--s5); }
-  .faq p { margin: 0 0 var(--s5); }
-  .body strong { color: var(--ink); font-weight: 600; }
-
-  /* CTA */
   .cta-sec .rule { margin-top: 0; }
   .cta-sec p { max-width: 52ch; margin-inline: auto; }
   .cta-sec div { margin-top: var(--s6); }
 
-  /* Mobile: CTAs e blocos com bom toque */
   @media (max-width: 600px) {
     .hero-cta .btn, .cta-sec .btn { width: 100%; justify-content: center; }
-    .voc li { font-size: 1.12rem; }
   }
 </style>

@@ -24,15 +24,6 @@ const {
 const site = Astro.site ?? new URL('https://alineantunes.site');
 const canonical = new URL(Astro.url.pathname, site);
 const ogImageAbs = new URL(withBase(ogImage), site);
-
-// @font-face com base path (woff2 servidos sob /site-aline/fonts/).
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const fontFaces = `
-@font-face{font-family:'Bradford';src:url('${base}/fonts/bradford-medium.woff2') format('woff2');font-weight:400 600;font-style:normal;font-display:swap}
-@font-face{font-family:'Bradford Black';src:url('${base}/fonts/bradford-black.woff2') format('woff2');font-weight:700 900;font-style:normal;font-display:swap}
-@font-face{font-family:'ABC Prophet';src:url('${base}/fonts/abc-prophet.woff2') format('woff2');font-weight:400 600;font-style:normal;font-display:swap}
-@font-face{font-family:'GT Alpina';src:url('${base}/fonts/gt-alpina.woff2') format('woff2');font-weight:400 500;font-style:normal;font-display:swap}
-@font-face{font-family:'Modern Era';src:url('${base}/fonts/modern-era.woff2') format('woff2');font-weight:400 600;font-style:normal;font-display:swap}`;
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -43,11 +34,14 @@ const fontFaces = `
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
-    <!-- Fontes reais auto-hospedadas (Bradford, ABC Prophet, GT Alpina, Modern Era).
-         @font-face injetado abaixo com o base path correto; pré-carrega as duas críticas. -->
-    <style is:inline set:html={fontFaces}></style>
-    <link rel="preload" href={withBase('/fonts/bradford-medium.woff2')} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={withBase('/fonts/modern-era.woff2')} as="font" type="font/woff2" crossorigin />
+    <!-- Fontes gratuitas (Google Fonts) — produção-safe.
+         Fraunces (títulos/labels) · Newsreader (prosa/citações/H2) · Hanken Grotesk (corpo/UI). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+    />
     <!-- Marca a presença de JS o quanto antes (evita flash do reveal). -->
     <script is:inline>document.documentElement.classList.add('js');</script>
 

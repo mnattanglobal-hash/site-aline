@@ -2,29 +2,34 @@
 import { getCollection } from 'astro:content';
 import { PILAR_META } from '../content/config';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
 import Depoimentos from '../components/Depoimentos.astro';
 import Marquee from '../components/Marquee.astro';
-import SeloGirando from '../components/SeloGirando.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import YouTubeFeed from '../components/YouTubeFeed.astro';
 import depoimentos from '../data/depoimentos.json';
-import { SITE, withBase } from '../site';
+import { SITE, withBase, whatsappLink } from '../site';
 import { Image } from 'astro:assets';
 import { img } from '../lib/images';
 
 const heroImg = img('aa-hero-home');
+const blocoImg = img('aa-sessoes-clareza');
+const mentoraImg = img('aa-sobre-retrato');
+const gifHands = withBase('/img/gif-hands-yinyang.gif');
+const gifSun = withBase('/img/gif-sun.gif');
+
+const whatsappConhecer = whatsappLink('Oi, Aline. Vim pelo site e gostaria de conhecer melhor a sua forma de trabalhar.');
 
 const depoDestaque = depoimentos.filter((d) => d.destaque).slice(0, 4);
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const destaques = posts.slice(0, 3);
 
 const pilares = Object.entries(PILAR_META)
   .filter(([nome]) => nome !== 'Arcanos')
   .map(([nome, meta]) => ({ nome, desc: meta.desc, slug: meta.slug, img: img(meta.img), alt: meta.alt }));
+
+const virtudes = ['Lucidez', 'Honestidade', 'Liberdade', 'Autovalor', 'Sobriedade', 'Autenticidade', 'Compaixão', 'Integridade', 'Autonomia', 'Coragem', 'Presença'];
 
 const site = Astro.site ?? new URL('https://alineantunes.site');
 const jsonLd = [
@@ -49,85 +54,125 @@ const jsonLd = [
 ---
 <BaseLayout jsonLd={jsonLd}>
   <!-- Hero -->
-  <section class="hero glow">
+  <section class="hero bg-blush">
     <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow" data-reveal>Tarô terapêutico · sessões individuais</span>
-        <h1 data-reveal style="--reveal-delay:80ms">Antes de uma nova vida, uma nova autoconsciência.</h1>
-        <p class="sub" data-reveal style="--reveal-delay:160ms">A gente quer mudar a relação, o trabalho, o jeito de amar. Quer uma vida nova. Mas a vida não muda de fora pra dentro. Ela muda no instante em que você enxerga, sem se enganar, o padrão que vem te conduzindo há anos.</p>
-        <div class="actions" data-reveal style="--reveal-delay:240ms">
-          <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma sessão</a>
-          <a href={withBase("/blog")} class="btn btn-ghost">Ler o blog</a>
-        </div>
-      </div>
-      <figure class="hero-media" data-reveal style="--reveal-delay:120ms">
+      <figure class="hero-media" data-reveal>
         {heroImg ? (
           <Image
             src={heroImg}
-            alt="Retrato de Aline Antunes, de cabelos ruivos e blusa de linho clara, apoiando o queixo na mão, diante de prateleiras de madeira"
-            widths={[480, 768, 1120]}
-            sizes="(max-width: 860px) 92vw, 46vw"
+            alt="Retrato de Aline Antunes, de cabelos ruivos e blusa de linho clara, apoiando o queixo na mão"
+            widths={[360, 560, 840]}
+            sizes="(max-width: 860px) 80vw, 32vw"
             format="webp"
             quality={72}
             loading="eager"
             fetchpriority="high"
           />
         ) : (
-          <div class="hero-fallback" role="img" aria-label="Luz quente">
-            <span class="hero-spark" aria-hidden="true">✦</span>
-          </div>
+          <div class="hero-fallback" role="img" aria-label="Luz quente"><span class="hero-spark" aria-hidden="true">✦</span></div>
         )}
-        <span class="hero-selo"><SeloGirando size={128} /></span>
+      </figure>
+      <div class="hero-copy center">
+        <span class="eyebrow" data-reveal>para pessoas que (sobre)vivem às suas feridas e ao passado</span>
+        <h1 data-reveal style="--reveal-delay:80ms">Antes de uma nova vida, uma nova autoconsciência.</h1>
+        <p class="sub" data-reveal style="--reveal-delay:160ms">A vida não muda de fora pra dentro. Ela muda no instante em que você enxerga, sem se enganar, o padrão que vem te conduzindo há anos.</p>
+        <div class="actions" data-reveal style="--reveal-delay:240ms">
+          <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma consulta</a>
+          <a href={withBase("/blog")} class="btn btn-ghost">Ler o blog</a>
+        </div>
+      </div>
+      <figure class="hero-gif" data-reveal style="--reveal-delay:120ms" aria-hidden="true">
+        <img src={gifHands} alt="" loading="eager" />
       </figure>
     </div>
   </section>
 
-  <!-- Faixa marquee (texto rolando, como na referência) -->
-  <Marquee items={[
-    'maturidade emocional',
-    'autonomia afetiva',
-    'romper padrões',
-    'o tarô como espelho',
-    'individuação',
-    'escolher por direção',
-  ]} />
+  <!-- Faixa marquee (corrimão de palavras) -->
+  <Marquee items={['Lucidez', 'Autenticidade', 'Liberdade', 'Autovalor', 'Autonomia emocional']} />
 
-  <!-- Tese (seção-âncora escura) -->
-  <section class="section anchor tese-sec">
+  <!-- Bloco "Você aprendeu a sobreviver" (substitui o antigo bloco marrom) -->
+  <section class="section bg-wheat sobreviver-sec">
     <div class="read center">
-      <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
-      <blockquote class="thesis" data-reveal>A consciência vem primeiro. Sempre.</blockquote>
-      <p class="thesis-body muted" data-reveal style="--reveal-delay:120ms">Porque a mesma dor não volta por acaso. Ela volta porque existe um ciclo — um caminho que você não escolheu, mas continua repetindo, só que com nomes e rostos diferentes. As cartas reconhecem, com uma precisão que às vezes assusta, o que já está se movendo dentro de você: o que você sente e não nomeia, o ciclo que se repete, o ponto cego que organiza as suas escolhas.</p>
+      <div class="stanza" data-reveal>
+        <p class="strong-line">Você aprendeu a sobreviver.</p>
+        <p>A sobreviver às expectativas.</p>
+        <p>Às “novas” histórias dolorosas que se somam às antigas.</p>
+        <p>Às feridas que não são integradas.</p>
+        <p>Aos papéis que precisou desempenhar para pertencer.</p>
+      </div>
+      <div class="questions" data-reveal style="--reveal-delay:120ms">
+        <p>Percebe que certas histórias continuam se repetindo, mesmo quando você tenta fazer diferente?</p>
+        <p>Já se perguntou por que algumas partes da sua vida parecem avançar enquanto outras permanecem presas aos mesmos padrões?</p>
+        <p>E se a questão fosse algo mais profundo? Algo sobre transformação na forma como você se relaciona consigo e com o passado que te aconteceu? E em como você (res)sente as suas emoções e sentimentos?</p>
+      </div>
+      <p class="aside-line" data-reveal>… estou chegando perto?</p>
+      <p class="questions q-close" data-reveal>Perto da forma pesada e auto-depreciativa como você aprendeu a se tratar e olhar para si mesma(o)?</p>
+      <p class="strong-line closing" data-reveal>Então você está no lugar certo.</p>
     </div>
   </section>
 
-  <!-- Reconhecimento da dor → sessão -->
-  <section class="wrap section section-band">
-    <div class="center" data-reveal>
-      <span class="eyebrow">Talvez você reconheça</span>
-      <h2>Oito frases. Quantas você já pensou?</h2>
-    </div>
-    <ul class="voc-home" data-reveal>
-      <li>"Às vezes nem sei o que estou sentindo."</li>
-      <li>"Tenho dificuldade de ocupar meu espaço."</li>
-      <li>"Estou vivendo o que quero ou o que esperam de mim?"</li>
-      <li>"Será que isso é desejo ou apenas hábito?"</li>
-      <li>"Parece que estou sempre buscando aprovação."</li>
-      <li>"Parte de mim quer mudar. Outra parte resiste."</li>
-      <li>"Sinto que eu me afastei de mim."</li>
-      <li>"Esse relacionamento tem propósito na minha vida?"</li>
-    </ul>
-    <div class="center voc-cta" data-reveal>
-      <p class="muted">Se bateu o <em>"é exatamente isso"</em>, é disso que a sessão cuida.</p>
-      <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Conhecer a sessão</a>
+  <!-- Bloco two-tone com imagem + GIF do sol -->
+  <section class="two-tone normal-sec" style="--tt-a: color-mix(in srgb, var(--c-blush) 62%, #fff); --tt-b: color-mix(in srgb, var(--c-sand) 26%, #fff);">
+    <div class="wrap split-grid">
+      <figure class="split-media" data-reveal>
+        {blocoImg && (
+          <Image src={blocoImg} alt="Luz dourada sobre águas calmas ao amanhecer" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="lazy" />
+        )}
+      </figure>
+      <div class="normal-copy" data-reveal style="--reveal-delay:100ms">
+        <img class="sun-seal" src={gifSun} alt="" aria-hidden="true" loading="lazy" />
+        <p class="strong-line lead-line">para muita gente, viver dessa forma parece normal.</p>
+        <div class="stanza tight">
+          <p>Continuar funcionando.</p>
+          <p>Cumprir responsabilidades.</p>
+          <p>Seguir em frente.</p>
+          <p>Adaptar-se mais uma vez.</p>
+        </div>
+        <p>Mas poucas pessoas percebem quanta energia é necessária para sustentar uma vida construída em torno de antigas feridas, padrões e versões de si que já não fazem sentido.</p>
+        <p>Em algum momento, sobreviver deixa de ser aceitável. E surge um desejo difícil de ignorar: viver com mais verdade, mais consciência e mais liberdade interior.</p>
+        <p>Quando essa transformação acontece, não mudamos apenas o que fazemos. Mudamos a forma como existimos. É esse processo que sustenta todo o meu trabalho.</p>
+        <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma consulta</a>
+      </div>
     </div>
   </section>
 
-  <!-- Pilares -->
+  <!-- Bloco "Mentora de transformação pessoal" -->
+  <section class="section bg-sand mentora-sec">
+    <div class="wrap split-grid rev">
+      <figure class="split-media" data-reveal>
+        {mentoraImg && (
+          <Image src={mentoraImg} alt="Retrato de Aline Antunes em luz quente" widths={[420, 620, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
+        )}
+      </figure>
+      <div class="mentora-copy" data-reveal style="--reveal-delay:100ms">
+        <p class="mentora-sub">Mentora de transformação pessoal, educadora emocional e pesquisadora da experiência humana.</p>
+        <p class="mentora-bio">(Movida por perguntas sobre a alma humana nas horas vagas. E nas horas ocupadas também. Mãe de um dog. Casada com o meu companheiro de vida. Encantada pelas miudezas despercebidas. Meu arcano preferido é O Louco — amanhã não sei.)</p>
+        <p>A maioria das pessoas que chegam até mim já tentou muitas coisas. Leram livros. Fizeram cursos. Buscaram respostas. Algumas fizeram terapia por anos. Outras conhecem seus padrões com riqueza de detalhes.</p>
+        <p>Mas, apesar de toda essa consciência, algo continua parecendo incompleto. Elas entendem muito sobre si mesmas. Mas ainda não conseguiram transformar aquilo que mais desejam transformar. Ou sentem que existe uma distância entre quem são hoje e quem sabem que poderiam se tornar.</p>
+        <p>Foi para essas pessoas que este trabalho nasceu. Ao longo da minha trajetória, transitei pela educação, pelo desenvolvimento humano, pela psicopedagogia e pelo estudo profundo dos processos de transformação. Com o tempo, percebi algo que mudou a forma como compreendo o crescimento humano: <strong>autoconhecimento, por si só, nem sempre transforma.</strong></p>
+        <p>A transformação acontece quando aquilo que compreendemos intelectualmente encontra espaço para ser vivido, integrado e incorporado. Por isso, meu trabalho não é oferecer respostas prontas. É criar condições para que você desenvolva uma relação mais consciente consigo mesmo, compreenda os padrões que moldam sua vida e construa uma identidade mais alinhada com quem realmente é.</p>
+        <p>Não acredito que exista uma fórmula para isso. Mas acredito profundamente que existe sabedoria dentro de cada pessoa. Às vezes ela está escondida sob camadas de adaptação, medo, expectativas e antigas estratégias de sobrevivência. Meu trabalho é ajudar você a encontrá-la. E a partir dela, construir uma vida mais autêntica, consciente e inteira.</p>
+        <p>Se você sente que chegou o momento de uma transformação mais profunda do que simples mudanças externas, seja bem-vinda(o).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- As virtudes do nosso crescimento -->
+  <section class="section bg-peach virtudes-sec">
+    <div class="wrap center">
+      <h2 data-reveal>As virtudes do nosso crescimento</h2>
+      <ul class="virtudes" data-reveal style="--reveal-delay:80ms">
+        {virtudes.map((v) => <li>{v}</li>)}
+      </ul>
+      <p class="virtudes-fecho" data-reveal style="--reveal-delay:160ms">As respostas podem iluminar o caminho. Mas são as virtudes que nos permitem percorrê-lo.</p>
+    </div>
+  </section>
+
+  <!-- Pilares (blog por território) -->
   <section class="wrap section">
     <div class="center" data-reveal>
       <span class="eyebrow">O blog por território</span>
-      <h2>Seis territórios para se olhar</h2>
+      <h2>Seis territórios para ler e se olhar</h2>
       <p class="muted pilares-sub">Os artigos do blog, organizados por território de trabalho. Escolha por onde começar a leitura.</p>
     </div>
     <div class="card-grid pilares" data-reveal>
@@ -147,24 +192,8 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Destaques do blog -->
-  {destaques.length > 0 && (
-    <section class="wrap section section-band">
-      <div class="center" data-reveal>
-        <span class="eyebrow">Do blog</span>
-        <h2>Para começar a leitura</h2>
-      </div>
-      <div class="card-grid" data-reveal>
-        {destaques.map((p) => (
-          <ArticleCard href={withBase(`/blog/${p.slug}`)} titulo={p.data.titulo} hook={p.data.hook} pilar={p.data.pilar} arcano={p.data.arcano} />
-        ))}
-      </div>
-      <p class="center more-link"><a href={withBase("/blog")} class="btn btn-ghost">Ver todos os artigos</a></p>
-    </section>
-  )}
-
   <!-- Depoimentos -->
-  <section class="wrap section">
+  <section class="wrap section bg-cream">
     <div class="center" data-reveal>
       <span class="eyebrow">Depoimentos</span>
       <h2>O que dizem as clientes</h2>
@@ -187,7 +216,7 @@ const jsonLd = [
   </section>
 
   <!-- Instagram -->
-  <section class="wrap section section-band">
+  <section class="wrap section bg-blush">
     <div class="center" data-reveal>
       <span class="eyebrow">No Instagram</span>
       <h2>Esteja comigo nas redes sociais</h2>
@@ -208,87 +237,106 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- Como saber se sou a profissional certa para você? -->
+  <section class="section bg-salmon profissional-sec">
+    <div class="read center">
+      <div data-reveal>
+        <span class="eyebrow">Antes de começar</span>
+        <h2>Como saber se sou a profissional certa para você?</h2>
+      </div>
+      <div class="prof-body" data-reveal style="--reveal-delay:100ms">
+        <p>Antes de qualquer compromisso, você pode compartilhar o que está vivendo, fazer perguntas e conhecer melhor minha forma de trabalhar. Eu também poderei entender suas necessidades e perceber se realmente posso contribuir com sua jornada.</p>
+        <p>Nem todo profissional é a escolha certa para todas as pessoas. O mais importante é encontrar alguém com quem você se sinta seguro para explorar, questionar e transformar aquilo que precisa ser transformado.</p>
+        <p>Ficarei feliz em apresentar o meu trabalho.</p>
+      </div>
+      <div data-reveal style="--reveal-delay:160ms"><a href={whatsappConhecer} class="btn btn-gold" rel="noopener">Me chame no WhatsApp</a></div>
+    </div>
+  </section>
+
   <!-- CTA final (seção-âncora escura) -->
   <section class="section anchor oxblood cta-sec">
     <div class="read center">
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
       <h2 data-reveal>Quer dar o primeiro passo?</h2>
       <p class="muted" data-reveal style="--reveal-delay:100ms">A sessão é uma conversa de clareza, não de previsão. Você sai entendendo o padrão e com algo concreto para fazer com isso.</p>
-      <div data-reveal style="--reveal-delay:180ms"><a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma sessão</a></div>
+      <div data-reveal style="--reveal-delay:180ms"><a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma consulta</a></div>
     </div>
   </section>
 </BaseLayout>
 <style>
-  /* ---- Hero ---- */
-  .hero { padding-block: var(--s9) var(--s9); border-bottom: 1px solid var(--line); overflow: hidden; }
-  .hero-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: var(--s8); align-items: center; }
-  .hero h1 { font-size: clamp(2.5rem, 5.6vw, 4rem); margin: var(--s4) 0; }
-  .sub { font-size: 1.2rem; color: var(--ink-soft); max-width: 52ch; }
-  .actions { display: flex; gap: var(--s4); margin-top: var(--s6); flex-wrap: wrap; }
+  /* ---- Hero (imagem à esquerda · texto ao centro · gif giratório à direita) ---- */
+  .hero { padding-block: var(--s9); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: .8fr 1.1fr .6fr; gap: var(--s7); align-items: center; }
+  .hero h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); margin: var(--s4) 0; }
+  .hero .eyebrow { font-style: italic; text-transform: none; letter-spacing: .02em; font-weight: 500; font-size: .98rem; color: var(--ink-soft); font-family: var(--font-serif); }
+  .sub { font-size: 1.12rem; color: var(--ink-soft); max-width: 46ch; margin-inline: auto; }
+  .actions { display: flex; gap: var(--s4); margin-top: var(--s6); flex-wrap: wrap; justify-content: center; }
 
-  .hero-media { margin: 0; position: relative; order: -1; }
-  .hero-selo {
-    position: absolute; left: -28px; bottom: -28px; z-index: 2;
-    display: grid; place-items: center;
-    width: 128px; height: 128px; border-radius: 50%;
-    background: var(--paper); box-shadow: var(--shadow-soft);
-  }
-  @media (max-width: 860px) { .hero-selo { left: auto; right: -14px; bottom: -22px; width: 104px; height: 104px; transform: scale(.82); } }
+  .hero-media { margin: 0; }
   .hero-media :global(img) {
     width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 28% center;
-    border-radius: 18px;
-    box-shadow: 0 30px 70px -36px color-mix(in srgb, var(--ink) 70%, transparent);
+    border-radius: 18px; box-shadow: 0 30px 70px -36px color-mix(in srgb, var(--ink) 70%, transparent);
   }
+  .hero-gif { margin: 0; display: grid; place-items: center; }
+  .hero-gif img { width: 100%; max-width: 200px; height: auto; mix-blend-mode: multiply; }
   .hero-fallback {
-    position: relative; width: 100%; aspect-ratio: 4 / 5;
-    border-radius: 18px; border: 1px solid var(--line);
-    background:
-      radial-gradient(60% 60% at 50% 38%, color-mix(in srgb, var(--amber) 32%, transparent), transparent 70%),
-      linear-gradient(160deg, var(--paper-2), var(--paper-3));
+    position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 18px; border: 1px solid var(--line);
+    background: radial-gradient(60% 60% at 50% 38%, color-mix(in srgb, var(--amber) 32%, transparent), transparent 70%), linear-gradient(160deg, var(--paper-2), var(--paper-3));
     display: grid; place-items: center; overflow: hidden;
   }
   .hero-spark { font-size: clamp(4rem, 12vw, 8rem); color: var(--gold-soft); opacity: .9; }
 
-  /* ---- Tese (âncora) ---- */
-  .tese-sec .rule { margin-top: 0; }
-  .thesis {
-    font-family: var(--font-display); font-style: italic; font-weight: 420;
-    font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.28;
-    color: #f6efe1; margin: var(--s5) 0 var(--s6); border: 0; padding: 0; background: none;
+  @media (max-width: 860px) {
+    .hero { padding-block: var(--s8) var(--s7); }
+    .hero-grid { grid-template-columns: 1fr; gap: var(--s6); }
+    .hero-media { order: 1; max-width: 360px; margin-inline: auto; }
+    .hero-copy { order: 2; }
+    .hero-gif { order: 0; }
+    .hero-gif img { max-width: 150px; }
+    .hero-media :global(img) { aspect-ratio: 5 / 4; }
   }
-  .thesis-body { font-size: 1.12rem; max-width: 60ch; margin-inline: auto; }
-  .thesis-body strong { color: var(--gold-bright); }
 
-  /* ---- Seções ---- */
-  .section-band { background: var(--paper-2); border-block: 1px solid var(--line); }
+  /* ---- Bloco "Você aprendeu a sobreviver" ---- */
+  .stanza p { margin: 0 0 var(--s2); font-family: var(--font-serif); font-size: 1.18rem; line-height: 1.5; color: var(--ink-soft); }
+  .stanza.tight p { margin-bottom: var(--s1); }
+  .strong-line { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.25; color: var(--ink); margin: 0 0 var(--s3); }
+  .sobreviver-sec .questions { max-width: 60ch; margin: var(--s6) auto 0; }
+  .sobreviver-sec .questions p { font-size: 1.12rem; color: var(--ink); margin-bottom: var(--s4); }
+  .sobreviver-sec .aside-line { font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; color: var(--wine); margin: var(--s6) 0 var(--s3); }
+  .sobreviver-sec .q-close { max-width: 56ch; margin-inline: auto; }
+  .sobreviver-sec .closing { margin-top: var(--s6); color: var(--gold); }
+
+  /* ---- Bloco two-tone "viver dessa forma parece normal" ---- */
+  .normal-sec { padding-block: var(--s9); }
+  .normal-copy .sun-seal { width: 84px; height: auto; margin-bottom: var(--s4); mix-blend-mode: multiply; }
+  .normal-copy { font-size: 1.06rem; }
+  .normal-copy p { color: var(--ink-soft); }
+  .lead-line { font-size: clamp(1.6rem, 3.6vw, 2.2rem) !important; color: var(--ink) !important; margin-bottom: var(--s5); }
+  .normal-copy .stanza p { font-size: 1.12rem; color: var(--ink); }
+  .normal-copy .btn { margin-top: var(--s4); }
+
+  /* ---- Bloco Mentora ---- */
+  .mentora-copy { font-size: 1.04rem; }
+  .mentora-copy p { color: var(--ink-soft); }
+  .mentora-sub { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3vw, 1.85rem); line-height: 1.3; color: var(--ink) !important; margin-bottom: var(--s4); }
+  .mentora-bio { font-family: var(--font-serif); font-style: italic; color: var(--wine) !important; font-size: 1.06rem; }
+  .mentora-copy strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- As virtudes ---- */
+  .virtudes-sec h2 { margin-top: 0; }
+  .virtudes { list-style: none; padding: 0; margin: var(--s7) auto; max-width: 880px; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s4) var(--s7); }
+  .virtudes li { font-family: var(--font-label); font-weight: 700; font-size: .92rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+  .virtudes-fecho { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; line-height: 1.5; color: var(--ink); max-width: 46ch; margin-inline: auto; }
+
+  /* ---- Profissional certa ---- */
+  .profissional-sec h2 { margin-top: 0; }
+  .prof-body { margin: var(--s6) 0; }
+  .prof-body p { font-size: 1.12rem; color: var(--ink); }
+
+  /* ---- Reaproveitados ---- */
   .pilares { margin-top: var(--s7); }
-  .depo-wrap { margin-top: var(--s7); }
-  .ig-home, .yt-home { margin-top: var(--s7); }
-  .more-link { margin-top: var(--s7); }
-
+  .depo-wrap, .ig-home, .yt-home { margin-top: var(--s7); }
   .pilares-sub { max-width: 56ch; margin: var(--s4) auto 0; }
-
-  /* Reconhecimento da dor (voz-do-cliente) — cards verdes, respirados */
-  .voc-home { list-style: none; padding: 0; margin: var(--s7) auto 0; max-width: 880px; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); }
-  .voc-home li {
-    font-family: var(--font-serif); font-style: italic;
-    font-size: 1.32rem; line-height: 1.42; color: var(--ink);
-    padding: var(--s5) var(--s6);
-    background: color-mix(in srgb, var(--moss-soft) 22%, var(--paper-2));
-    border: 1px solid color-mix(in srgb, var(--moss) 30%, var(--line));
-    border-radius: var(--radius);
-    transition: border-color .25s ease, transform .2s var(--ease), box-shadow .3s ease;
-  }
-  .voc-home li:hover { border-color: var(--moss); transform: translateY(-3px); box-shadow: var(--shadow-soft); }
-  .voc-cta { margin-top: var(--s7); }
-  .voc-cta p { margin-bottom: var(--s4); font-size: 1.1rem; }
-  .voc-cta em { font-family: var(--font-serif); color: var(--wine); font-style: italic; }
-  @media (max-width: 600px) {
-    .voc-home { grid-template-columns: 1fr; }
-    .voc-cta .btn, .actions .btn { width: 100%; justify-content: center; }
-  }
-  .card-grid + .more-link { margin-top: var(--s7); }
-
   .pilar-card { display: flex; flex-direction: column; color: var(--ink); overflow: hidden; }
   .pilar-thumb { display: block; margin: calc(-1 * var(--s6)) calc(-1 * var(--s6)) var(--s5); }
   .pilar-thumb :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
@@ -300,7 +348,6 @@ const jsonLd = [
   .pilar-card:hover .more { color: var(--ink); }
   .pilar-card:hover .more span { transform: translateX(4px); }
 
-  /* ---- Banner do Arcano ---- */
   .arcano-banner {
     display: flex; align-items: center; justify-content: space-between; gap: var(--s6);
     flex-wrap: wrap; padding: var(--s8) var(--s7);
@@ -310,18 +357,14 @@ const jsonLd = [
   .arcano-txt { max-width: 58ch; }
   .arcano-txt h2 { margin: var(--s2) 0 var(--s3); }
 
-  /* ---- CTA âncora ---- */
   .cta-sec .rule { margin-top: 0; }
   .cta-sec h2 { margin-top: 0; }
   .cta-sec p { max-width: 52ch; margin-inline: auto; }
   .cta-sec div { margin-top: var(--s6); }
 
-  @media (max-width: 860px) {
-    .hero { padding-block: var(--s8) var(--s7); }
-    .hero-grid { grid-template-columns: 1fr; gap: var(--s7); }
-    .hero-copy { order: 2; }
-    .hero-media { order: 1; max-width: 420px; }
-    .hero-media img, .hero-fallback { aspect-ratio: 5 / 4; }
+  @media (max-width: 600px) {
+    .actions .btn, .cta-sec .btn, .profissional-sec .btn, .normal-copy .btn { width: 100%; justify-content: center; }
+    .virtudes { gap: var(--s3) var(--s5); }
   }
   @media (prefers-reduced-motion: reduce) {
     .pilar-card:hover .more span { transform: none; }

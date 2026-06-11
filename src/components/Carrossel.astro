@@ -1,0 +1,101 @@
+---
+// Carrossel de frases com setinhas (← →) — navega uma frase por vez.
+// Réplica do pedido da Aline para "a mesma dor, com outro rosto".
+// Acessível: botões com aria-label, região aria-live, navegação por teclado.
+interface Props {
+  items: string[];
+  fundo?: 'verde' | 'creme';
+}
+const { items, fundo = 'verde' } = Astro.props;
+---
+<div class:list={["carrossel", `f-${fundo}`]} data-carrossel>
+  <button class="car-nav car-prev" type="button" aria-label="Frase anterior">
+    <span aria-hidden="true">&#8592;</span>
+  </button>
+
+  <div class="car-viewport" aria-live="polite">
+    {items.map((t, i) => (
+      <p class="car-slide" data-i={i} hidden={i !== 0}>{t}</p>
+    ))}
+  </div>
+
+  <button class="car-nav car-next" type="button" aria-label="Próxima frase">
+    <span aria-hidden="true">&#8594;</span>
+  </button>
+
+  <div class="car-dots" role="tablist" aria-label="Selecionar frase">
+    {items.map((_, i) => (
+      <button class="car-dot" type="button" data-dot={i} aria-label={`Frase ${i + 1}`} aria-selected={i === 0 ? 'true' : 'false'}></button>
+    ))}
+  </div>
+</div>
+<style>
+  .carrossel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--s4);
+    max-width: 880px;
+    margin: var(--s7) auto 0;
+    padding: var(--s8) var(--s6) var(--s9);
+    border-radius: 22px;
+  }
+  .carrossel.f-verde { background: color-mix(in srgb, var(--c-olive) 30%, #fff); border: 1px solid color-mix(in srgb, var(--moss) 28%, var(--line)); }
+  .carrossel.f-creme { background: var(--paper-2); border: 1px solid var(--line); }
+
+  .car-viewport { position: relative; min-height: 5.5em; display: grid; place-items: center; text-align: center; }
+  .car-slide {
+    margin: 0; grid-area: 1 / 1;
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(1.4rem, 3.4vw, 1.95rem); line-height: 1.4; color: var(--ink);
+    max-width: 26ch;
+  }
+  .car-slide[hidden] { display: none; }
+
+  .car-nav {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    background: #fff; border: 1px solid var(--line-strong); color: var(--ink);
+    font-size: 1.3rem; line-height: 1;
+    transition: transform .18s var(--ease), background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .car-nav:hover { transform: translateY(-2px); background: var(--gold-bright); color: var(--ink); border-color: transparent; }
+
+  .car-dots { grid-column: 1 / -1; display: flex; justify-content: center; gap: var(--s2); margin-top: var(--s6); }
+  .car-dot {
+    width: 9px; height: 9px; padding: 0; border-radius: 50%; cursor: pointer;
+    background: color-mix(in srgb, var(--ink) 22%, transparent); border: 0;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .car-dot[aria-selected="true"] { background: var(--terra); transform: scale(1.25); }
+
+  @media (max-width: 600px) {
+    .carrossel { gap: var(--s2); padding: var(--s7) var(--s3) var(--s8); }
+    .car-nav { width: 40px; height: 40px; }
+  }
+</style>
+<script is:inline>
+  (() => {
+    const init = (root) => {
+      const slides = Array.from(root.querySelectorAll('.car-slide'));
+      const dots = Array.from(root.querySelectorAll('.car-dot'));
+      if (!slides.length) return;
+      let cur = 0;
+      const show = (n) => {
+        cur = (n + slides.length) % slides.length;
+        slides.forEach((s, i) => { s.hidden = i !== cur; });
+        dots.forEach((d, i) => d.setAttribute('aria-selected', i === cur ? 'true' : 'false'));
+      };
+      root.querySelector('.car-prev')?.addEventListener('click', () => show(cur - 1));
+      root.querySelector('.car-next')?.addEventListener('click', () => show(cur + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+      root.setAttribute('tabindex', '0');
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+      });
+    };
+    document.querySelectorAll('[data-carrossel]').forEach(init);
+  })();
+</script>
