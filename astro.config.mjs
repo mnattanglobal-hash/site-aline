@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import remarkWikilinks from './remark-wikilinks.mjs';
 
-// Preview no GitHub Pages, servida em /site-aline (base = '/site-aline').
+// Produção no domínio próprio alineantunes.com (GitHub Pages custom domain → base '/').
 export default defineConfig({
-  site: 'https://mnattanglobal-hash.github.io',
-  base: '/site-aline',
+  site: 'https://alineantunes.com',
+  base: '/',
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkWikilinks],
