@@ -18,7 +18,7 @@ const { items, gifSrc, gifAlt = '', gifSide = 'left', gifSize = 200 } = Astro.pr
 <div class:list={["acc-wrap", { "has-gif": !!gifSrc, "gif-right": gifSide === 'right' }]} style={`--gif-w:${gifSize}px`}>
   {gifSrc && (
     <figure class="acc-gif" aria-hidden="true">
-      <img src={gifSrc} alt={gifAlt} loading="lazy" />
+      <img src={gifSrc} alt={gifAlt} width={gifSize} height={Math.round(gifSize / 1.408)} loading="lazy" decoding="async" />
     </figure>
   )}
   <div class="acc-list">

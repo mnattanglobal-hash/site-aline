@@ -14,8 +14,8 @@ import { img } from '../lib/images';
 const heroImg = img('aa-hero-ilustra');
 const blocoImg = img('aa-normal-sala');
 const mentoraImg = img('aa-retrato-aline');
-const gifHands = withBase('/img/gif-hands-yinyang.gif');
-const gifSun = withBase('/img/gif-sun.gif');
+const gifHands = withBase('/img/gif-hands-yinyang.webp');
+const gifSun = withBase('/img/gif-sun.webp');
 
 const whatsappConhecer = whatsappLink('Oi, Aline. Vim pelo site e gostaria de conhecer melhor a sua forma de trabalhar.');
 
@@ -82,7 +82,7 @@ const jsonLd = [
         </div>
       </div>
       <figure class="hero-gif" data-reveal style="--reveal-delay:120ms" aria-hidden="true">
-        <img src={gifHands} alt="" loading="eager" />
+        <img src={gifHands} alt="" width="300" height="213" loading="eager" decoding="async" />
       </figure>
     </div>
   </section>
@@ -120,7 +120,7 @@ const jsonLd = [
         )}
       </figure>
       <div class="normal-copy" data-reveal style="--reveal-delay:100ms">
-        <img class="sun-seal" src={gifSun} alt="" aria-hidden="true" loading="lazy" />
+        <img class="sun-seal" src={gifSun} alt="" aria-hidden="true" width="180" height="128" loading="lazy" decoding="async" />
         <p class="strong-line lead-line">para muita gente, viver dessa forma parece normal.</p>
         <div class="stanza tight">
           <p>Continuar funcionando.</p>
@@ -179,7 +179,7 @@ const jsonLd = [
         <a class="card pilar-card" href={withBase(`/blog/pilar/${p.slug}`)}>
           {p.img && (
             <span class="pilar-thumb">
-              <Image src={p.img} alt={p.alt} widths={[320, 560]} sizes="(max-width: 600px) 90vw, 340px" format="webp" quality={70} loading="lazy" />
+              <Image src={p.img} alt={p.alt} widths={[320, 480]} sizes="(max-width: 600px) 90vw, 340px" format="webp" quality={62} loading="lazy" />
             </span>
           )}
           <span class="badge">Pilar</span>
