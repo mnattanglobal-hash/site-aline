@@ -41,7 +41,10 @@ const { items, fundo = 'verde' } = Astro.props;
     padding: var(--s8) var(--s6) var(--s9);
     border-radius: 22px;
   }
-  .carrossel.f-verde { background: color-mix(in srgb, var(--c-olive) 30%, #fff); border: 1px solid color-mix(in srgb, var(--moss) 28%, var(--line)); }
+  .carrossel.f-verde { background: #6E8B3D; border: 1px solid color-mix(in srgb, #000 12%, #6E8B3D); }
+  .carrossel.f-verde .car-slide { color: #fbfdf3; }
+  .carrossel.f-verde .car-dot { background: color-mix(in srgb, #fff 45%, transparent); }
+  .carrossel.f-verde .car-dot[aria-selected="true"] { background: var(--gold-bright); }
   .carrossel.f-creme { background: var(--paper-2); border: 1px solid var(--line); }
 
   .car-viewport { position: relative; min-height: 5.5em; display: grid; place-items: center; text-align: center; }

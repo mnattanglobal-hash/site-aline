@@ -140,6 +140,26 @@ img { max-width: 100%; height: auto; display: block; }
   border-block: 1px solid color-mix(in srgb, var(--ink) 7%, transparent);
 }
 
+/* ---- Padrão de fundo flor-de-lis (⚜️) — motivo repetido, substitui o antigo lótus ---- */
+/* Motivo escuro (terracota) para fundos CLAROS. */
+.flordelis-bg {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='84'%20height='84'%20viewBox='0%200%2064%2064'%3E%3Cg%20fill='%23a1543c'%20fill-opacity='0.13'%3E%3Cpath%20d='M32%206%20C27%2016%2027%2024%2032%2031%20C37%2024%2037%2016%2032%206%20Z'/%3E%3Cpath%20d='M31%2031%20C22%2030%2014%2026%2015%2017%20C19%2024%2026%2027%2032%2030%20Z'/%3E%3Cpath%20d='M33%2031%20C42%2030%2050%2026%2049%2017%20C45%2024%2038%2027%2032%2030%20Z'/%3E%3Crect%20x='24'%20y='32'%20width='16'%20height='5'%20rx='1.5'/%3E%3Cpath%20d='M27%2037%20C25%2045%2028%2052%2032%2055%20C36%2052%2039%2045%2037%2037%20Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 84px;
+}
+/* Motivo claro (creme) para fundos ESCUROS/saturados. */
+.flordelis-bg--light {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='84'%20height='84'%20viewBox='0%200%2064%2064'%3E%3Cg%20fill='%23f4eee8'%20fill-opacity='0.16'%3E%3Cpath%20d='M32%206%20C27%2016%2027%2024%2032%2031%20C37%2024%2037%2016%2032%206%20Z'/%3E%3Cpath%20d='M31%2031%20C22%2030%2014%2026%2015%2017%20C19%2024%2026%2027%2032%2030%20Z'/%3E%3Cpath%20d='M33%2031%20C42%2030%2050%2026%2049%2017%20C45%2024%2038%2027%2032%2030%20Z'/%3E%3Crect%20x='24'%20y='32'%20width='16'%20height='5'%20rx='1.5'/%3E%3Cpath%20d='M27%2037%20C25%2045%2028%2052%2032%2055%20C36%2052%2039%2045%2037%2037%20Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 84px;
+}
+/* Painel translúcido sob textos longos quando há padrão de fundo, p/ legibilidade. */
+.fdl-panel {
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  border-radius: 18px;
+  padding: var(--s7) var(--s6);
+  backdrop-filter: blur(1px);
+}
+
 /* ---- Seção em duas cores (réplica two-tone do Everbe; tons claros p/ AA) ---- */
 .two-tone {
   position: relative;

@@ -55,10 +55,9 @@ const faq = [
   </section>
 
   <!-- O que você desenvolve -->
-  <section class="section bg-olive what-sec">
+  <section class="section what-sec what-sec--sienna flordelis-bg--light" style="background:#A0522D;">
     <div class="read">
       <div class="center" data-reveal>
-        <span class="eyebrow">O que o acompanhamento constrói</span>
         <h2>O que você desenvolve ao longo do processo</h2>
       </div>
       <div class="what-grid" data-reveal>
@@ -71,10 +70,9 @@ const faq = [
   </section>
 
   <!-- Como acontece na prática -->
-  <section class="section bg-salmon">
+  <section class="section como-sec--terra" style="background:#CD8162;">
     <div class="read">
       <div data-reveal>
-        <span class="eyebrow">Como acontece na prática</span>
         <h2>Como acontece na prática</h2>
       </div>
       <ol class="steps" data-reveal>
@@ -97,18 +95,18 @@ const faq = [
   </section>
 
   <!-- Dúvidas comuns (acordeão + gif yin-yang à esquerda) -->
-  <section class="section bg-blush">
+  <section class="section faq-sec--green" style="background:#6E8B3D;">
     <div class="wrap">
       <div class="center" data-reveal>
         <span class="eyebrow">Antes de começar</span>
         <h2>Dúvidas comuns</h2>
       </div>
-      <Acordeao items={faq} gifSrc={gifBagua} gifAlt="" gifSide="left" />
+      <Acordeao items={faq} gifSrc={gifBagua} gifAlt="" gifSide="left" gifSize={257} />
     </div>
   </section>
 
   <!-- CTA final -->
-  <section class="section anchor cta-sec">
+  <section class="section cta-sec cta-sec--rose flordelis-bg" style="background:#EED5D2;">
     <div class="read center">
       <p class="rule" aria-hidden="true"><span class="sparkle">✦</span></p>
       <h2 data-reveal>Dê o primeiro passo</h2>
@@ -142,6 +140,16 @@ const faq = [
   .steps p { margin: 0; color: var(--ink-soft); }
 
   .depo-band { margin-top: var(--s6); }
+
+  /* "O que você desenvolve" sobre sienna (#A0522D): título claro (cards seguem claros) */
+  .what-sec--sienna .center h2 { color: #fdf3ec; }
+  /* "Como acontece na prática" sobre terracota (#CD8162): texto claro */
+  .como-sec--terra h2 { color: #fff5ef; }
+  .como-sec--terra .steps h3 { color: #fff7f1; }
+  .como-sec--terra .steps p { color: color-mix(in srgb, #fff5ef 90%, transparent); }
+  /* "Dúvidas comuns" sobre verde (#6E8B3D): título e eyebrow claros */
+  .faq-sec--green .center h2 { color: #fbfdf3; }
+  .faq-sec--green .center .eyebrow { color: #e6efcb; }
 
   .cta-sec .rule { margin-top: 0; }
   .cta-sec p { max-width: 54ch; margin-inline: auto; }

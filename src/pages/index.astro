@@ -11,9 +11,9 @@ import { SITE, withBase, whatsappLink } from '../site';
 import { Image } from 'astro:assets';
 import { img } from '../lib/images';
 
-const heroImg = img('aa-hero-home');
-const blocoImg = img('aa-sessoes-clareza');
-const mentoraImg = img('aa-sobre-retrato');
+const heroImg = img('aa-hero-ilustra');
+const blocoImg = img('aa-normal-sala');
+const mentoraImg = img('aa-retrato-aline');
 const gifHands = withBase('/img/gif-hands-yinyang.gif');
 const gifSun = withBase('/img/gif-sun.gif');
 
@@ -56,15 +56,15 @@ const jsonLd = [
   <!-- Hero -->
   <section class="hero bg-blush">
     <div class="wrap hero-grid">
-      <figure class="hero-media" data-reveal>
+      <figure class="hero-media hero-media--art" data-reveal>
         {heroImg ? (
           <Image
             src={heroImg}
-            alt="Retrato de Aline Antunes, de cabelos ruivos e blusa de linho clara, apoiando o queixo na mão"
+            alt="Ilustração de uma mulher serena regando flores que brotam da própria cabeça"
             widths={[360, 560, 840]}
-            sizes="(max-width: 860px) 80vw, 32vw"
+            sizes="(max-width: 860px) 70vw, 28vw"
             format="webp"
-            quality={72}
+            quality={80}
             loading="eager"
             fetchpriority="high"
           />
@@ -116,7 +116,7 @@ const jsonLd = [
     <div class="wrap split-grid">
       <figure class="split-media" data-reveal>
         {blocoImg && (
-          <Image src={blocoImg} alt="Luz dourada sobre águas calmas ao amanhecer" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="lazy" />
+          <Image src={blocoImg} alt="Sala de estar aconchegante, em tons terrosos e luz quente" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="lazy" />
         )}
       </figure>
       <div class="normal-copy" data-reveal style="--reveal-delay:100ms">
@@ -141,18 +141,17 @@ const jsonLd = [
     <div class="wrap split-grid rev">
       <figure class="split-media" data-reveal>
         {mentoraImg && (
-          <Image src={mentoraImg} alt="Retrato de Aline Antunes em luz quente" widths={[420, 620, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
+          <Image src={mentoraImg} alt="Retrato de Aline Antunes, ruiva, apoiando o queixo na mão" widths={[420, 620, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
         )}
       </figure>
       <div class="mentora-copy" data-reveal style="--reveal-delay:100ms">
-        <p class="mentora-sub">Mentora de transformação pessoal, educadora emocional e pesquisadora da experiência humana.</p>
-        <p class="mentora-bio">(Movida por perguntas sobre a alma humana nas horas vagas. E nas horas ocupadas também. Mãe de um dog. Casada com o meu companheiro de vida. Encantada pelas miudezas despercebidas. Meu arcano preferido é O Louco — amanhã não sei.)</p>
-        <p>A maioria das pessoas que chegam até mim já tentou muitas coisas. Leram livros. Fizeram cursos. Buscaram respostas. Algumas fizeram terapia por anos. Outras conhecem seus padrões com riqueza de detalhes.</p>
-        <p>Mas, apesar de toda essa consciência, algo continua parecendo incompleto. Elas entendem muito sobre si mesmas. Mas ainda não conseguiram transformar aquilo que mais desejam transformar. Ou sentem que existe uma distância entre quem são hoje e quem sabem que poderiam se tornar.</p>
-        <p>Foi para essas pessoas que este trabalho nasceu. Ao longo da minha trajetória, transitei pela educação, pelo desenvolvimento humano, pela psicopedagogia e pelo estudo profundo dos processos de transformação. Com o tempo, percebi algo que mudou a forma como compreendo o crescimento humano: <strong>autoconhecimento, por si só, nem sempre transforma.</strong></p>
+        <p class="mentora-sub">Mentora de transformação pessoal, educadora emocional</p>
+        <p class="mentora-bio">(Movida por perguntas sobre a alma humana nas horas vagas. E nas horas ocupadas também. Mãe de um dog. Casada com o meu companheiro de vida. Encantada pelas miudezas despercebidas. Meu arcano preferido é O Louco — amanhã não sei!)</p>
+        <p>A maioria das pessoas que chegam até mim já tentou muitas coisas. Leram livros. Fizeram cursos. Buscaram respostas. Algumas fizeram terapia por anos. Muitas delas já não acreditavam mais em si mesmas, pois apesar de toda essa consciência, algo continua parecendo incompleto. Elas entenderam muitas coisas. Mas ainda não conseguiram transformar aquilo que mais desejam transformar. Ou sentem que existe uma distância entre quem são hoje e quem sabem que poderiam se tornar.</p>
+        <p>Foi para essas pessoas que este trabalho nasceu. Ao longo da minha trajetória, transitei pela tarologia, pelo desenvolvimento humano, pela gestalt-terapia e pelo estudo profundo dos processos de transformação. Mas principalmente, sempre fui o meu laboratório principal. Com o tempo, percebi algo que mudou a forma como compreendo o crescimento humano: <strong>autoconhecimento, por si só, nem sempre transforma.</strong></p>
         <p>A transformação acontece quando aquilo que compreendemos intelectualmente encontra espaço para ser vivido, integrado e incorporado. Por isso, meu trabalho não é oferecer respostas prontas. É criar condições para que você desenvolva uma relação mais consciente consigo mesmo, compreenda os padrões que moldam sua vida e construa uma identidade mais alinhada com quem realmente é.</p>
         <p>Não acredito que exista uma fórmula para isso. Mas acredito profundamente que existe sabedoria dentro de cada pessoa. Às vezes ela está escondida sob camadas de adaptação, medo, expectativas e antigas estratégias de sobrevivência. Meu trabalho é ajudar você a encontrá-la. E a partir dela, construir uma vida mais autêntica, consciente e inteira.</p>
-        <p>Se você sente que chegou o momento de uma transformação mais profunda do que simples mudanças externas, seja bem-vinda(o).</p>
+        <p>Se você sente que chegou o momento de cultivar mais consciência, maturidade emocional e autenticidade na forma como vive e se relaciona, seja bem-vinda(o).</p>
       </div>
     </div>
   </section>
@@ -160,7 +159,7 @@ const jsonLd = [
   <!-- As virtudes do nosso crescimento -->
   <section class="section bg-peach virtudes-sec">
     <div class="wrap center">
-      <h2 data-reveal>As virtudes do nosso crescimento</h2>
+      <h2 data-reveal>Virtudes que direcionam o meu trabalho</h2>
       <ul class="virtudes" data-reveal style="--reveal-delay:80ms">
         {virtudes.map((v) => <li>{v}</li>)}
       </ul>
@@ -277,8 +276,13 @@ const jsonLd = [
     width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 28% center;
     border-radius: 18px; box-shadow: 0 30px 70px -36px color-mix(in srgb, var(--ink) 70%, transparent);
   }
+  /* Quando o hero é uma ilustração (PNG transparente): sem moldura, sem recorte. */
+  .hero-media--art :global(img) {
+    aspect-ratio: auto; object-fit: contain; border-radius: 0; box-shadow: none;
+    background: transparent; width: 100%; height: auto; max-height: 480px; margin-inline: auto;
+  }
   .hero-gif { margin: 0; display: grid; place-items: center; }
-  .hero-gif img { width: 100%; max-width: 200px; height: auto; mix-blend-mode: multiply; }
+  .hero-gif img { width: 100%; max-width: 257px; height: auto; mix-blend-mode: multiply; }
   .hero-fallback {
     position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 18px; border: 1px solid var(--line);
     background: radial-gradient(60% 60% at 50% 38%, color-mix(in srgb, var(--amber) 32%, transparent), transparent 70%), linear-gradient(160deg, var(--paper-2), var(--paper-3));
@@ -287,13 +291,15 @@ const jsonLd = [
   .hero-spark { font-size: clamp(4rem, 12vw, 8rem); color: var(--gold-soft); opacity: .9; }
 
   @media (max-width: 860px) {
+    /* No celular: imagem (esq.) e GIF (dir.) lado a lado; texto embaixo. */
     .hero { padding-block: var(--s8) var(--s7); }
-    .hero-grid { grid-template-columns: 1fr; gap: var(--s6); }
-    .hero-media { order: 1; max-width: 360px; margin-inline: auto; }
-    .hero-copy { order: 2; }
-    .hero-gif { order: 0; }
-    .hero-gif img { max-width: 150px; }
+    .hero-grid { grid-template-columns: 1fr 1fr; gap: var(--s5) var(--s4); align-items: center; }
+    .hero-media { grid-column: 1; grid-row: 1; order: 1; max-width: 100%; margin-inline: auto; }
+    .hero-gif { grid-column: 2; grid-row: 1; order: 2; align-self: center; }
+    .hero-copy { grid-column: 1 / -1; grid-row: 2; order: 3; }
+    .hero-gif img { max-width: 207px; }
     .hero-media :global(img) { aspect-ratio: 5 / 4; }
+    .hero-media--art :global(img) { aspect-ratio: auto; max-height: 320px; }
   }
 
   /* ---- Bloco "Você aprendeu a sobreviver" ---- */

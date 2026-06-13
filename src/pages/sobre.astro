@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../site';
 import { Image } from 'astro:assets';
 import { img } from '../lib/images';
-const retrato = img('aa-sobre-retrato');
+const retrato = img('aa-retrato-aline');
 const luz = img('aa-contato-luz');
 ---
 <BaseLayout title="Sobre · Aline Antunes" description="A história da Aline: da Gestão Pública à terapia simbólica. Autoridade vivencial em maturidade emocional, individuação e rompimento de padrões.">
@@ -17,7 +17,7 @@ const luz = img('aa-contato-luz');
       </div>
       <figure class="split-media intro-portrait" data-reveal style="--reveal-delay:120ms">
         {retrato ? (
-          <Image src={retrato} alt="Retrato de Aline Antunes em luz dourada e quente" widths={[360, 520, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
+          <Image src={retrato} alt="Retrato de Aline Antunes, ruiva, apoiando o queixo na mão" widths={[360, 520, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
         ) : (
           <div class="portrait-fallback" role="img" aria-label="Luz dourada"><span aria-hidden="true">✦</span></div>
         )}
@@ -25,9 +25,10 @@ const luz = img('aa-contato-luz');
     </div>
   </section>
 
-  <!-- Corpo (fundo claro alternado) -->
-  <section class="section-sm bg-wheat">
-    <div class="read body">
+  <!-- Corpo (fundo flor-de-lis, texto sobre painel translúcido) -->
+  <section class="section-sm bg-wheat flordelis-bg sofrimento-sec">
+    <div class="read">
+     <div class="body fdl-panel">
       <p data-reveal>Nem sempre o sofrimento aparece como dor. Às vezes ele aparece como adaptação. A adaptação de quem aprendeu a corresponder às expectativas. A adaptação de quem se acostumou a ocupar papéis, cumprir funções e atender necessidades externas sem perceber o quanto estava se afastando de si mesma.</p>
 
       <p data-reveal>Antes de trabalhar com desenvolvimento emocional, eu também vivi essa experiência. Durante anos, busquei construir minha identidade a partir do que fazia, dos resultados que entregava e dos lugares que ocupava. Até perceber que existe uma diferença profunda entre desempenhar um papel e habitar a própria vida.</p>
@@ -42,11 +43,12 @@ const luz = img('aa-contato-luz');
       <h2 data-reveal>O que eu não faço</h2>
       <p data-reveal>Não trabalho com promessas de respostas prontas. Utilizo o Tarô como uma linguagem simbólica de autoconhecimento e investigação emocional. As cartas não revelam um destino inevitável. Elas tornam visíveis os padrões, conflitos e potenciais que já estão atuando na sua vida.</p>
       <p data-reveal>Cada arcano funciona como um espelho da experiência humana, ajudando a reconhecer aquilo que muitas vezes permanece inconsciente. Porque aquilo que não é visto tende a se repetir. E aquilo que se torna consciente pode finalmente ser transformado.</p>
+     </div>
     </div>
   </section>
 
   <!-- Para quem é (com imagem ao lado) + CTA dentro do último bloco -->
-  <section class="section bg-sand quem-sec">
+  <section class="section quem-sec quem-sec--rust" style="background:#CD5B45;">
     <div class="wrap split-grid">
       <figure class="split-media" data-reveal>
         {luz ? (
@@ -86,6 +88,11 @@ const luz = img('aa-contato-luz');
 
   .quem-copy h2 { margin-top: 0; }
   .quem-copy .convite { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--wine); margin: var(--s5) 0 var(--s4); }
+
+  /* "Para quem é" sobre fundo terracota (#CD5B45): texto claro p/ contraste */
+  .quem-sec--rust .quem-copy h2 { color: #fff5ef; }
+  .quem-sec--rust .quem-copy p { color: color-mix(in srgb, #fff5ef 90%, transparent); }
+  .quem-sec--rust .quem-copy .convite { color: #fbe3d6; }
 
   @media (max-width: 600px) {
     .quem-copy .btn { width: 100%; justify-content: center; }

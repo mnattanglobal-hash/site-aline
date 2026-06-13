@@ -8,7 +8,7 @@ import { whatsappLink, withBase } from '../../site';
 import { Image } from 'astro:assets';
 import { img } from '../../lib/images';
 const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero agendar uma sessão de Tarot Terapêutico.');
-const heroImg = img('aa-contato-luz');
+const heroImg = img('aa-taro-baralho');
 const gifSun = withBase('/img/gif-sun.gif');
 
 const depoDestaque = depoimentos.filter((d) => d.destaque);
@@ -34,7 +34,7 @@ const faq = [
 ---
 <BaseLayout title="Tarot Terapêutico · Atendimento individual · Aline Antunes" description="Uma sessão para escutar o que se repete na sua vida, enxergar a dinâmica por trás do padrão e sair com clareza e um gesto concreto. O Tarô como espelho do presente, não previsão de futuro.">
   <!-- Hero: texto + imagem na lateral (sem a antiga imagem do portal) -->
-  <section class="section two-tone hero-sec" style="--tt-a: color-mix(in srgb, var(--c-blush) 62%, #fff); --tt-b: color-mix(in srgb, var(--c-sand) 26%, #fff);">
+  <section class="section two-tone hero-sec hero-sec--sienna" style="--tt-a: #A0522D; --tt-b: color-mix(in srgb, var(--c-sand) 26%, #fff);">
     <div class="wrap split-grid">
       <div class="hero-copy">
         <span class="eyebrow" data-reveal>Atendimento individual · Tarot Terapêutico</span>
@@ -47,7 +47,7 @@ const faq = [
       </div>
       <figure class="split-media" data-reveal style="--reveal-delay:120ms">
         {heroImg && (
-          <Image src={heroImg} alt="Luz suave atravessando um ambiente sereno" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="eager" />
+          <Image src={heroImg} alt="Aline Antunes estendendo um baralho de Tarô sobre a mesa" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="eager" />
         )}
       </figure>
     </div>
@@ -78,10 +78,9 @@ const faq = [
   </section>
 
   <!-- O que você leva da sessão -->
-  <section class="section bg-olive what-sec">
+  <section class="section what-sec what-sec--green" style="background:#6E8B3D;">
     <div class="read">
       <div class="center" data-reveal>
-        <span class="eyebrow">O que você leva</span>
         <h2>O que você leva da sessão</h2>
       </div>
       <div class="what-grid" data-reveal>
@@ -93,8 +92,8 @@ const faq = [
     </div>
   </section>
 
-  <!-- Como funciona (fundo com flores de lótus) -->
-  <section class="section bg-wheat lotus-bg como-sec">
+  <!-- Como funciona (fundo com padrão de flor-de-lis) -->
+  <section class="section bg-wheat flordelis-bg como-sec">
     <div class="read">
       <div data-reveal>
         <span class="eyebrow">Como funciona</span>
@@ -173,11 +172,16 @@ const faq = [
   .what-item p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.55; }
   @media (max-width: 600px) { .what-grid { grid-template-columns: 1fr; } }
 
-  /* Como funciona — fundo de flores de lótus */
-  .lotus-bg {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='92'%20height='92'%20viewBox='0%200%2080%2080'%3E%3Cg%20fill='none'%20stroke='%238b1a1a'%20stroke-opacity='0.10'%20stroke-width='1.2'%3E%3Ccircle%20cx='40'%20cy='40'%20r='5'/%3E%3Cellipse%20cx='40'%20cy='26'%20rx='6'%20ry='13'/%3E%3Cellipse%20cx='40'%20cy='54'%20rx='6'%20ry='13'/%3E%3Cellipse%20cx='26'%20cy='40'%20rx='13'%20ry='6'/%3E%3Cellipse%20cx='54'%20cy='40'%20rx='13'%20ry='6'/%3E%3Cellipse%20cx='30'%20cy='30'%20rx='6'%20ry='13'%20transform='rotate(45%2030%2030)'/%3E%3Cellipse%20cx='50'%20cy='50'%20rx='6'%20ry='13'%20transform='rotate(45%2050%2050)'/%3E%3Cellipse%20cx='50'%20cy='30'%20rx='6'%20ry='13'%20transform='rotate(-45%2050%2030)'/%3E%3Cellipse%20cx='30'%20cy='50'%20rx='6'%20ry='13'%20transform='rotate(-45%2030%2050)'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: repeat; background-size: 92px;
-  }
+  /* Hero sobre fundo sienna (#A0522D): texto claro p/ contraste */
+  .hero-sec--sienna .hero-copy h1 { color: #fdf3ec; }
+  .hero-sec--sienna .hero-copy .eyebrow { color: #f3d9c8; }
+  .hero-sec--sienna .hero-copy .lead { color: #fbe7da; }
+  .hero-sec--sienna .hero-copy .proof-mini { color: color-mix(in srgb, #fdf3ec 86%, transparent); }
+  .hero-sec--sienna .hero-copy .proof-mini .sparkle { color: var(--gold-bright); }
+
+  /* "O que você leva" sobre verde (#6E8B3D): título claro (cards seguem claros) */
+  .what-sec--green .center h2 { color: #fbfdf3; }
+
   .steps { list-style: none; padding: 0; margin: var(--s6) 0; display: grid; gap: var(--s4); }
   .steps li { display: flex; gap: var(--s4); align-items: flex-start; }
   .step-n { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); border: 1px solid var(--gold-soft); background: #fff; }

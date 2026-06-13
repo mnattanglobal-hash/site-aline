@@ -11,10 +11,11 @@ interface Props {
   gifSrc?: string;
   gifAlt?: string;
   gifSide?: 'left' | 'right';
+  gifSize?: number; // largura do gif em px (padrão 200)
 }
-const { items, gifSrc, gifAlt = '', gifSide = 'left' } = Astro.props;
+const { items, gifSrc, gifAlt = '', gifSide = 'left', gifSize = 200 } = Astro.props;
 ---
-<div class:list={["acc-wrap", { "has-gif": !!gifSrc, "gif-right": gifSide === 'right' }]}>
+<div class:list={["acc-wrap", { "has-gif": !!gifSrc, "gif-right": gifSide === 'right' }]} style={`--gif-w:${gifSize}px`}>
   {gifSrc && (
     <figure class="acc-gif" aria-hidden="true">
       <img src={gifSrc} alt={gifAlt} loading="lazy" />
@@ -35,12 +36,12 @@ const { items, gifSrc, gifAlt = '', gifSide = 'left' } = Astro.props;
 <style>
   .acc-wrap { margin-top: var(--s6); }
   .acc-wrap.has-gif {
-    display: grid; grid-template-columns: 200px 1fr; gap: var(--s7); align-items: start;
+    display: grid; grid-template-columns: var(--gif-w, 200px) 1fr; gap: var(--s7); align-items: start;
   }
-  .acc-wrap.has-gif.gif-right { grid-template-columns: 1fr 200px; }
+  .acc-wrap.has-gif.gif-right { grid-template-columns: 1fr var(--gif-w, 200px); }
   .acc-wrap.has-gif.gif-right .acc-gif { order: 2; }
   .acc-gif { margin: 0; position: sticky; top: var(--s7); }
-  .acc-gif img { width: 100%; max-width: 200px; height: auto; mix-blend-mode: multiply; }
+  .acc-gif img { width: 100%; max-width: var(--gif-w, 200px); height: auto; mix-blend-mode: multiply; }
 
   .acc-list { display: grid; gap: var(--s3); }
   .acc-item {
