@@ -6,6 +6,9 @@ import remarkWikilinks from './remark-wikilinks.mjs';
 export default defineConfig({
   site: 'https://alineantunes.com',
   base: '/',
+  // GitHub Pages roda Jekyll, que esconde pastas com "_" (ex.: _astro). Usar "assets"
+  // (sem underscore) evita o problema de vez, além do .nojekyll em public/.
+  build: { assets: 'assets' },
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkWikilinks],
