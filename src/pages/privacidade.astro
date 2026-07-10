@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { whatsappLink, withBase } from '../site';
+const whatsapp = whatsappLink('Oi, Aline. Tenho uma dúvida sobre privacidade / meus dados.');
+const atualizado = '8 de julho de 2026';
+---
+<BaseLayout title="Política de Privacidade · Aline Antunes" description="Como a Aline Antunes coleta, usa e protege seus dados, e como você pode cancelar o recebimento de e-mails a qualquer momento.">
+  <section class="section intro-sec glow">
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Privacidade</span>
+      <h1 data-reveal style="--reveal-delay:80ms">Política de Privacidade</h1>
+      <p class="lead" data-reveal style="--reveal-delay:140ms">Transparência sobre quais dados eu coleto, por quê, e como você mantém o controle deles. Última atualização: {atualizado}.</p>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="read prosa" data-reveal>
+      <h2>Quem é responsável</h2>
+      <p>Este site e a comunicação por e-mail são de responsabilidade de Aline Antunes (alineantunes.com). Se tiver qualquer dúvida sobre seus dados, fale comigo pelo <a href={whatsapp} rel="noopener">WhatsApp</a> ou pela página de <a href={withBase('/contato')}>Contato</a>.</p>
+
+      <h2>Quais dados eu coleto</h2>
+      <p>Coleto apenas o que você me fornece de forma voluntária:</p>
+      <ul>
+        <li><strong>Nome e e-mail</strong>, quando você se inscreve na newsletter, responde ao quiz “Descubra seu Arcano” ou entra em contato.</li>
+        <li>Dados básicos de interação com os e-mails (se foram abertos ou se um link foi clicado), usados só para melhorar o conteúdo.</li>
+      </ul>
+      <p>Não coleto dados sensíveis e não compro, alugo nem importo listas de terceiros.</p>
+
+      <h2>Como uso esses dados</h2>
+      <ul>
+        <li>Enviar a newsletter e uma sequência de e-mails de conteúdo sobre maturidade e autonomia emocional.</li>
+        <li>Responder ao seu contato e apresentar meus atendimentos, quando você pede.</li>
+      </ul>
+
+      <h2>Consentimento e cancelamento</h2>
+      <p>Você só recebe e-mails porque pediu para recebê-los (opt-in), com <strong>confirmação por e-mail</strong> antes do primeiro envio. <strong>Todos os e-mails têm um link de cancelamento</strong> visível: um clique e você para de receber, na hora, sem precisar justificar. Também respeito o cancelamento com um clique direto pela caixa de entrada (cabeçalho List-Unsubscribe).</p>
+
+      <h2>Com quem compartilho</h2>
+      <p>Eu <strong>não vendo nem compartilho</strong> seus dados. Para operar, uso apenas prestadores de serviço técnicos, como a <strong>Amazon Web Services (Amazon SES)</strong> para a entrega dos e-mails. Sua lista fica armazenada em servidor próprio (plataforma Listmonk), sob meu controle.</p>
+
+      <h2>Qualidade da lista</h2>
+      <p>E-mails que retornam (bounce) ou marcações de spam são <strong>removidos automaticamente</strong> da lista. Mantenho a base limpa e envio em volume baixo e gradual, justamente para respeitar sua caixa de entrada.</p>
+
+      <h2>Segurança e retenção</h2>
+      <p>Seus dados ficam em servidor com acesso restrito e conexão criptografada (HTTPS). Mantenho seu cadastro enquanto você quiser receber meus e-mails; ao cancelar, seu endereço é suprimido.</p>
+
+      <h2>Seus direitos (LGPD)</h2>
+      <p>Você pode, a qualquer momento, solicitar acesso, correção ou exclusão dos seus dados, além de cancelar o recebimento. É só me pedir pelos canais de contato acima.</p>
+
+      <h2>Alterações</h2>
+      <p>Se esta política mudar, atualizo a data no topo desta página.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prosa h2 { margin-top: var(--s6); }
+  .prosa ul { padding-left: 1.2em; }
+  .prosa li { margin-bottom: var(--s2); line-height: 1.6; }
+  .prosa p { line-height: 1.7; }
+</style>
