@@ -70,29 +70,29 @@ const isActive = (href: string) => {
 </header>
 <style>
   .site-header {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid color-mix(in srgb, #A0522D 60%, transparent);
     position: sticky; top: 0; z-index: 30;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    background: #A0522D;
     backdrop-filter: blur(8px);
   }
   .bar { display: flex; align-items: center; justify-content: space-between; padding-block: var(--s4); gap: var(--s5); }
   .brand { display: inline-flex; align-items: center; gap: .55em; color: var(--ink); border: 0; }
   .brand-mark { color: var(--gold); font-size: 1.05rem; transition: transform .4s var(--ease); font-variant-emoji: text; }
   .brand:hover .brand-mark { transform: rotate(90deg); }
-  .brand-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; text-transform: lowercase; }
+  .brand-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; text-transform: lowercase; color: #fff5ef; }
 
   nav { display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
   .nav-pages { display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
-  .navlink { position: relative; color: var(--ink-soft); border: 0; font-size: .95rem; text-transform: lowercase; padding-block: 2px; }
-  .navlink::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1px; background: var(--gold-soft); transition: right .25s var(--ease); }
-  .navlink:hover { color: var(--gold); }
+  .navlink { position: relative; color: color-mix(in srgb, #fff5ef 85%, transparent); border: 0; font-size: .95rem; text-transform: lowercase; padding-block: 2px; }
+  .navlink::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1px; background: #fbe3d6; transition: right .25s var(--ease); }
+  .navlink:hover { color: #fff5ef; }
   .navlink:hover::after { right: 0; }
-  .navlink.active { color: var(--ink); font-weight: 600; }
+  .navlink.active { color: #fff5ef; font-weight: 600; }
   .navlink.active::after { right: 0; }
 
   .nav-social { display: flex; align-items: center; gap: var(--s3); }
-  .social { color: var(--ink-soft); border: 0; display: inline-flex; transition: color .2s ease, transform .2s ease; }
-  .social:hover { color: var(--gold); transform: translateY(-1px); }
+  .social { color: color-mix(in srgb, #fff5ef 75%, transparent); border: 0; display: inline-flex; transition: color .2s ease, transform .2s ease; }
+  .social:hover { color: #fff5ef; transform: translateY(-1px); }
 
   /* Dropdown de Atendimentos (desktop) */
   .nav-group { position: relative; }
@@ -128,11 +128,11 @@ const isActive = (href: string) => {
   @media (max-width: 860px) {
     /* Remove o backdrop-filter no mobile: ele cria containing-block e prendia o
        painel fixo do menu dentro da barra. Sem ele, o nav fixo cobre a viewport. */
-    .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--paper); }
+    .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: #A0522D; }
     .menu-toggle {
       display: inline-grid; place-items: center;
-      width: 44px; height: 44px; padding: 0; color: var(--ink);
-      background: transparent; border: 1px solid var(--line); border-radius: 10px; cursor: pointer;
+      width: 44px; height: 44px; padding: 0; color: #fff5ef;
+      background: transparent; border: 1px solid color-mix(in srgb, #fff5ef 30%, transparent); border-radius: 10px; cursor: pointer;
     }
     .menu-toggle .i-close { display: none; }
     .menu-toggle[aria-expanded="true"] .i-menu { display: none; }
@@ -142,7 +142,7 @@ const isActive = (href: string) => {
       position: fixed; top: 0; right: 0; bottom: 0; left: auto;
       width: min(82vw, 320px); height: 100dvh;
       flex-direction: column; flex-wrap: nowrap; align-items: flex-start; justify-content: flex-start; gap: var(--s5);
-      background: var(--paper); border-left: 1px solid var(--line);
+      background: #A0522D; border-left: 1px solid color-mix(in srgb, #fff5ef 20%, transparent);
       padding: calc(var(--s8) + var(--s6)) var(--s6) var(--s7);
       overflow-y: auto; -webkit-overflow-scrolling: touch;
       transform: translateX(100%); transition: transform .3s var(--ease);
@@ -162,11 +162,11 @@ const isActive = (href: string) => {
       flex-direction: column; gap: var(--s2);
       margin: 0; padding: 0 0 0 var(--s4); min-width: 0;
       background: transparent; border: 0; box-shadow: none;
-      border-left: 1px solid var(--line);
+      border-left: 1px solid color-mix(in srgb, #fff5ef 25%, transparent);
     }
     .nav-submenu::before { display: none; }
-    .nav-sublink { font-size: 1rem; color: var(--ink-soft); padding: 0; }
-    .nav-sublink:hover { background: transparent; }
+    .nav-sublink { font-size: 1rem; color: color-mix(in srgb, #fff5ef 75%, transparent); padding: 0; }
+    .nav-sublink:hover { background: transparent; color: #fff5ef; }
     .nav-social { gap: var(--s4); }
     .nav-cta { margin-top: var(--s3); width: 100%; justify-content: center; box-sizing: border-box; }
     .nav-scrim:not([hidden]) {

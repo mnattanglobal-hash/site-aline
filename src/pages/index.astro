@@ -29,7 +29,7 @@ const pilares = Object.entries(PILAR_META)
   .filter(([nome]) => nome !== 'Arcanos')
   .map(([nome, meta]) => ({ nome, desc: meta.desc, slug: meta.slug, img: img(meta.img), alt: meta.alt }));
 
-const virtudes = ['Lucidez', 'Honestidade', 'Liberdade', 'Autovalor', 'Sobriedade', 'Autenticidade', 'Compaixão', 'Integridade', 'Autonomia', 'Coragem', 'Presença'];
+const virtudes = ['Lucidez', 'Honestidade', 'Liberdade', 'Autovalor', 'Sobriedade', 'Autenticidade', 'Criatividade', 'Compaixão', 'Integridade', 'Autonomia', 'Coragem', 'Presença'];
 
 const site = Astro.site ?? new URL('https://alineantunes.site');
 const jsonLd = [
@@ -74,8 +74,8 @@ const jsonLd = [
       </figure>
       <div class="hero-copy center">
         <span class="eyebrow" data-reveal>para pessoas que (sobre)vivem às suas feridas e ao passado</span>
-        <h1 data-reveal style="--reveal-delay:80ms">Antes de uma nova vida, autoconsciência.</h1>
-        <p class="sub" data-reveal style="--reveal-delay:160ms">É comum passarmos anos tentando administrar os efeitos barulhentos de algo cuja causa nunca foi verdadeiramente escutada.</p>
+        <h1 data-reveal style="--reveal-delay:80ms">Antes de uma nova vida, a vida precisa voltar a criar.</h1>
+        <p class="sub" data-reveal style="--reveal-delay:160ms">É comum passarmos anos tentando mudar aquilo que faz barulho, enquanto permanece invisível o que continua impedindo a vida de criar novas possibilidades.</p>
         <div class="actions" data-reveal style="--reveal-delay:240ms">
           <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma consulta</a>
           <a href={withBase("/blog")} class="btn btn-ghost">Ler o blog</a>
@@ -88,7 +88,7 @@ const jsonLd = [
   </section>
 
   <!-- Faixa marquee (corrimão de palavras) -->
-  <Marquee items={['Lucidez', 'Autenticidade', 'Liberdade', 'Autovalor', 'Autonomia emocional']} />
+  <Marquee items={['Lucidez', 'Autenticidade', 'Liberdade', 'Autovalor', 'Autonomia emocional', 'Criatividade']} />
 
   <!-- Bloco "Você aprendeu a sobreviver" (substitui o antigo bloco marrom) -->
   <section class="section bg-wheat sobreviver-sec">
@@ -114,7 +114,7 @@ const jsonLd = [
   </section>
 
   <!-- Bloco two-tone com imagem + GIF do sol -->
-  <section class="two-tone normal-sec" style="--tt-a: color-mix(in srgb, var(--c-blush) 62%, #fff); --tt-b: color-mix(in srgb, var(--c-sand) 26%, #fff);">
+  <section class="two-tone normal-sec" style="--tt-a: color-mix(in srgb, #6E8B3D 55%, #fff); --tt-b: #EED2EE;">
     <div class="wrap split-grid">
       <figure class="split-media" data-reveal>
         {blocoImg && (
@@ -123,16 +123,9 @@ const jsonLd = [
       </figure>
       <div class="normal-copy" data-reveal style="--reveal-delay:100ms">
         <img class="sun-seal" src={gifSun} alt="" aria-hidden="true" width="180" height="128" loading="lazy" decoding="async" />
-        <p class="ego-lead"><strong>Você pode conhecer teorias, sobreviver aos seus padrões, falar das suas feridas e até explicar suas dinâmicas emocionais com precisão. Mas transformação não acontece quando você acumula conhecimento sobre si. Ela acontece quando você se torna capaz de sustentar a verdade sobre si mesma sem fugir, sem se justificar e sem se condenar.</strong></p>
-        <p>Por isso, este trabalho não busca enfraquecer o ego.<br />Busca fortalecê-lo.</p>
-        <div class="stanza tight">
-          <p>Um ego fortalecido não precisa se defender de tudo.</p>
-          <p>Consegue olhar para si com honestidade.</p>
-          <p>Reconhecer contradições.</p>
-          <p>Rever escolhas.</p>
-          <p>Integrar partes negadas.</p>
-          <p>E recuperar a própria autoridade interior.</p>
-        </div>
+        <p class="ego-lead"><strong>Toda vida possui uma força autocriativa. Ela é a capacidade de criar novos caminhos, novas escolhas e novas formas de existir. Quando essa força se aprisiona em padrões, medos, vínculos ou histórias que já não correspondem a quem você é, a vida continua — mas deixa de criar novas possibilidades. É desse lugar que nasce o meu trabalho.</strong></p>
+        <p>A sessão é um convite para reconhecer onde o movimento da sua vida foi interrompido. Não para encontrar respostas prontas, mas para tornar visíveis as estruturas que aprisionam a sua força autocriativa. O Tarô entra como linguagem simbólica, ampliando aquilo que a consciência ainda não consegue nomear.</p>
+        <p>Porque a interrupção do movimento da vida não se desfaz apenas quando algo é compreendido, mas quando você se torna capaz de sustentar a verdade sobre si mesma — inclusive suas contradições — sem fugir, sem se justificar e sem se condenar. É nesse espaço que a força autocriativa volta a encontrar passagem.</p>
         <a href={withBase("/atendimentos/taro-terapeutico")} class="btn btn-gold">Agendar uma consulta</a>
       </div>
     </div>
@@ -149,17 +142,18 @@ const jsonLd = [
       <div class="mentora-copy" data-reveal style="--reveal-delay:100ms">
         <p class="mentora-sub">Mentora de transformação pessoal, educadora emocional</p>
         <p class="mentora-bio">(Movida por perguntas sobre a alma humana nas horas vagas. E nas horas ocupadas também. Mãe de um dog. Casada com o meu companheiro de vida. Encantada pelas miudezas despercebidas. Meu arcano preferido é O Louco — amanhã não sei!)</p>
-        <p>A maioria das pessoas que chegam até mim já tentou muitas coisas. Leram livros. Fizeram cursos. Buscaram respostas. Algumas fizeram terapia por anos. Muitas delas já não acreditavam mais em si mesmas, pois apesar de toda essa consciência, algo continua parecendo incompleto. Elas entenderam muitas coisas. Mas ainda não conseguiram transformar aquilo que mais desejam transformar. Ou sentem que existe uma distância entre quem são hoje e quem sabem que poderiam se tornar.</p>
-        <p>Foi para essas pessoas que este trabalho nasceu. Ao longo da minha trajetória, transitei pela tarologia, pelo desenvolvimento humano, pela gestalt-terapia e pelo estudo profundo dos processos de transformação. Mas principalmente, sempre fui o meu laboratório principal. Com o tempo, pude aprender com quem já tinha percorrido o caminho, e uma importante chave mudou a forma como compreendo o crescimento humano: <strong>autoconhecimento, por si só, não transforma.</strong></p>
-        <p>A transformação acontece quando aquilo que compreendemos intelectualmente encontra espaço para ser vivido, integrado e incorporado. Por isso, meu trabalho não é oferecer respostas prontas. É criar condições para que você desenvolva uma relação mais consciente consigo mesmo, compreenda os padrões que moldam sua vida e construa uma identidade mais alinhada com quem realmente é.</p>
-        <p>Não acredito que exista uma fórmula para isso. Mas acredito profundamente que existe sabedoria dentro de cada pessoa. Às vezes ela está escondida sob camadas de adaptação, medo, expectativas e antigas estratégias de sobrevivência. Meu trabalho é ajudar você a encontrá-la. E a partir dela, construir uma vida mais autêntica, consciente e inteira.</p>
-        <p>Se você sente que chegou o momento de cultivar mais consciência, maturidade emocional e autenticidade na forma como vive e se relaciona, seja bem-vinda(o).</p>
+        <p>A maioria das pessoas que chegam até mim já percorreu um longo caminho. Leram livros, fizeram cursos, buscaram diferentes formas de terapia e desenvolveram uma boa compreensão sobre si mesmas. Ainda assim, algo permanece estagnado. Elas entendem os próprios padrões, reconhecem as feridas que carregam e conseguem explicar com clareza o que vivem. Mas continuam sem conseguir criar o que mais desejam: um relacionamento diferente, uma decisão importante, uma nova forma de viver, uma relação mais livre consigo mesmas.</p>
+        <p>Foi convivendo com essas histórias — e com a minha própria — que comecei a perceber algo que transformou a maneira como compreendo o desenvolvimento humano. Ao longo da minha trajetória, transitei pela tarologia, pelos estudos de desenvolvimento humano, processos de individuação com Jung, alquimia profunda, alta magia, pela Gestalt-terapia e filosofias. E foi na prática, acompanhando pessoas e vivenciando e observando os meus próprios processos, que uma pergunta passou a orientar todo o meu trabalho: o que faz com que a vida deixe de criar?</p>
+        <p>Hoje compreendo que, por trás de sintomas diferentes, muitas vezes existe a mesma interrupção. A força autocriativa continua presente, mas encontra-se aprisionada em padrões, medos, vínculos, expectativas ou antigas estratégias de sobrevivência. A vida segue acontecendo, mas perde a capacidade de criar novas possibilidades.</p>
+        <p>É por isso que meu trabalho não se concentra apenas na queixa que trouxe você até aqui. Ele busca reconhecer onde o movimento da sua vida foi interrompido. A terapia sustenta esse processo de reconhecimento, e o Tarô participa dele como linguagem simbólica, tornando visível aquilo que muitas vezes ainda não encontrou palavras.</p>
+        <p>Não acredito em fórmulas prontas nem em transformações instantâneas. Acredito que toda pessoa possui uma força autocriativa capaz de renovar a própria existência. Às vezes ela está silenciosa. Às vezes parece distante. Mas ela não desaparece. Meu trabalho é ajudar você a reconhecer o que interrompeu esse movimento para que, pouco a pouco, essa força volte a encontrar passagem.</p>
+        <p>Se você sente que chegou o momento de compreender a si mesma com mais profundidade, recuperar a autoria sobre a própria vida e abrir espaço para novas possibilidades, seja bem-vinda(o).</p>
       </div>
     </div>
   </section>
 
   <!-- As virtudes do nosso crescimento -->
-  <section class="section bg-peach virtudes-sec">
+  <section class="section virtudes-sec" style="background: color-mix(in srgb, #6E8B3D 55%, #fff);">
     <div class="wrap center">
       <h2 data-reveal>Virtudes que direcionam o meu trabalho</h2>
       <ul class="virtudes" data-reveal style="--reveal-delay:80ms">
@@ -170,7 +164,7 @@ const jsonLd = [
   </section>
 
   <!-- Pilares (blog por território) -->
-  <section class="wrap section">
+  <section class="wrap section pilares-sec" style="background:#A0522D;">
     <div class="center" data-reveal>
       <span class="eyebrow">O blog por território</span>
       <h2>Seis territórios para ler e se olhar</h2>
@@ -194,7 +188,7 @@ const jsonLd = [
   </section>
 
   <!-- Depoimentos -->
-  <section class="wrap section bg-cream">
+  <section class="wrap section depo-sec" style="background:#FFA07A;">
     <div class="center" data-reveal>
       <span class="eyebrow">Depoimentos</span>
       <h2>O que dizem as clientes</h2>
@@ -322,7 +316,7 @@ const jsonLd = [
   .lead-line { font-size: clamp(1.6rem, 3.6vw, 2.2rem) !important; color: var(--ink) !important; margin-bottom: var(--s5); }
   .ego-lead { font-size: clamp(1.18rem, 2.4vw, 1.4rem); line-height: 1.45; margin-bottom: var(--s5); }
   .ego-lead strong { color: var(--ink); font-weight: 600; }
-  .normal-copy .stanza p { font-size: 1.12rem; color: var(--ink); }
+  .normal-copy .stanza p { font-size: 1.12rem; color: var(--ink-soft); }
   .normal-copy .btn { margin-top: var(--s4); }
 
   /* ---- Bloco Mentora ---- */
@@ -333,10 +327,22 @@ const jsonLd = [
   .mentora-copy strong { color: var(--ink); font-weight: 600; }
 
   /* ---- As virtudes ---- */
-  .virtudes-sec h2 { margin-top: 0; }
+  .virtudes-sec h2 { margin-top: 0; color: var(--ink); }
   .virtudes { list-style: none; padding: 0; margin: var(--s7) auto; max-width: 880px; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s4) var(--s7); }
   .virtudes li { font-family: var(--font-label); font-weight: 700; font-size: .92rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
-  .virtudes-fecho { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; line-height: 1.5; color: var(--ink); max-width: 46ch; margin-inline: auto; }
+  .virtudes-fecho { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; line-height: 1.5; color: color-mix(in srgb, var(--ink) 72%, transparent); max-width: 46ch; margin-inline: auto; }
+
+  /* Pilares sobre sienna (#A0522D) */
+  .pilares-sec .eyebrow { color: #f3d9c8; }
+  .pilares-sec h2, .pilares-sec .muted { color: #fdf3ec; }
+  .pilares-sec .pilar-card { background: color-mix(in srgb, #fff 12%, transparent); border-color: color-mix(in srgb, #fff 20%, transparent); }
+  .pilares-sec .pilar-card h3 { color: #fdf3ec; }
+  .pilares-sec .pilar-card .hook { color: color-mix(in srgb, #fdf3ec 75%, transparent); }
+  .pilares-sec .pilar-card .more { color: #fbe3d6; }
+
+  /* Depoimentos sobre #FFA07A */
+  .depo-sec .eyebrow { color: color-mix(in srgb, var(--ink) 70%, transparent); }
+  .depo-sec h2 { color: var(--ink); }
 
   /* ---- Profissional certa ---- */
   .profissional-sec h2 { margin-top: 0; }
@@ -378,5 +384,19 @@ const jsonLd = [
   }
   @media (prefers-reduced-motion: reduce) {
     .pilar-card:hover .more span { transform: none; }
+  }
+
+  /* Mobile: verde só atrás da foto do sofá; gif do sol e texto já no fundo lavanda */
+  @media (max-width: 860px) {
+    .normal-sec.two-tone {
+      background: color-mix(in srgb, #6E8B3D 55%, #fff) !important;
+      padding-block-end: 0;
+    }
+    .normal-sec .normal-copy {
+      background: #EED2EE;
+      margin-inline: calc(-1 * var(--s5));
+      padding-inline: var(--s5);
+      padding-block: var(--s7) var(--s9);
+    }
   }
 </style>

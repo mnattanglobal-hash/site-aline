@@ -392,8 +392,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--s8) 0; }
 @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee {
   overflow: hidden; white-space: nowrap;
-  border-block: 1px solid var(--line);
-  background: color-mix(in srgb, var(--gold-bright) 22%, var(--paper));
+  border-block: 1px solid color-mix(in srgb, #CD8162 60%, transparent);
+  background: #CD8162;
   padding-block: var(--s4);
 }
 .marquee__track {
@@ -405,9 +405,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--s8) 0; }
 .marquee__item {
   font-family: var(--font-label);
   font-size: .82rem; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--ink); white-space: nowrap;
+  color: #fff5ef; white-space: nowrap;
 }
-.marquee__sep { color: var(--terra); }
+.marquee__sep { color: color-mix(in srgb, #fff5ef 60%, transparent); }
 
 /* Label vertical decorativo (writing-mode) — toque editorial da referência. */
 .v-label {
