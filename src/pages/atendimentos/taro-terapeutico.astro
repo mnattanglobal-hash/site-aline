@@ -8,7 +8,7 @@ import { whatsappLink, withBase } from '../../site';
 import { Image } from 'astro:assets';
 import { img } from '../../lib/images';
 const whatsapp = whatsappLink('Oi, Aline. Vim pelo site e quero agendar uma sessão de Tarot Terapêutico.');
-const heroImg = img('aa-taro-baralho');
+const heroImg = img('aa-taro-aline');
 const gifSun = withBase('/img/gif-sun.webp');
 
 const depoDestaque = depoimentos.filter((d) => d.destaque);
@@ -47,7 +47,7 @@ const faq = [
       </div>
       <figure class="split-media" data-reveal style="--reveal-delay:120ms">
         {heroImg && (
-          <Image src={heroImg} alt="Aline Antunes estendendo um baralho de Tarô sobre a mesa" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="eager" />
+          <Image src={heroImg} alt="Retrato de Aline Antunes" widths={[480, 720, 960]} sizes="(max-width: 860px) 88vw, 44vw" format="webp" quality={72} loading="eager" />
         )}
       </figure>
     </div>
@@ -175,8 +175,9 @@ const faq = [
   .hero-sec--sienna .hero-copy h1 { color: #fdf3ec; }
   .hero-sec--sienna .hero-copy .eyebrow { color: #f3d9c8; }
   .hero-sec--sienna .hero-copy .lead { color: #fbe7da; }
-  .hero-sec--sienna .hero-copy .proof-mini { color: color-mix(in srgb, #fdf3ec 86%, transparent); }
-  .hero-sec--sienna .hero-copy .proof-mini .sparkle { color: var(--gold-bright); }
+  /* Prova social em verde-sálvia claro: legível sobre o fundo sienna (o oliva da página some aqui). */
+  .hero-sec--sienna .hero-copy .proof-mini { color: #cfe6a0; font-weight: 500; }
+  .hero-sec--sienna .hero-copy .proof-mini .sparkle { color: #cfe6a0; }
 
   /* "O que você leva" sobre verde (#6E8B3D): título claro (cards seguem claros) */
   .what-sec--green .center h2 { color: #fbfdf3; }

@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import { img } from '../lib/images';
 const retrato = img('aa-retrato-aline');
 const luz = img('aa-contato-luz');
+const vidaImg = img('aa-sobre-vida');
 ---
 <BaseLayout title="Sobre · Aline Antunes" description="A história da Aline: da Gestão Pública à terapia simbólica. Autoridade vivencial em maturidade emocional, individuação e rompimento de padrões.">
   <!-- Intro (duas cores) -->
@@ -41,11 +42,17 @@ const luz = img('aa-contato-luz');
 
       <p class="pergunta" data-reveal>O que faz a vida deixar de criar?</p>
 
+      {vidaImg && (
+        <figure class="sobre-vida-fig" data-reveal>
+          <Image src={vidaImg} alt="Retrato de Aline Antunes" widths={[240, 380]} sizes="240px" format="webp" quality={76} loading="lazy" />
+        </figure>
+      )}
+
       <p data-reveal>Foi quando compreendi que a questão nunca esteve apenas nas circunstâncias. A maior transformação começou quando passei a reconhecer que existe, em cada pessoa, uma força autocriativa: a capacidade de criar novos caminhos, novos significados e novas formas de existir. E que essa força não acaba quando sofremos — ela pode se aprisionar em medos, padrões, expectativas, vínculos ou antigas estratégias de sobrevivência.</p>
 
       <p data-reveal>Essa descoberta transformou profundamente a maneira como passei a compreender o desenvolvimento humano.</p>
 
-      <p data-reveal>Hoje acredito que muitos dos sofrimentos que carregamos não são sustentados apenas pelo que aconteceu conosco. Eles também nascem quando o movimento da vida é interrompido e deixamos de criar a partir de quem realmente somos.</p>
+      <p class="destaque-p" data-reveal>Hoje acredito que muitos dos sofrimentos que carregamos não são sustentados apenas pelo que aconteceu conosco. Eles também nascem quando o movimento da vida é interrompido e deixamos de criar a partir de quem realmente somos.</p>
 
       <p data-reveal>Desde então, essa passou a ser a pergunta que orienta o meu trabalho: onde o movimento da sua vida foi interrompido?</p>
 
@@ -113,6 +120,13 @@ const luz = img('aa-contato-luz');
   /* Override fdl-panel background para #FFA07A conforme pedido */
   .sofrimento-sec .fdl-panel { background: color-mix(in srgb, #FFA07A 22%, #fff); border-color: color-mix(in srgb, #FFA07A 30%, transparent); }
   .pergunta { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 600; color: var(--ink); margin: var(--s5) 0; }
+  /* Foto delicada logo abaixo da pergunta-chave. */
+  .sobre-vida-fig { margin: var(--s5) auto; max-width: 240px; }
+  .sobre-vida-fig :global(img) { width: 100%; border-radius: 14px; aspect-ratio: 3 / 4; object-fit: cover; box-shadow: 0 10px 28px rgba(33,27,36,.16); }
+  /* Parágrafo de destaque: quebra o texto longo com um respiro visual, no tom da marca. */
+  .destaque-p { font-family: var(--font-serif); font-size: 1.16rem; line-height: 1.6; color: var(--wine) !important;
+    border-left: 3px solid var(--gold); background: color-mix(in srgb, var(--gold-soft) 22%, transparent);
+    padding: var(--s4) var(--s5); border-radius: 0 12px 12px 0; margin: var(--s5) 0; }
 
   .quem-copy h2 { margin-top: 0; }
   .quem-copy .convite { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--wine); margin: var(--s5) 0 var(--s4); }

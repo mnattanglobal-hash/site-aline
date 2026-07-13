@@ -13,7 +13,7 @@ import { img } from '../lib/images';
 
 const heroImg = img('aa-hero-ilustra');
 const blocoImg = img('aa-normal-sala');
-const mentoraImg = img('aa-retrato-aline');
+const mentoraImg = img('aa-home-aline');
 const gifHands = withBase('/img/gif-hands-yinyang.webp');
 const gifSun = withBase('/img/gif-sun.webp');
 
@@ -136,17 +136,18 @@ const jsonLd = [
     <div class="wrap split-grid rev">
       <figure class="split-media" data-reveal>
         {mentoraImg && (
-          <Image src={mentoraImg} alt="Retrato de Aline Antunes, ruiva, apoiando o queixo na mão" widths={[420, 620, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
+          <Image src={mentoraImg} alt="Retrato de Aline Antunes" widths={[420, 620, 840]} sizes="(max-width: 860px) 80vw, 40vw" format="webp" quality={74} loading="lazy" />
         )}
       </figure>
       <div class="mentora-copy" data-reveal style="--reveal-delay:100ms">
         <p class="mentora-sub">Mentora de transformação pessoal, educadora emocional</p>
         <p class="mentora-bio">(Movida por perguntas sobre a alma humana nas horas vagas. E nas horas ocupadas também. Mãe de um dog. Casada com o meu companheiro de vida. Encantada pelas miudezas despercebidas. Meu arcano preferido é O Louco — amanhã não sei!)</p>
         <p>A maioria das pessoas que chegam até mim já percorreu um longo caminho. Leram livros, fizeram cursos, buscaram diferentes formas de terapia e desenvolveram uma boa compreensão sobre si mesmas. Ainda assim, algo permanece estagnado. Elas entendem os próprios padrões, reconhecem as feridas que carregam e conseguem explicar com clareza o que vivem. Mas continuam sem conseguir criar o que mais desejam: um relacionamento diferente, uma decisão importante, uma nova forma de viver, uma relação mais livre consigo mesmas.</p>
-        <p>Foi convivendo com essas histórias — e com a minha própria — que comecei a perceber algo que transformou a maneira como compreendo o desenvolvimento humano. Ao longo da minha trajetória, transitei pela tarologia, pelos estudos de desenvolvimento humano, processos de individuação com Jung, alquimia profunda, alta magia, pela Gestalt-terapia e filosofias. E foi na prática, acompanhando pessoas e vivenciando e observando os meus próprios processos, que uma pergunta passou a orientar todo o meu trabalho: o que faz com que a vida deixe de criar?</p>
+        <p>Foi convivendo com essas histórias — e com a minha própria — que comecei a perceber algo que transformou a maneira como compreendo o desenvolvimento humano. Ao longo da minha trajetória, transitei pela tarologia, pelos estudos de desenvolvimento humano, processos de individuação com Jung, alquimia profunda, alta magia, pela Gestalt-terapia e filosofias. E foi na prática, acompanhando pessoas e vivenciando e observando os meus próprios processos, que uma pergunta passou a orientar todo o meu trabalho:</p>
+        <p class="mentora-pull">O que faz com que a vida deixe de criar?</p>
         <p>Hoje compreendo que, por trás de sintomas diferentes, muitas vezes existe a mesma interrupção. A força autocriativa continua presente, mas encontra-se aprisionada em padrões, medos, vínculos, expectativas ou antigas estratégias de sobrevivência. A vida segue acontecendo, mas perde a capacidade de criar novas possibilidades.</p>
         <p>É por isso que meu trabalho não se concentra apenas na queixa que trouxe você até aqui. Ele busca reconhecer onde o movimento da sua vida foi interrompido. A terapia sustenta esse processo de reconhecimento, e o Tarô participa dele como linguagem simbólica, tornando visível aquilo que muitas vezes ainda não encontrou palavras.</p>
-        <p>Não acredito em fórmulas prontas nem em transformações instantâneas. Acredito que toda pessoa possui uma força autocriativa capaz de renovar a própria existência. Às vezes ela está silenciosa. Às vezes parece distante. Mas ela não desaparece. Meu trabalho é ajudar você a reconhecer o que interrompeu esse movimento para que, pouco a pouco, essa força volte a encontrar passagem.</p>
+        <p>Não acredito em fórmulas prontas nem em transformações instantâneas. Acredito que <strong>toda pessoa possui uma força autocriativa capaz de renovar a própria existência.</strong> Às vezes ela está silenciosa. Às vezes parece distante. Mas ela não desaparece. Meu trabalho é ajudar você a reconhecer o que interrompeu esse movimento para que, pouco a pouco, essa força volte a encontrar passagem.</p>
         <p>Se você sente que chegou o momento de compreender a si mesma com mais profundidade, recuperar a autoria sobre a própria vida e abrir espaço para novas possibilidades, seja bem-vinda(o).</p>
       </div>
     </div>
@@ -325,6 +326,12 @@ const jsonLd = [
   .mentora-sub { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3vw, 1.85rem); line-height: 1.3; color: var(--ink) !important; margin-bottom: var(--s4); }
   .mentora-bio { font-family: var(--font-serif); font-style: italic; color: var(--wine) !important; font-size: 1.06rem; }
   .mentora-copy strong { color: var(--ink); font-weight: 600; }
+  /* Destaque que quebra o texto longo: a pergunta-pivô em serifa grande, discreta. */
+  .mentora-pull {
+    font-family: var(--font-display); font-style: italic; font-weight: 420;
+    font-size: clamp(1.5rem, 3.4vw, 2rem); line-height: 1.28; color: var(--wine) !important;
+    border-left: 2px solid var(--gold); padding: var(--s3) 0 var(--s3) var(--s5);
+    margin: var(--s5) 0; }
 
   /* ---- As virtudes ---- */
   .virtudes-sec h2 { margin-top: 0; color: var(--ink); }

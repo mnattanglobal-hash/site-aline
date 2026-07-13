@@ -120,9 +120,13 @@ const avatar = withBase('/aline-avatar.webp');
 
     close?.addEventListener('click', (e) => { e.preventDefault(); hide(); });
 
-    // Convida conforme a pessoa navega: aparece após um tempo OU ao rolar a página.
-    const timer = window.setTimeout(show, 8000);
+    // Convida conforme a pessoa navega: aparece após um tempo mínimo OU ao rolar a página,
+    // mas NUNCA antes de MIN_DELAY (evita que o scroll rápido no celular mostre cedo demais).
+    const MIN_DELAY = 6000;
+    const start = Date.now();
+    const timer = window.setTimeout(show, MIN_DELAY);
     const onScroll = () => {
+      if (Date.now() - start < MIN_DELAY) return;
       if (window.scrollY > window.innerHeight * 0.6) { show(); cleanup(); }
     };
     const cleanup = () => {
